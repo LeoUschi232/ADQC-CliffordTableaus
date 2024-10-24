@@ -1,3 +1,21 @@
+# Ignore IDE files
 .venv
 .idea
 
+# Ignore LaTeX auxiliary and compilation files
+*.aux
+*.bbl
+*.blg
+*.bcf
+*.log
+*.out
+*.run.xml
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
