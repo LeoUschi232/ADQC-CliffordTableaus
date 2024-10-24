@@ -3,6 +3,7 @@
 
 % load additional packages
 \usepackage{booktabs}
+\usepackage[backend=biber,style=numeric-comp,sorting=none]{biblatex}
 
 
 % presentation metadata
@@ -28,10 +29,13 @@
     footline on = {every page, title page=false},
 }
 
+% Current default for bibliography
+\addbibresource{../Documentation/bibliography.bib}
 
 \begin{document}
 
     \maketitle
 
-
+    \newpage
+    \printbibliography
 \end{document}
