@@ -1,5 +1,5 @@
 # Ignore IDE files
-src/cmake-build-debug
+cmake-build-debug
 .idea
 
 # Ignore LaTeX auxiliary and compilation files
