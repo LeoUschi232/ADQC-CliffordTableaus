@@ -1,5 +1,5 @@
 # Ignore IDE files
-.venv
+cmake-build-debug
 .idea
 
 # Ignore LaTeX auxiliary and compilation files
