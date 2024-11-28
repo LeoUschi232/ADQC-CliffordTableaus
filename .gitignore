@@ -1,0 +1,39 @@
+# Ignore IDE files
+cmake-build-debug
+.idea
+
+# Ignore LaTeX auxiliary and compilation files
+*.aux
+*.bbl
+*.blg
+*.bcf
+*.log
+*.out
+*.run.xml
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+
+# Ignore specific log files for your project
+compilation_log.txt
+
+# Ignore all files from latexmk (if using latexmkrc)
+latexmkrc
+
+# Ignore presentation-specific auxiliary files
+Presentation/tum/*.bbl
+Presentation/tum/*.blg
+Presentation/tum/*.log
+Presentation/tum/*.aux
+Presentation/tum/*.out
+Presentation/tum/*.run.xml
+Presentation/tum/*.toc
+Presentation/tum/*.snm
+Presentation/tum/*.nav
+Presentation/tum/*.vrb
