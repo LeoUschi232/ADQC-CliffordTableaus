@@ -1,0 +1,14 @@
+# ninja log v6
+648	688	1731107850779320906	ADQC	b6d578b95278e142
+4	70	1732770444437088207	CMakeFiles/clifford_tableau.dir/main.cpp.o.ddi	e36162e0af882976
+70	74	1732770444507088201	CMakeFiles/clifford_tableau.dir/CXX.dd	e1ee834f1c10fdf4
+70	74	1732770444507088201	/home/leouscin/Documents/TUM_Studium/SEM_9/ADQC/cmake-build-debug/CMakeFiles/clifford_tableau.dir/CXXModules.json	e1ee834f1c10fdf4
+70	74	1732770444507088201	CMakeFiles/clifford_tableau.dir/main.cpp.o.modmap	e1ee834f1c10fdf4
+74	1172	1732770444507088201	CMakeFiles/clifford_tableau.dir/main.cpp.o	e6ffb64a87c817cb
+1172	1226	1732770445603754760	clifford_tableau	97ee5c59f3426917
+1	65	1732797654172192228	CMakeFiles/clifford_tableau.dir/main.cpp.o.ddi	e36162e0af882976
+65	68	1732797654235525584	CMakeFiles/clifford_tableau.dir/CXX.dd	e1ee834f1c10fdf4
+65	68	1732797654235525584	/home/leouscin/Documents/TUM_Studium/SEM_9/ADQC/cmake-build-debug/CMakeFiles/clifford_tableau.dir/CXXModules.json	e1ee834f1c10fdf4
+65	68	1732797654235525584	CMakeFiles/clifford_tableau.dir/main.cpp.o.modmap	e1ee834f1c10fdf4
+68	612	1732797654238858918	CMakeFiles/clifford_tableau.dir/main.cpp.o	e6ffb64a87c817cb
+612	649	1732797654782192441	clifford_tableau	97ee5c59f3426917
