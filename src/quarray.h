@@ -1,8 +1,21 @@
-//
-// Created by leouscin on 11/25/24.
-//
+#pragma once
 
-#ifndef CLIFFORD_TABLEAU_QUARRAY_H
-#define CLIFFORD_TABLEAU_QUARRAY_H
+namespace CliffordTableaus {
+    class QuArray {
+    public:
+        QuArray(int n);
 
-#endif //CLIFFORD_TABLEAU_QUARRAY_H
+        ~QuArray();
+
+        void set(int i, int j, int val);
+
+        int get(int i, int j);
+
+        void print();
+
+    private:
+        int n;
+        int *data;
+    };
+}
+
