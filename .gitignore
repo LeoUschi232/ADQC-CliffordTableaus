@@ -1,6 +1,8 @@
 # Ignore IDE files
 cmake-build-debug
 .idea
+.vscode
+.venv
 
 # Ignore LaTeX auxiliary and compilation files
 *.aux
