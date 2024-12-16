@@ -284,3 +284,5 @@ if __name__ == "__main__":
     ]
     for i in random_matrices:
         print(i)
+    print(1/sqrt(2).evalf())
+

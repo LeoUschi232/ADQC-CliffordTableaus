@@ -1,5 +1,5 @@
 #include "quarray.h"
-#include <cmath>
+
 #include <algorithm>
 
 namespace CliffordTableaus {
@@ -8,15 +8,17 @@ namespace CliffordTableaus {
         return (x > 0) && ((x & (x - 1)) == 0);
     }
 
-    QuArray::QuArray(std::size_t dim, const std::vector<std::complex<double>> &values)
+
+    QuArray::QuArray(std::size_t dim, const std::vector<std::complex<double>> &values, bool measure)
             : N(dim), data(values) {
         if (!isPowerOfTwo(N) || N <= 0 || data.size() != N * N) {
             throw std::invalid_argument("Dimension must be a non-zero power-of-two and values must match dimension.");
         }
-        if (!isUnitary()) {
-            throw std::invalid_argument("Matrix must be unitary upon initialization.");
+        if (measure || !isUnitary()) {
+            throw std::invalid_argument("Non-measure matrix must be unitary upon initialization.");
         }
     }
+
 
     QuArray::QuArray(const QuArray &other) = default;
 
@@ -296,6 +298,283 @@ namespace CliffordTableaus {
                 }
             }
         }
-        return QuArray(newDim, kronData);
+        return {newDim, kronData};
+    }
+
+    QuArray &QuArray::operator^=(int power) {
+        *this = *this ^ power;
+        return *this;
+    }
+
+    QuArray &QuArray::operator&=(const QuArray &other) {
+        *this = *this & other;
+        return *this;
+    }
+
+
+    uint32_t QuArray::dim2n(uint32_t dim) {
+        // Determine the number of qubits
+        // dim = 2^n -> n = log2(dim)
+        std::size_t n = 0;
+        {
+            std::size_t tmp = dim;
+            while (tmp > 1) {
+                tmp >>= 1;
+                n++;
+            }
+        }
+        if ((1ULL << n) != dim) {
+            throw std::invalid_argument("Dimension must be a power of two.");
+        }
+        return n;
+    }
+
+    QuArray QuArray::MeasureZero() {
+        return QuArray(2, {1.0, 0.0, 0.0, 0.0}, true);
+    }
+
+    QuArray QuArray::MeasureOne() {
+        return QuArray(2, {0.0, 0.0, 0.0, 1.0}, true);
+    }
+
+    QuArray QuArray::Identity() {
+        return QuArray(2, {1.0, 0.0, 0.0, 1.0});
+    }
+
+    QuArray QuArray::PauliX() {
+        return QuArray(2, {0.0, 1.0, 1.0, 0.0});
+    }
+
+    QuArray QuArray::PauliY() {
+        return QuArray(2, {0.0, -1.0i, 1.0i, 0.0});
+    }
+
+    QuArray QuArray::PauliZ() {
+        return QuArray(2, {1.0, 0.0, 0.0, -1.0});
+    }
+
+    QuArray QuArray::Hadamard() {
+        return QuArray(2, {h_factor, h_factor, h_factor, -h_factor});
+    }
+
+    QuArray QuArray::Phase() {
+        return QuArray(2, {1.0, 0.0, 0.0, 1.0i});
+    }
+
+    QuArray QuArray::TGate() {
+        return QuArray(2, {1.0, 0.0, 0.0, std::complex<double>(h_factor, h_factor)});
+    }
+
+    QuArray QuArray::RotationX(double theta) {
+        auto cos_t = std::cos(0.5 * theta);
+        auto sin_t = std::sin(0.5 * theta);
+        return QuArray(2, {
+                cos_t, -1.0i * sin_t,
+                -1.0i * sin_t, cos_t
+        });
+    }
+
+    QuArray QuArray::RotationY(double theta) {
+        auto cos_t = std::cos(0.5 * theta);
+        auto sin_t = std::sin(0.5 * theta);
+        return QuArray(2, {
+                cos_t, -sin_t,
+                sin_t, cos_t
+        });
+    }
+
+    QuArray QuArray::RotationZ(double theta) {
+        return QuArray(2, {
+                std::exp(-0.5i * theta), 0.0,
+                0.0, std::exp(0.5i * theta)
+        });
+    }
+
+
+    QuArray QuArray::ControlGate(std::size_t dim, std::size_t control, std::size_t target, const QuArray &gate) {
+        auto n = dim2n(dim);
+        if (control >= n || target >= n || control == target) {
+            throw std::invalid_argument("Invalid control/target indices.");
+        }
+        if (gate.size() != 2) {
+            throw std::invalid_argument("Gate to apply must be 2x2.");
+        }
+
+        // Define simple 2x2 matrices
+        QuArray I = QuArray::Identity();
+        QuArray M0 = MeasureZero();
+        QuArray M1 = MeasureOne();
+
+        // Build the first part: M0 at control and I elsewhere
+        QuArray first_factor = QuArray(1, {1.0}, true);
+        for (std::size_t qubit = 0; qubit < n; ++qubit) {
+            if (qubit == control) {
+                first_factor &= M0;
+            } else {
+                first_factor &= I;
+            }
+        }
+
+        // Build the second part: M1 at control, X at target, I elsewhere
+        QuArray second_factor = QuArray(1, {1.0}, true);
+        for (std::size_t qubit = 0; qubit < n; ++qubit) {
+            if (qubit == control) {
+                second_factor &= M1;
+            } else if (qubit == target) {
+                second_factor &= gate;
+            } else {
+                second_factor &= I;
+            }
+        }
+
+        // The full Control gate is first_factor + second_factor
+        return first_factor + second_factor;
+    }
+
+    QuArray QuArray::DoubleControlGate(
+            std::size_t dim, std::size_t control1, std::size_t control2, std::size_t target, const QuArray &gate
+    ) {
+        auto n = dim2n(dim);
+        if (control1 >= n || control2 >= n || target >= n ||
+            control1 == control2 || control1 == target || control2 == target) {
+            throw std::invalid_argument("Invalid qubit indices for double control gate.");
+        }
+        if (gate.size() != 2) {
+            throw std::invalid_argument("Gate must be 2x2.");
+        }
+
+        QuArray I = QuArray::Identity();
+        QuArray M0 = QuArray::MeasureZero();
+        QuArray M1 = QuArray::MeasureOne();
+
+        // "00" submatrix: M0 at control1, M0 at control2, I elsewhere
+        QuArray result00(1, {1.0}, true);
+        for (std::size_t qubit = 0; qubit < n; ++qubit) {
+            if (qubit == control1 || qubit == control2) {
+                result00 &= M0;
+            } else {
+                result00 &= I;
+            }
+        }
+
+        // "01" submatrix: M0 at control1, M1 at control2, I elsewhere
+        QuArray result01(1, {1.0}, true);
+        for (std::size_t qubit = 0; qubit < n; ++qubit) {
+            if (qubit == control1) {
+                result01 &= M0;
+            } else if (qubit == control2) {
+                result01 &= M1;
+            } else {
+                result01 &= I;
+            }
+        }
+
+        // "10" submatrix: M1 at control1, M0 at control2, I elsewhere
+        QuArray result10(1, {1.0}, true);
+        for (std::size_t qubit = 0; qubit < n; ++qubit) {
+            if (qubit == control1) {
+                result10 &= M1;
+            } else if (qubit == control2) {
+                result10 &= M0;
+            } else {
+                result10 &= I;
+            }
+        }
+
+        // "11" submatrix: M1 at control1, M1 at control2, gate at target, I elsewhere
+        QuArray result11(1, {1.0}, true);
+        for (std::size_t qubit = 0; qubit < n; ++qubit) {
+            if (qubit == control1 || qubit == control2) {
+                result11 &= M1;
+            } else if (qubit == target) {
+                result11 &= gate;
+            } else {
+                result11 &= I;
+            }
+        }
+
+        // Sum up all submatrices
+        return result00 + result01 + result10 + result11;
+    }
+
+
+    QuArray QuArray::CNOT(std::size_t dim, std::size_t control, std::size_t target) {
+        return ControlGate(dim, control, target, PauliX());
+    }
+
+    QuArray QuArray::Toffoli(std::size_t dim, std::size_t control1, std::size_t control2, std::size_t target) {
+        return DoubleControlGate(dim, control1, control2, target, PauliX());
+    }
+
+    QuArray QuArray::SWAP(std::size_t dim, std::size_t qubit1, std::size_t qubit2) {
+        auto n = dim2n(dim);
+        if (qubit1 >= n || qubit2 >= n || qubit1 == qubit2) {
+            throw std::invalid_argument("Invalid qubit indices for SWAP.");
+        }
+
+        std::vector<std::complex<double>> mat(dim * dim, std::complex<double>(0.0, 0.0));
+
+        // Helper lambda to swap bits in index
+        auto swap_bits = [qubit1, qubit2](std::size_t x) {
+            std::size_t bit1 = (x >> qubit1) & 1ULL;
+            std::size_t bit2 = (x >> qubit2) & 1ULL;
+
+            // If bits differ, swap them
+            if (bit1 != bit2) {
+                x ^= (1ULL << qubit1);
+                x ^= (1ULL << qubit2);
+            }
+            return x;
+        };
+
+        // Build the permutation matrix
+        for (std::size_t i = 0; i < dim; ++i) {
+            std::size_t j = swap_bits(i);
+            mat[j * dim + i] = 1.0;
+        }
+
+        // This is a unitary, so no measure flag
+        return {dim, mat};
+    }
+
+
+    QuArray QuArray::Fredkin(std::size_t dim, std::size_t control, std::size_t target1, std::size_t target2) {
+        auto n = dim2n(dim);
+        if (control >= n || target1 >= n || target2 >= n || target1 == target2) {
+            throw std::invalid_argument("Invalid qubit indices for Fredkin.");
+        }
+
+        QuArray I = QuArray::Identity();
+        QuArray M0 = QuArray::MeasureZero();
+        QuArray M1 = QuArray::MeasureOne();
+
+        // Part when control=0: M0 at control, I at other qubits
+        QuArray part0(1, {1.0}, true);
+        for (std::size_t q = 0; q < n; ++q) {
+            if (q == control) {
+                part0 &= M0;
+            } else {
+                part0 &= I;
+            }
+        }
+
+        // Part when control=1: M1 at control, I at others (initially no operation on targets)
+        QuArray part1(1, {1.0}, true);
+        for (std::size_t q = 0; q < n; ++q) {
+            if (q == control) {
+                part1 &= M1;
+            } else {
+                part1 &= I;
+            }
+        }
+
+        // Now apply SWAP operation on target1 and target2 only if control=1
+        // The SWAP function returns the full NxN operator performing swap on target1,target2
+        QuArray swap_op = QuArray::SWAP(dim, target1, target2);
+
+        // Combine the parts:
+        // If control=0: no swap, just part0
+        // If control=1: swap, so part1 * swap_op
+        return part0 + (part1 * swap_op);
     }
 }
