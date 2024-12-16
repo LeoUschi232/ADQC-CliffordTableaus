@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 #include <random>
+#include <iomanip>
+#include <iostream>
 
 namespace CliffordTableaus {
     // Helper functions
@@ -16,7 +18,7 @@ namespace CliffordTableaus {
         if (!isPowerOfTwo(N) || N <= 0 || data.size() != N * N) {
             throw std::invalid_argument("Dimension must be a non-zero power-of-two and values must match dimension.");
         }
-        if (measure || !isUnitary()) {
+        if (!measure && !isUnitary()) {
             throw std::invalid_argument("Non-measure matrix must be unitary upon initialization.");
         }
     }
@@ -80,7 +82,7 @@ namespace CliffordTableaus {
         if (other.N != N) {
             throw std::invalid_argument("Matrix dimension mismatch on multiplication.");
         }
-        QuArray result(N, std::vector<std::complex<double>>(N * N, std::complex<double>(0, 0)));
+        QuArray result(N, std::vector<std::complex<double>>(N * N, std::complex<double>(0, 0)), true);
         for (std::size_t i = 0; i < N; ++i) {
             for (std::size_t j = 0; j < N; ++j) {
                 std::complex<double> sum(0, 0);
@@ -228,7 +230,7 @@ namespace CliffordTableaus {
             throw std::invalid_argument("Dimension mismatch.");
         }
 
-        QuArray result(N, std::vector<std::complex<double>>(N * N, std::complex<double>(0, 0)));
+        QuArray result(N, std::vector<std::complex<double>>(N * N, std::complex<double>(0, 0)), true);
         for (std::size_t i = 0; i < N; ++i) {
             for (std::size_t j = 0; j < N; ++j) {
                 std::complex<double> sum(0, 0);
@@ -601,4 +603,99 @@ namespace CliffordTableaus {
         // to perform any feasible unitary operation without global phase shift.
         return QuArray::RotationZ(beta) * QuArray::RotationY(gamma) * QuArray::RotationZ(delta) * exp(1i * alpha);
     }
+
+    void QuArray::print() const {
+        const char *top_left = "⎡";
+        const char *top_right = "⎤";
+        const char *mid_left = "⎢";
+        const char *mid_right = "⎥";
+        const char *bot_left = "⎣";
+        const char *bot_right = "⎦";
+
+        auto format_number = [](double val) {
+            // Check if it's close to an integer
+            double rounded = std::round(val);
+            if (std::abs(val - rounded) < 1e-14) {
+                // Print as integer
+                std::ostringstream oss;
+                oss << static_cast<long long>(static_cast<long long>(rounded));
+                return oss.str();
+            } else {
+                // Print as shorter decimal, strip trailing zeros
+                std::ostringstream oss;
+                oss << std::defaultfloat << std::setprecision(6) << val;
+                std::string str = oss.str();
+
+                // Strip trailing zeros and a trailing decimal point if needed
+                if (str.find('.') != std::string::npos) {
+                    while (!str.empty() && (str.back() == '0')) {
+                        str.pop_back();
+                    }
+                    if (!str.empty() && str.back() == '.') {
+                        str.pop_back();
+                    }
+                }
+
+                return str;
+            }
+        };
+
+        auto print_complex = [&](std::complex<double> val) {
+            double re = val.real();
+            double im = val.imag();
+
+            // Handle near-zero as zero
+            if (std::abs(re) < 1e-14) re = 0.0;
+            if (std::abs(im) < 1e-14) im = 0.0;
+
+            if (re == 0.0 && im == 0.0) {
+                return std::string("0");
+            } else if (im == 0.0) {
+                return format_number(re);
+            } else if (re == 0.0) {
+                // Pure imaginary
+                if (std::abs(im - 1.0) < 1e-14) {
+                    return std::string("1⋅ⅈ");
+                } else if (std::abs(im + 1.0) < 1e-14) {
+                    return std::string("-1⋅ⅈ");
+                } else {
+                    return format_number(im) + "⋅ⅈ";
+                }
+            } else {
+                // Complex number with both parts
+                std::string real_part = format_number(re);
+                std::string imag_part = format_number(std::abs(im));
+                if (im > 0) {
+                    return real_part + " + " + imag_part + "⋅ⅈ";
+                } else {
+                    return real_part + " - " + imag_part + "⋅ⅈ";
+                }
+            }
+        };
+
+        for (std::size_t i = 0; i < N; ++i) {
+            if (i == 0) {
+                std::cout << "\t" << top_left;
+            } else if (i == N - 1) {
+                std::cout << "\t" << bot_left;
+            } else {
+                std::cout << "\t" << mid_left;
+            }
+
+            for (std::size_t j = 0; j < N; ++j) {
+                std::cout << print_complex((*this)(i, j));
+                if (j < N - 1) std::cout << "       ";
+            }
+
+            if (i == 0) {
+                std::cout << top_right << "\n";
+            } else if (i == N - 1) {
+                std::cout << bot_right << "\n";
+            } else {
+                std::cout << mid_right << "\n";
+            }
+        }
+        std::cout << std::endl;
+    }
+
 }

@@ -120,12 +120,14 @@ TEST(QuArrayTest, AdvancedArithmetic) {
     //  - Matrix Division (A/B = B^(-1)*A)
     //  - Matrix Exponentiation
 }
+
 TEST(QuArrayTest, BasicOperations) {
     // TODO: Do 2 tests per:
     //  - Transpose
     //  - Conjugate
     //  - Dagger
 }
+
 TEST(QuArrayTest, AdvancedOperations) {
     // TODO: Do 2 tests per:
     //  - Tensor product using predefined matrices (PauliX etc)
@@ -133,6 +135,27 @@ TEST(QuArrayTest, AdvancedOperations) {
 }
 
 
+TEST(QuArrayTest, JustPrintStuff) {
+    auto id = QuArray::Identity();
+    auto x = QuArray::PauliX();
+    auto y = QuArray::PauliY();
+    auto z = QuArray::PauliZ();
+    auto h = QuArray::Hadamard();
+
+    (id & x).print();
+    (x & y).print();
+    (y & z).print();
+    // NOLINTNEXTLINE
+    (h & h).print();
+    (h & x & y).print();
+    (h & id & id).print();
+    (id & x & z).print();
+
+    QuArray::RandomUnitary().print();
+    QuArray::RandomUnitary().print();
+    QuArray::RandomUnitary().print();
+    QuArray::RandomUnitary().print();
+}
 
 
 int main(int argc, char **argv) {

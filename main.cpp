@@ -1,4 +1,8 @@
 #include <iostream>
+#include "quarray.h"
+
+using namespace std::complex_literals;
+using QuArray = CliffordTableaus::QuArray;
 
 /**
  * Tasks:
@@ -9,6 +13,4 @@
  * - Write Stabilizer Algorithm
  */
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
 }

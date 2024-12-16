@@ -145,6 +145,8 @@ namespace CliffordTableaus {
         static QuArray Fredkin(std::size_t dim, std::size_t control, std::size_t target1, std::size_t target2);
 
         static QuArray RandomUnitary();
+
+        void print() const;
     };
 }
 
