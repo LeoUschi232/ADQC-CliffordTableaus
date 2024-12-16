@@ -1,6 +1,4 @@
 from random import choice, uniform
-from random import choice, uniform
-from random import choice, uniform
 from typing import Iterable
 from sympy import (
     pretty, Matrix, re, im, simplify, shape, sqrt, S, ImmutableMatrix, ImmutableDenseMatrix, ImmutableSparseMatrix,
@@ -270,17 +268,19 @@ p1 = m1 * m0 * m0 + m0 * m1 * m1
 p2 = m0 * m1 * m0 + m1 * m0 * m1
 p3 = m0 * m0 * m1 + m1 * m1 * m0
 
+# id = Quarray([[1, 0], [0, 1]])
+# x = Quarray([[0, 1], [1, 0]])
+# y = Quarray([[0, -1j], [1j, 0]])
+# z = Quarray([[1, 0], [0, -1]])
+# h = h_fac * Quarray([[1, 1], [1, -1]])
+# s = Quarray([[1, 0], [0, 1j]])
+# t = Quarray([[1, 0], [0, 0.5 * sqrt(2) * (1 + 1j)]])
 if __name__ == "__main__":
-    u = Quarray([
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 0, 1],
-        [0, 0, 1, 0]
-    ])
-    print(u @ (x * id) @ u == x * x)
-    print(u @ (id * x) @ u == id * x)
-    print(u @ (z * id) @ u == z * id)
-    print(u @ (id * z) @ u == z * z)
-
-    print(u @ (y * id) @ u)
-    print(u @ (y * id) @ u == y * x)
+    random_matrices = [
+        z * s * x,
+        s * id * y,
+        h * t,
+        h * z * h * y
+    ]
+    for i in random_matrices:
+        print(i)

@@ -18,8 +18,7 @@ namespace CliffordTableaus {
         }
     }
 
-    QuArray::QuArray(const QuArray &other)
-            : N(other.N), data(other.data) {}
+    QuArray::QuArray(const QuArray &other) = default;
 
     std::complex<double> QuArray::operator()(std::size_t row, std::size_t col) const {
         return data[row * N + col];
