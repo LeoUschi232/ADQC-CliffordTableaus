@@ -22,4 +22,8 @@ namespace CliffordTableaus {
                 throw std::invalid_argument("Invalid input.");
         }
     }
+
+    uint8_t random_bit() {
+        return distribution(generator);
+    }
 }

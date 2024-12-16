@@ -10,14 +10,14 @@ namespace CliffordTableaus {
     using uint = std::size_t;
 
     /**
-     * Clifford tableaus for a new simulation algorithm, by which both deterministic
+     * Improved stabilizer tableaus for a new simulation algorithm, by which both deterministic
      * and random measurements can be performed in O (n^2) time.
      * The cost is a factor-2 increase in the number of bits needed to specify a state.
      * For in addition to the n stabilizer generators, we now store n “destabilizer” generators,
      * which are Pauli operators that together with the stabilizer generators generate the full Pauli group Pn.
      * So the number of bits needed is 2*n*(2*n+1)=4*n^2+2*n.
      */
-    class Tableau {
+    class ImprovedStabilizerTableau {
     private:
         /**
          * The number of qubits in the system.
@@ -31,9 +31,23 @@ namespace CliffordTableaus {
         uint total_bits;
 
         /**
-         * The stabilizer and destabilizer generators.
+         * The tableau of stabilizer and destabilizer generators.
+         * The destabilizer generators occupy the first n rows of the tableau.
+         * The stabilizer generators occupy the next n rows.
+         * It is convenient to add an additional (2n+1)-st row for scratch space.
+         * Therefore the tableau is (2n+1)x(2n+1) big.
          */
-        std::vector<uint8_t> generators;
+        std::vector<uint8_t> tableau;
+
+
+        /**
+         * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
+         * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
+         * that appear when multiplying Pauli matrices.
+         * @param h The generator to update.
+         * @param i The generator to add to h.
+         */
+        void rowsum(int h, int i);
 
         /**
          * Set the value of a bit in the tableau.
@@ -50,23 +64,43 @@ namespace CliffordTableaus {
         uint8_t get(uint index);
 
 
-        /**
-         * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
-         * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
-         * that appear when multiplying Pauli matrices.
-         * @param h The generator to update.
-         * @param i The generator to add to h.
-         */
-        void rowsum(int h, int i);
-
     public:
         /**
-         * Construct a new Tableau object.
+         * Construct a new ImprovedStabilizerTableau object.
          * The entries of the tableau will be default initialized to the state |0〉^(⊗n).
          * This state is represented by a tableau with its (2n)x(2n) submatrix set to identity.
          * @param n The number of qubits in the system.
          */
-        Tableau(uint n);
+        ImprovedStabilizerTableau(uint n);
+
+        /**
+         * Transform the tableau according to the CNOT gate applied to qubits control and target.
+         * After application the tableau stabilizes the state |ψ〉→ CNOT(control, target)|ψ〉.
+         * @param control Control qubit a.
+         * @param target Target qubit b.
+         */
+        void CNOT(uint control, uint target);
+
+        /**
+         * Transform the tableau according to the Hadamard gate applied to the qubit qubit.
+         * After application the tableau stabilizes the state |ψ〉→ H(qubit)|ψ〉.
+         * @param qubit Qubit to apply the Hadamard gate to.
+         */
+        void Hadamard(uint qubit);
+
+        /**
+         * Transform the tableau according to the Phase gate applied to the qubit qubit.
+         * After application the tableau stabilizes the state |ψ〉→ Phase(qubit)|ψ〉.
+         * @param qubit Qubit to apply the Phase gate to.
+         */
+        void Phase(uint qubit);
+
+        /**
+         * Transform the tableau according to a measurement performed on qubit given by qubit.
+         * @param qubit Qubit to measure.
+         * @return The measurement outcome.
+         */
+        uint8_t Measurement(uint qubit);
 
         /**
          * Set the value of the x operator bit for a qubit.
@@ -101,13 +135,6 @@ namespace CliffordTableaus {
          */
         void set_xz(uint i, uint j, uint8_t xz);
 
-        /**
-         * Set the value of the xz-combination for a qubit.
-         * @param i Index of the generator.
-         * @param j Index of qubit.
-         * @param pauli The Pauli operator to set the xz-combination to.
-         */
-        void set_xz(uint i, uint j, char pauli);
 
         /**
          * Get the value of the x operator bit for a qubit.
