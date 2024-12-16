@@ -1,5 +1,7 @@
 #pragma once
 
+#include "subroutines.h"
+
 #include <stdexcept>
 #include <cstdint>
 #include <vector>
@@ -46,6 +48,16 @@ namespace CliffordTableaus {
          * @return The value of the bit.
          */
         uint8_t get(uint index);
+
+
+        /**
+         * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
+         * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
+         * that appear when multiplying Pauli matrices.
+         * @param h The generator to update.
+         * @param i The generator to add to h.
+         */
+        void rowsum(int h, int i);
 
     public:
         /**

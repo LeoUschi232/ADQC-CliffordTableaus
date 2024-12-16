@@ -22,9 +22,4 @@ namespace CliffordTableaus {
                 throw std::invalid_argument("Invalid input.");
         }
     }
-
-    int rowsum(int h, int i){
-
-    }
-
 }

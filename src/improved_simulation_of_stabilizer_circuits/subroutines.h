@@ -16,14 +16,4 @@ namespace CliffordTableaus {
      */
     int g(uint8_t x1z1x2z2);
 
-    /**
-     * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
-     * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
-     * that appear when multiplying Pauli matrices.
-     * @param h The generator to update.
-     * @param i The generator to add to h.
-     * @return The updated generator h.
-     */
-    int rowsum(int h, int i);
-
 }

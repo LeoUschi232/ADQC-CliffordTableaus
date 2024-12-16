@@ -11,6 +11,23 @@ namespace CliffordTableaus {
         }
     }
 
+    void Tableau::rowsum(int h, int i) {
+        auto rh = get_r(h);
+        auto ri = get_r(i);
+
+        int sum_g = 2 * (rh + ri);
+        for (int j = 1; j <= n; ++j) {
+            sum_g += g((get_xz(i, j) << 2) | get_xz(h, j));
+        }
+        if (sum_g % 4 ==0){
+            set_r(h, 0);
+        } else if (sum_g % 4 == 2){
+            set_r(h, 1);
+        } else {
+            throw std::logic_error("The sum of rh, ri and g should never be congruent to 1 or 3.");
+        }
+    }
+
     void Tableau::set(uint index, uint8_t value) {
         uint byte_index = index / 8;
         uint bit_index = index % 8;
