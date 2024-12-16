@@ -1,6 +1,8 @@
 #include "quarray.h"
 
 #include <algorithm>
+#include <cmath>
+#include <random>
 
 namespace CliffordTableaus {
     // Helper functions
@@ -576,5 +578,27 @@ namespace CliffordTableaus {
         // If control=0: no swap, just part0
         // If control=1: swap, so part1 * swap_op
         return part0 + (part1 * swap_op);
+    }
+
+    QuArray QuArray::RandomUnitary() {
+        const double lower_bound = 0.0;
+        const double upper_bound = 2.0 * M_PI;
+
+        std::random_device randomDevice;
+        std::mt19937 gen(randomDevice());
+        std::uniform_real_distribution<> distribution(lower_bound, upper_bound);
+
+        double alpha = distribution(gen);
+        double beta = distribution(gen);
+        double gamma = distribution(gen);
+        double delta = distribution(gen);
+
+        // Theorem 4.1: Z-Y decomposition for a single qubit
+        // Suppose U is a unitary operation on a single qubit.
+        // Then there exist real numbers α, β, γ and δ such that
+        // U = e^(iα) * Rz(β) * Ry(γ) * Rz(δ)
+        // The array of gates <rz-ry-rz> is chosen because it has the potential
+        // to perform any feasible unitary operation without global phase shift.
+        return QuArray::RotationZ(beta) * QuArray::RotationY(gamma) * QuArray::RotationZ(delta) * exp(1i * alpha);
     }
 }

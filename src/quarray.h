@@ -143,6 +143,8 @@ namespace CliffordTableaus {
         static QuArray SWAP(std::size_t dim, std::size_t qubit1, std::size_t qubit2);
 
         static QuArray Fredkin(std::size_t dim, std::size_t control, std::size_t target1, std::size_t target2);
+
+        static QuArray RandomUnitary();
     };
 }
 

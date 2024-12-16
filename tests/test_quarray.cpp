@@ -105,9 +105,34 @@ TEST(QuArrayTest, Construction) {
     }), std::invalid_argument);
 }
 
-TEST(QuArrayTest, Arithmetic) {
+TEST(QuArrayTest, BasicArithmetic) {
+    // TODO: Do 2 tests per:
+    //  - Addition
+    //  - Subtraction
+    //  - Scalar Multiplication
+    //  - Matrix Multiplication
 
 }
+
+TEST(QuArrayTest, AdvancedArithmetic) {
+    // TODO: Do 2 tests per:
+    //  - Matrix inversion
+    //  - Matrix Division (A/B = B^(-1)*A)
+    //  - Matrix Exponentiation
+}
+TEST(QuArrayTest, BasicOperations) {
+    // TODO: Do 2 tests per:
+    //  - Transpose
+    //  - Conjugate
+    //  - Dagger
+}
+TEST(QuArrayTest, AdvancedOperations) {
+    // TODO: Do 2 tests per:
+    //  - Tensor product using predefined matrices (PauliX etc)
+    //  - Tensor product using arbitrary unitary matrices (You can us RandomUnitary for that)
+}
+
+
 
 
 int main(int argc, char **argv) {
