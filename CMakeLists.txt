@@ -9,7 +9,10 @@ enable_testing()
 find_package(GTest REQUIRED)
 
 # QuArray library
-add_library(QuArrayLib src/quarray.cpp)
+add_library(QuArrayLib src/quarray.cpp
+        src/improved_simulation_of_stabilizer_circuits/subroutines.cpp
+        src/improved_simulation_of_stabilizer_circuits/subroutines.h
+)
 target_include_directories(QuArrayLib PUBLIC src)
 
 # Test executable
@@ -19,7 +22,5 @@ add_test(NAME QuArrayTests COMMAND test_quarray)
 
 # Main executable
 add_executable(clifford_tableau main.cpp
-        src/improved_simulation_of_stabilizer_circuits/qutils.cpp
-        src/improved_simulation_of_stabilizer_circuits/qutils.h
 )
 target_link_libraries(clifford_tableau QuArrayLib)

@@ -698,4 +698,5 @@ namespace CliffordTableaus {
         std::cout << std::endl;
     }
 
+
 }
