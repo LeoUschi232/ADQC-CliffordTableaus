@@ -26,6 +26,11 @@ namespace CliffordTableaus {
         } else {
             throw std::logic_error("The sum of rh, ri and g should never be congruent to 1 or 3.");
         }
+
+        for (int j = 1; j <= n; ++j) {
+            set_x(h, j, get_x(i, j) ^ get_x(h, j));
+            set_z(h, j, get_z(i, j) ^ get_z(h, j));
+        }
     }
 
     void Tableau::set(uint index, uint8_t value) {
