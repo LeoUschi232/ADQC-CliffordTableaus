@@ -32,7 +32,7 @@ namespace CliffordTableaus {
      * @param x1z1x2z2 The 4 input bits stored in the least significant bits of an 8-bit unsigned integer.
      * @return The exponent to which i is raised when the Pauli matrices represented by x1z1 and x2z2 are multiplied.
      */
-    int g(uint8_t x1z1x2z2);
+    int g(int x1z1x2z2);
 
     /**
      * Generate a random bit, either 0 or 1 with equal probability.

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libQuArrayLib.a CMakeFiles/QuArrayLib.dir/src/quarray.cpp.o CMakeFiles/QuArrayLib.dir/src/improved_simulation_of_stabilizer_circuits/subroutines.cpp.o CMakeFiles/QuArrayLib.dir/src/improved_simulation_of_stabilizer_circuits/improved_stabilizer_tableau.cpp.o CMakeFiles/QuArrayLib.dir/src/stabilizer_circuit.cpp.o CMakeFiles/QuArrayLib.dir/src/stabilizer_tableau.cpp.o
+/usr/bin/ranlib libQuArrayLib.a

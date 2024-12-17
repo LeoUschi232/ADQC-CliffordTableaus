@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/clifford_tableau.dir/link.d CMakeFiles/clifford_tableau.dir/main.cpp.o -o clifford_tableau  libQuArrayLib.a

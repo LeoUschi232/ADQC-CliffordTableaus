@@ -44,7 +44,7 @@ namespace CliffordTableaus {
         uint n = 0;
         std::smatch match;
         while (true) {
-            std::cout << "Initialize the number of qubit register in QASM3 format: qreg q[n];\n";
+            std::cout << "Initialize the number of qubit register in QASM3 format: qreg q[n];\n> ";
             std::string line;
             if (!std::getline(std::cin, line)) {
                 // End input, just return empty
@@ -62,7 +62,7 @@ namespace CliffordTableaus {
 
         tableau.initializeTableau(n);
         std::string measurement_result(n, 'x');
-        std::cout << "Initialized circuit with" << n << " qubits.\n"
+        std::cout << "Initialized circuit with " << n << " qubits.\n"
                   << "Available commands:\n"
                   << "Gates CNOT, H, S, Measure, X, Y, Z applied to qubits in QASM3 format.\n"
                   << "exit|quit => Terminate interactive mode and print current measurement string.\n"
@@ -94,11 +94,9 @@ namespace CliffordTableaus {
             }
 
             if (!applyGateLine(line, tableau, measurement_result)) {
-                std::cout << "Error! Expected input: command in QASM3 format or exit|quit|finish|measure all."
-                          << std::endl;
+                std::cout << "Error: Invalid input." << std::endl;
             }
         }
-
         return measurement_result;
     }
 

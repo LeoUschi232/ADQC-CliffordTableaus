@@ -33,4 +33,12 @@ add_test(NAME QuArrayTests COMMAND test_quarray)
 
 # Main executable
 add_executable(clifford_tableau main.cpp)
+
+# Link the library
 target_link_libraries(clifford_tableau QuArrayLib)
+
+# Add include directories for proper header resolution
+target_include_directories(clifford_tableau PUBLIC
+        src
+        src/improved_simulation_of_stabilizer_circuits
+)

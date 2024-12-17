@@ -1,8 +1,7 @@
-#include <iostream>
-#include "quarray.h"
+#include "stabilizer_circuit.h"
+#include "improved_stabilizer_tableau.h"
 
-using namespace std::complex_literals;
-using QuArray = CliffordTableaus::QuArray;
+using namespace CliffordTableaus;
 
 /**
  * Tasks:
@@ -13,4 +12,6 @@ using QuArray = CliffordTableaus::QuArray;
  * - Write Stabilizer Algorithm
  */
 int main() {
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    StabilizerCircuit::interactiveMode(stabilizerTableau);
 }
