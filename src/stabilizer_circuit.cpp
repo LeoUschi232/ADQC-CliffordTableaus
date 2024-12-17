@@ -1,7 +1,18 @@
 #include "stabilizer_circuit.h"
 
+#include <utility>
+
 namespace CliffordTableaus {
-    StabilizerCircuit::StabilizerCircuit(const std::string &circuit_filename) : circuit_filename(circuit_filename) {
+    StabilizerCircuit::StabilizerCircuit(std::string circuit_filename) : n(0), circuit_filename(std::move(circuit_filename)) {
+        initializeCircuit();
+    }
+
+    void StabilizerCircuit::setCircuit(const std::string &p_circuit_filename) {
+        this->circuit_filename = p_circuit_filename;
+        initializeCircuit();
+    }
+
+    void StabilizerCircuit::initializeCircuit() {
         std::ifstream file(circuit_filename);
         if (!file.is_open()) {
             throw std::runtime_error("Unable to open the circuit file.");
@@ -25,4 +36,6 @@ namespace CliffordTableaus {
 
         n = std::stoul(match[1]);
     }
+
+
 }

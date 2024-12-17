@@ -23,7 +23,7 @@ namespace CliffordTableaus {
          */
         std::string circuit_filename;
 
-
+        void initializeCircuit();
     public:
         /**
          * Construct a new StabilizerCircuit object.
@@ -38,9 +38,9 @@ namespace CliffordTableaus {
          * The file contains the circuit in QASM3 format, and the number of qubits is inferred.
          * @param circuit_filename Path to the file containing the circuit.
          */
-        explicit StabilizerCircuit(const std::string &circuit_filename);
+        explicit StabilizerCircuit(std::string circuit_filename);
 
-
+        void setCircuit(const std::string &p_circuit_filename);
     };
 
 
