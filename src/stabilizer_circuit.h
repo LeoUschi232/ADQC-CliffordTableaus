@@ -10,6 +10,7 @@
 #include <regex>
 #include <utility>
 #include <random>
+#include <complex>
 
 namespace CliffordTableaus {
     using uint = std::size_t;

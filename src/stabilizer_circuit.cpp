@@ -48,7 +48,11 @@ namespace CliffordTableaus {
             bool measure_all_at_the_end,
             bool overwrite_file
     ) {
-        std::vector<Gate> allowed_gates = {Gate::CNOT, Gate::HADAMARD, Gate::PHASE};
+
+        std::vector<Gate> allowed_gates = {Gate::CNOT, Gate::PHASE};
+        if (n_qubits >= 2) {
+            allowed_gates.push_back(Gate::HADAMARD);
+        }
         if (allow_intermediate_measurement) {
             allowed_gates.push_back(Gate::MEASURE);
         }
