@@ -1,6 +1,0 @@
-/home/leouscin/Documents/TUM_Studium/SEM_9/ATQC/build/CMakeFiles/QuArrayLib.dir
-/home/leouscin/Documents/TUM_Studium/SEM_9/ATQC/build/CMakeFiles/test_quarray.dir
-/home/leouscin/Documents/TUM_Studium/SEM_9/ATQC/build/CMakeFiles/clifford_tableau.dir
-/home/leouscin/Documents/TUM_Studium/SEM_9/ATQC/build/CMakeFiles/test.dir
-/home/leouscin/Documents/TUM_Studium/SEM_9/ATQC/build/CMakeFiles/edit_cache.dir
-/home/leouscin/Documents/TUM_Studium/SEM_9/ATQC/build/CMakeFiles/rebuild_cache.dir
