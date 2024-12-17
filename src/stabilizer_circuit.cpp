@@ -2,17 +2,10 @@
 
 
 namespace CliffordTableaus {
-    StabilizerCircuit::StabilizerCircuit(std::string circuit_filename) : n(0),
-                                                                         circuit_filename(std::move(circuit_filename)) {
-        initializeCircuit();
-    }
 
-    void StabilizerCircuit::setCircuit(const std::string &p_circuit_filename) {
-        this->circuit_filename = p_circuit_filename;
-        initializeCircuit();
-    }
 
-    void StabilizerCircuit::initializeCircuit() {
+
+    std::string StabilizerCircuit::executeCircuit(const std::string &circuit_filename, StabilizerTableau &tableau) {
         std::ifstream file(circuit_filename);
         if (!file.is_open()) {
             throw std::runtime_error("Unable to open the circuit file.");
@@ -34,7 +27,8 @@ namespace CliffordTableaus {
             throw std::runtime_error("Invalid QASM format: 'qreg q[n];' expected on the second line.");
         }
 
-        n = std::stoul(match[1]);
+        auto n = std::stoul(match[1]);
+        tableau.initializeTableau()
     }
 
 
@@ -236,9 +230,9 @@ namespace CliffordTableaus {
     }
 
 
-    std::string StabilizerCircuit::getCNOT(uint qubit1, uint qubit2) {
+    std::string StabilizerCircuit::getCNOT(uint control, uint target) {
         std::ostringstream builder;
-        builder << "cx q[" << qubit1 << "],q[" << qubit2 << "];\n";
+        builder << "cx q[" << control << "],q[" << target << "];\n";
         return builder.str();
     }
 

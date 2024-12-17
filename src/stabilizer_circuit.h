@@ -1,5 +1,7 @@
 #pragma once
 
+#include "stabilizer_tableau.h"
+
 #include <cstdint>
 #include <stdexcept>
 #include <cstdint>
@@ -19,22 +21,6 @@ namespace CliffordTableaus {
     class StabilizerCircuit {
     private:
         /**
-         * The number of qubits in the system.
-         */
-        uint n;
-
-        /**
-         * Name of the file containing the circuit that would currently be executed.
-         */
-        std::string circuit_filename;
-
-        /**
-         * Initialize the circuit from the file.
-         * This method sets the number of qubits in the system to the the number of qubits provided by the circuit.
-         */
-        void initializeCircuit();
-
-        /**
          * Retrieve the file containing the circuit.
          * @param circuit_filename File containing the circuit in QASM3 format.
          * @param overwrite_file Whether the file should be overwritten if it already exists.
@@ -42,28 +28,20 @@ namespace CliffordTableaus {
          */
         static std::ofstream retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file);
 
+
     public:
         /**
-         * Construct a new StabilizerCircuit object.
-         * The qubits are initialized to the state |0〉^(⊗n) and the circuit is empty.
-         * @param n Number of qubits in the system.
+         * Execute a stabilizer circuit given by the QASM3 code in the file given by circuit_filename
+         * using the provided stabilizer tableau.
+         * If qubits are measured without further operations, the returned string will contain the measurement results.
+         * In place of all unmeasured qubits, the return string will contain 'x'.
+         * @param circuit_filename File containing the circuit in QASM3 format.
+         * @param tableau Stabilizer tableau to use to execute the circuit.
+         * @return The final measurement of the executed circuit
+         * using '0' and '1' for measured qubits and 'x' for unmeasured qubits.
          */
-        explicit StabilizerCircuit(uint n) : n(n) {}
+        static std::string executeCircuit(const std::string &circuit_filename,  StabilizerTableau &tableau );
 
-
-        /**
-         * Construct a new StabilizerCircuit object from a file.
-         * The file contains the circuit in QASM3 format, and the number of qubits is inferred.
-         * @param circuit_filename Path to the file containing the circuit.
-         */
-        explicit StabilizerCircuit(std::string circuit_filename);
-
-        /**
-         * Set the circuit_filename from a file.
-         * Also initializes the number of qubits.
-         * @param p_circuit_filename File containing the circuit in QASM3 format.
-         */
-        void setCircuit(const std::string &p_circuit_filename);
 
         /**
          * Create a random stabilizer circuit and write it to a file.
@@ -99,19 +77,58 @@ namespace CliffordTableaus {
                 bool overwrite_file
         );
 
-        static std::string getCNOT(uint qubit1, uint qubit2);
+        /**
+         * Get the string of a line of QASM3 code which applies the CNOT gate
+         * to target qubit depending on the control qubit.
+         * @param control Control qubit.
+         * @param target Target qubit to apply the X-gate to if the control qubit is |1〉.
+         * @return Line of QASM3 code corresponding to the application of the CNOT gate
+         * with the given control and target qubits.
+         */
+        static std::string getCNOT(uint control, uint target);
 
+        /**
+         * Get the string of a line of QASM3 code which applies the Hadamard gate to the qubit.
+         * @param qubit Qubit to apply the Hadamard gate to.
+         * @return Line of QASM3 code corresponding to the application of the Hadamard gate to the qubit.
+         */
         static std::string getHadamard(uint qubit);
 
+        /**
+         * Get the string of a line of QASM3 code which applies the Phase gate to the qubit.
+         * @param qubit Qubit to apply the Phase gate to.
+         * @return Line of QASM3 code corresponding to the application of the Phase gate to the qubit.
+         */
         static std::string getPhase(uint qubit);
 
+        /**
+         * Get the string of a line of QASM3 code which measures the qubit.
+         * @param qubit Qubit to measure.
+         * @return Line of QASM3 code corresponding to the measurement of the qubit.
+         */
         static std::string getMeasurement(uint qubit);
 
+        /**
+         * Decompose the Pauli-X gate into a sequence of CNOt, Hadamard, and Phase gates.
+         * @param qubit Qubit to apply the Pauli-X gate to.
+         * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-X gate.
+         */
         static std::string decomposePauliX(uint qubit);
 
+        /**
+         * Decompose the Pauli-Y gate into a sequence of CNOt, Hadamard, and Phase gates.
+         * @param qubit Qubit to apply the Pauli-Y gate to.
+         * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-Y gate.
+         */
         static std::string decomposePauliY(uint qubit);
 
+        /**
+         * Decompose the Pauli-Z gate into a sequence of CNOt, Hadamard, and Phase gates.
+         * @param qubit Qubit to apply the Pauli-Z gate to.
+         * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-Z gate.
+         */
         static std::string decomposePauliZ(uint qubit);
+
     };
 
     enum Gate {

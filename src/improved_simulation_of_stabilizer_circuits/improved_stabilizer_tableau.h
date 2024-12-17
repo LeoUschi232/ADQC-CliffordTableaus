@@ -47,16 +47,27 @@ namespace CliffordTableaus {
     public:
         /**
          * Construct a new ImprovedStabilizerTableau object.
-         * The entries of the tableau will be default initialized to the state |0〉^(⊗n).
-         * This state is represented by a tableau with its (2n)x(2n) submatrix set to identity.
-         * @param n The number of qubits in the system.
          */
-        explicit ImprovedStabilizerTableau(uint n);
+        ImprovedStabilizerTableau() = default;
 
         /**
-         * Virtual Destructor.
+         * Initialize the tableau with the given number of qubits and total bits.
+         * The entries of the tableau will be default initialized to the state |0〉^(⊗n).
+         * This state is represented by a tableau with its (2n)x(2n) submatrix set to identity.
+         * @param p_n Number of qubits in the system.
+         * @param p_total_bits Number of bits necessary to specify the state using the tableau.
          */
-        ~ImprovedStabilizerTableau() override = default;
+        void initializeTableau(uint p_n) override;
+
+        /// Superclass overrides begin.
+        void CNOT(uint control, uint target) override;
+
+        void Hadamard(uint qubit) override;
+
+        void Phase(uint qubit) override;
+
+        uint8_t Measurement(uint qubit) override;
+        /// Superclass overrides end.
 
         /**
          * Set the value of the x operator bit for a qubit.
@@ -131,14 +142,5 @@ namespace CliffordTableaus {
          */
         static uint8_t reverse_interpret(char pauli);
 
-        /// Superclass overrides begin.
-        void CNOT(uint control, uint target) override;
-
-        void Hadamard(uint qubit) override;
-
-        void Phase(uint qubit) override;
-
-        uint8_t Measurement(uint qubit) override;
-        /// Superclass overrides end.
     };
 }

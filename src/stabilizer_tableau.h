@@ -14,13 +14,13 @@ namespace CliffordTableaus {
         /**
          * The number of qubits in the system.
          */
-        uint n;
+        uint n{};
 
         /**
          * The total number of bits needed to specify the state.
          * Also total number of bits in the tableau.
          */
-        uint total_bits;
+        uint total_bits{};
 
         /**
          * The tableau of stabilizer and destabilizer generators.
@@ -32,12 +32,30 @@ namespace CliffordTableaus {
         std::vector<uint8_t> tableau;
 
         /**
-         * Constructor exclusively for the subclasses.
+         * Default Constructor exclusively for the subclasses.
          */
-        explicit StabilizerTableau(uint n, uint total_bits) :
-                n(n), total_bits(total_bits), tableau((total_bits + 7) / 8, 0) {}
+        explicit StabilizerTableau() = default;
+
+        /**
+        * Initialize the tableau with the given number of qubits and total bits.
+        * @param p_n Number of qubits in the system.
+        * @param p_total_bits Number of bits necessary to specify the state using the tableau.
+        */
+        virtual inline void initializeTableau(uint p_n, uint p_total_bits) {
+            this->n = p_n;
+            this->total_bits = p_total_bits;
+            this->tableau = std::vector<uint8_t>((total_bits + 7) / 8, 0);
+        }
 
     public:
+        /**
+         * Initialize the tableau with the given number of qubits.
+         * The overriding subclass must determine the amount of necessary total_bits from the amount of qubits
+         * and call the protected method initializeTableau with 2 arguments appropriately.
+         * @param p_n Number of qubits in the system.
+         */
+        virtual void initializeTableau(uint p_n) = 0;
+
         /**
          * Virtual Destructor.
          */

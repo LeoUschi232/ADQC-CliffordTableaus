@@ -1,11 +1,12 @@
 #include "improved_stabilizer_tableau.h"
 
 namespace CliffordTableaus {
-    ImprovedStabilizerTableau::ImprovedStabilizerTableau(uint n)
-            : StabilizerTableau(n, (2 * n + 1) * (2 * n + 1)) {
+    void ImprovedStabilizerTableau::initializeTableau(uint p_n) {
+        StabilizerTableau::initializeTableau(p_n, (2 * n + 1) * (2 * n + 1));
         for (int i = 0; i <= 2 * n; ++i) {
             set(i * (2 * n + 1) + i, 1);
         }
+
     }
 
     void ImprovedStabilizerTableau::CNOT(uint control, uint target) {
@@ -240,4 +241,6 @@ namespace CliffordTableaus {
                 throw std::invalid_argument("Invalid input.");
         }
     }
+
+
 }
