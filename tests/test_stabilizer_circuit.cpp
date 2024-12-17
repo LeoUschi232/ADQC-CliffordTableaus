@@ -9,7 +9,7 @@ using namespace std::complex_literals;
 TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_1.qasm",
-            3,
+            5,
             10,
             0,
             0,
@@ -19,7 +19,7 @@ TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
     );
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_2.qasm",
-            5,
+            25,
             100,
             10,
             20,
@@ -29,7 +29,7 @@ TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
     );
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_3.qasm",
-            10,
+            100,
             500,
             15,
             50,

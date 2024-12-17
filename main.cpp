@@ -1,19 +1,116 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <unordered_map>
+#include <algorithm>
+#include <getopt.h>
 #include "stabilizer_circuit.h"
+#include "stabilizer_tableau.h"
 #include "improved_stabilizer_tableau.h"
 
 using namespace CliffordTableaus;
 
-/**
- * Tasks:
- * Advanced Topics in Quantum Computing
- * - Explain Clifford Tableaus
- * - Make a Clifford Tableau
- * - Decompose Clifford Tableau
- * - Write Stabilizer Algorithm
- */
-int main() {
-    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
-    // auto final_measurement = StabilizerCircuit::interactiveMode(stabilizerTableau);
-    auto final_measurement = StabilizerCircuit::executeCircuit("")
-    std::cout << final_measurement << std::endl;
+int main(int argc, char *argv[]) {
+    std::string input_filename;
+    std::string output_filename;
+
+    // Default to ImprovedStabilizerTableau
+    unsigned int stabilizer_id = 1;
+    unsigned int num_shots = 1;
+
+    // Define options
+    struct option long_options[] = {
+            {"input",      required_argument, nullptr, 'i'},
+            {"stabilizer", required_argument, nullptr, 's'},
+            {"output",     required_argument, nullptr, 'o'},
+            {"num-shots",  required_argument, nullptr, 'n'},
+            {nullptr, 0,                      nullptr, 0}
+    };
+
+    int opt;
+    while ((opt = getopt_long(argc, argv, "i:s:o:n:", long_options, nullptr)) != -1) {
+        switch (opt) {
+            case 'i':
+                input_filename = optarg;
+                break;
+            case 's':
+                stabilizer_id = std::stoul(optarg);
+                break;
+            case 'o':
+                output_filename = optarg;
+                break;
+            case 'n':
+                num_shots = std::stoul(optarg);
+                break;
+            default:
+                std::cerr << "Usage: " << argv[0]
+                          << " [--input <input_filename>] [--stabilizer <stabilizer-id>]"
+                          << " [--output <input_filename>] [--num-shots <num-shots>]"
+                          << std::endl;
+                return 1;
+        }
+    }
+
+    // Select stabilizer tableau
+    std::unique_ptr<StabilizerTableau> stabilizerTableau;
+    // NOLINTNEXTLINE
+    switch (stabilizer_id) {
+        case 1:
+            stabilizerTableau = std::make_unique<ImprovedStabilizerTableau>();
+            break;
+        default:
+            std::cerr << "Error: Unsupported stabilizer algorithm ID: " << stabilizer_id << std::endl;
+            return 1;
+    }
+
+
+    try {
+        if (input_filename.empty()) {
+            // Interactive mode
+            std::string result = StabilizerCircuit::interactiveMode(*stabilizerTableau);
+            std::cout << "Final measurement: " << result << std::endl;
+        } else {
+            // Read circuit from file
+            std::unordered_map<std::string, unsigned int> measurement_results;
+            for (unsigned int shot = 0; shot < num_shots; ++shot) {
+                std::string measurement = StabilizerCircuit::executeCircuit(input_filename, *stabilizerTableau);
+                ++measurement_results[measurement];
+            }
+
+            // Sort and output results
+            std::vector<std::pair<std::string, unsigned int>> sorted_results(
+                    measurement_results.begin(), measurement_results.end()
+            );
+            std::sort(sorted_results.begin(), sorted_results.end());
+
+            std::ostringstream output;
+            output << "{";
+            for (size_t i = 0; i < sorted_results.size(); ++i) {
+                output << "\"" << sorted_results[i].first << "\": " << sorted_results[i].second;
+                if (i < sorted_results.size() - 1) {
+                    output << ", ";
+                }
+            }
+            output << "}";
+
+            // Print to console
+            std::cout << "Measurement results: " << output.str() << std::endl;
+
+            // Write to file if output filename is provided
+            if (!output_filename.empty()) {
+                std::ofstream out_file(output_filename);
+                if (!out_file) {
+                    std::cerr << "Error: Unable to write to file: " << output_filename << std::endl;
+                    return 1;
+                }
+                out_file << output.str();
+                out_file.close();
+            }
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
 }
