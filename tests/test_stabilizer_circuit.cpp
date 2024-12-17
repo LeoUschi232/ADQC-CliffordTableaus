@@ -39,30 +39,30 @@ TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
     );
 }
 
-TEST(StabilizerCircuitTest, TestRandomCircuitSet1) {
 
+TEST(StabilizerCircuitTest, TestImprovedStabilizerTableau) {
+    std::string measurement;
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
 
-    auto filename = "custom_circuit_2.qasm";
-    auto final_measurement = StabilizerCircuit::executeCircuit(filename, stabilizerTableau);
-    std::cout << final_measurement << std::endl;
+    measurement = StabilizerCircuit::executeCircuit("test_circuit_1.qasm", stabilizerTableau);
+    std::cout << "First measurement: " << measurement << std::endl;
+    ASSERT_EQ(measurement, "11010");
 
-}
-
-TEST(StabilizerCircuitTest, TestCustomCircuitSet1) {
-    std::string final_measurement;
-    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
-
-    final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_1.qasm", stabilizerTableau);
-    std::cout << "First measurement: " << final_measurement << std::endl;
-    ASSERT_EQ(final_measurement, "11010");
-
-    final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_2.qasm", stabilizerTableau);
-    std::cout << "Second measurement: " << final_measurement << std::endl;
-    char q0 = final_measurement.at(0);
-    char q1 = final_measurement.at(1);
-    char q2 = final_measurement.at(2);
-    char q3 = final_measurement.at(3);
+    measurement = StabilizerCircuit::executeCircuit("test_circuit_2.qasm", stabilizerTableau);
+    std::cout << "Second measurement: " << measurement << std::endl;
+    char q0 = measurement.at(0);
+    char q1 = measurement.at(1);
+    char q2 = measurement.at(2);
+    char q3 = measurement.at(3);
     ASSERT_EQ(q0, q1);
     ASSERT_EQ(q2, q3);
+
+    measurement = StabilizerCircuit::executeCircuit("test_circuit_3.qasm", stabilizerTableau);
+    std::cout << "Third measurement: " << measurement << std::endl;
+    ASSERT_TRUE(
+            measurement == "0000000000" ||
+            measurement == "0000011111" ||
+            measurement == "1111100000" ||
+            measurement == "1111111111"
+    );
 }
