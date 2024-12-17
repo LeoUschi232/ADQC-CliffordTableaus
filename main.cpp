@@ -13,5 +13,7 @@ using namespace CliffordTableaus;
  */
 int main() {
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
-    StabilizerCircuit::interactiveMode(stabilizerTableau);
+    // auto final_measurement = StabilizerCircuit::interactiveMode(stabilizerTableau);
+    auto final_measurement = StabilizerCircuit::executeCircuit("")
+    std::cout << final_measurement << std::endl;
 }

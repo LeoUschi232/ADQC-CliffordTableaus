@@ -9,8 +9,20 @@ namespace CliffordTableaus {
     }
 
     void ImprovedStabilizerTableau::CNOT(uint control, uint target) {
-        if (control >= n || target >= n || control == target) {
-            throw std::invalid_argument("Invalid control or target qubit.");
+        if (control == 0) {
+            throw_invalid_argument("Attempted to apply CNOT with control qubit = 0!");
+        }
+        if (control > n) {
+            throw_invalid_argument("Attempted to apply CNOT with control qubit > n!");
+        }
+        if (target == 0) {
+            throw_invalid_argument("Attempted to apply CNOT with target qubit = 0!");
+        }
+        if (target > n) {
+            throw_invalid_argument("Attempted to apply CNOT with target qubit > n!");
+        }
+        if (control == target) {
+            throw_invalid_argument("Attempted to apply CNOT with target qubit = control qubit!");
         }
 
         auto a = control;
@@ -25,8 +37,11 @@ namespace CliffordTableaus {
     }
 
     void ImprovedStabilizerTableau::Hadamard(uint qubit) {
-        if (qubit >= n) {
-            throw std::invalid_argument("Invalid qubit index.");
+        if (qubit == 0) {
+            throw_invalid_argument("Attempted to apply Hadamard with qubit = 0!");
+        }
+        if (qubit > n) {
+            throw_invalid_argument("Attempted to apply Hadamard with qubit > n!");
         }
 
         auto a = qubit;
@@ -40,8 +55,11 @@ namespace CliffordTableaus {
     }
 
     void ImprovedStabilizerTableau::Phase(uint qubit) {
-        if (qubit >= n) {
-            throw std::invalid_argument("Invalid qubit index.");
+        if (qubit == 0) {
+            throw_invalid_argument("Attempted to apply Phase with qubit = 0!");
+        }
+        if (qubit > n) {
+            throw_invalid_argument("Attempted to apply Phase with qubit > n!");
         }
 
         auto a = qubit;
@@ -52,9 +70,13 @@ namespace CliffordTableaus {
     }
 
     uint8_t ImprovedStabilizerTableau::Measurement(uint qubit) {
-        if (qubit >= n) {
-            throw std::invalid_argument("Invalid qubit index.");
+        if (qubit == 0) {
+            throw_invalid_argument("Attempted to measure qubit = 0!");
         }
+        if (qubit > n) {
+            throw_invalid_argument("Attempted to measure qubit > n!");
+        }
+        using_scratch_space = true;
 
         // Measurement of qubit a in standard basis.
         // First check whether there exists a p with n+1<=p<=2*n such that xpa=1.
@@ -114,7 +136,9 @@ namespace CliffordTableaus {
         }
 
         // Finally return r_{2n+1} as the measurement outcome.
-        return get_r(2 * n + 1);
+        auto measurement = get_r(2 * n + 1);
+        using_scratch_space = false;
+        return measurement;
     }
 
     void ImprovedStabilizerTableau::rowsum(int h, int i) {
@@ -154,24 +178,24 @@ namespace CliffordTableaus {
     }
 
     void ImprovedStabilizerTableau::set_x(uint i, uint j, uint8_t x) {
-        if (i >= 2 * n || j >= n) {
-            throw std::invalid_argument("Invalid indices for set_x.");
+        if (i == 0 || j == 0 || i > 2 * n || j > n) {
+            throw_invalid_argument("Invalid indices for set_x.");
         }
         // Shift the index starting at 1 to index starting at 0
         set((i - 1) * (2 * n + 1) + (j - 1), x);
     }
 
     void ImprovedStabilizerTableau::set_z(uint i, uint j, uint8_t z) {
-        if (i >= 2 * n || j >= n) {
-            throw std::invalid_argument("Invalid indices for set_z.");
+        if (i == 0 || j == 0 || i > 2 * n || j > n) {
+            throw_invalid_argument("Invalid indices for set_z.");
         }
         // Shift the index starting at 1 to index starting at 0
         set((i - 1) * (2 * n + 1) + n + (j - 1), z);
     }
 
     void ImprovedStabilizerTableau::set_r(uint i, uint8_t r) {
-        if (i >= 2 * n) {
-            throw std::invalid_argument("Invalid index for set_r.");
+        if (i == 0 || i > 2 * n) {
+            throw_invalid_argument("Invalid index for set_r.");
         }
         // Shift the index starting at 1 to index starting at 0
         set((i - 1) * (2 * n + 1) + 2 * n, r);
@@ -184,24 +208,24 @@ namespace CliffordTableaus {
 
 
     uint8_t ImprovedStabilizerTableau::get_x(uint i, uint j) {
-        if (i >= 2 * n || j >= n) {
-            throw std::invalid_argument("Invalid indices for get_x.");
+        if (i == 0 || j == 0 || i > 2 * n || j > n) {
+            throw_invalid_argument("Invalid indices for get_x.");
         }
         // Shift the index starting at 1 to index starting at 0
         return get((i - 1) * (2 * n + 1) + (j - 1));
     }
 
     uint8_t ImprovedStabilizerTableau::get_z(uint i, uint j) {
-        if (i >= 2 * n || j >= n) {
-            throw std::invalid_argument("Invalid indices for get_z.");
+        if (i == 0 || j == 0 || i > 2 * n || j > n) {
+            throw_invalid_argument("Invalid indices for get_z.");
         }
         // Shift the index starting at 1 to index starting at 0
         return get((i - 1) * (2 * n + 1) + n + (j - 1));
     }
 
     uint8_t ImprovedStabilizerTableau::get_r(uint i) {
-        if (i >= 2 * n) {
-            throw std::invalid_argument("Invalid index for get_r.");
+        if (i == 0 || i > 2 * n) {
+            throw_invalid_argument("Invalid index for get_r.");
         }
         // Shift the index starting at 1 to index starting at 0
         return get((i - 1) * (2 * n + 1) + 2 * n);
@@ -222,7 +246,7 @@ namespace CliffordTableaus {
             case 0b11:
                 return 'Y';
             default:
-                throw std::invalid_argument("Invalid input.");
+                throw std::invalid_argument("Invalid input to interpret function.");
         }
     }
 
@@ -237,9 +261,13 @@ namespace CliffordTableaus {
             case 'Y':
                 return 0b11;
             default:
-                throw std::invalid_argument("Invalid input.");
+                throw std::invalid_argument("Invalid input to reverse_interpret function.");
         }
     }
 
-
+    void ImprovedStabilizerTableau::throw_invalid_argument(const std::string &message) const {
+        if (!using_scratch_space) {
+            throw std::invalid_argument(message);
+        }
+    }
 }

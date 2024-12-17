@@ -4,10 +4,7 @@
 
 namespace CliffordTableaus {
     std::string StabilizerCircuit::executeCircuit(const std::string &circuit_filename, StabilizerTableau &tableau) {
-        std::ifstream file(circuit_filename);
-        if (!file.is_open()) {
-            throw std::runtime_error("Unable to open the circuit file.");
-        }
+        auto file = retrieveCircuitFile(circuit_filename);
 
         std::string line;
         if (!std::getline(file, line) || line != "OPENQASM 3;") {
@@ -171,7 +168,7 @@ namespace CliffordTableaus {
             bool measure_all_at_the_end,
             bool overwrite_file
     ) {
-        auto file = retrieveCircuitFile(circuit_filename, overwrite_file);
+        auto file = createCircuitFile(circuit_filename, overwrite_file);
 
         std::vector<Gate> allowed_gates = {Gate::PAULI_X, Gate::PAULI_Y, Gate::PAULI_Z, Gate::HADAMARD, Gate::PHASE};
         if (n_qubits >= 2) {
@@ -254,7 +251,7 @@ namespace CliffordTableaus {
             const std::string &circuit,
             bool overwrite_file
     ) {
-        auto file = retrieveCircuitFile(circuit_filename, overwrite_file);
+        auto file = createCircuitFile(circuit_filename, overwrite_file);
 
         std::istringstream iss(circuit);
         std::string line;
@@ -322,7 +319,7 @@ namespace CliffordTableaus {
         }
     }
 
-    std::ofstream StabilizerCircuit::retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file) {
+    std::ofstream StabilizerCircuit::createCircuitFile(const std::string &circuit_filename, bool overwrite_file) {
         // Get the directory of the current source file otherwise execution from different location will throw errors.
         // Ensure the directory exists by creating it if it doesn't.
         // Finally construct the full path to the file.
@@ -339,6 +336,27 @@ namespace CliffordTableaus {
         std::ofstream file(file_path);
         if (!file.is_open()) {
             throw std::runtime_error("Unable to open file for writing.");
+        }
+        return file;
+    }
+
+    std::ifstream StabilizerCircuit::retrieveCircuitFile(const std::string &circuit_filename) {
+        // Get the directory of the current source file otherwise execution from different location will throw errors.
+        // Ensure the directory exists by creating it if it doesn't.
+        namespace fs = std::filesystem;
+        fs::path base_directory = fs::path(__FILE__).parent_path() / "stabilizer_circuits";
+        fs::create_directories(base_directory);
+        fs::path file_path = base_directory / circuit_filename;
+
+        // Check if the file exists. If it doesn't, throw an error.
+        if (!fs::exists(file_path)) {
+            throw std::runtime_error("File does not exist: " + file_path.string());
+        }
+
+        // Open the file for reading.
+        std::ifstream file(file_path);
+        if (!file.is_open()) {
+            throw std::runtime_error("Unable to open file for reading: " + file_path.string());
         }
         return file;
     }

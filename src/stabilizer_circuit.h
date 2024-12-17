@@ -30,12 +30,19 @@ namespace CliffordTableaus {
     class StabilizerCircuit {
     private:
         /**
-         * Retrieve the file containing the circuit.
+         * Create the file containing the circuit.
          * @param circuit_filename File containing the circuit in QASM3 format.
          * @param overwrite_file Whether the file should be overwritten if it already exists.
          * @return An output file stream to the circuit file.
          */
-        static std::ofstream retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file);
+        static std::ofstream createCircuitFile(const std::string &circuit_filename, bool overwrite_file);
+
+        /**
+         * Retrieve the file containing the circuit.
+         * @param circuit_filename File containing the circuit in QASM3 format.
+         * @return A file stream to the circuit file.
+         */
+        static std::ifstream retrieveCircuitFile(const std::string &circuit_filename);
 
         /**
          * Apply the operation given by the line, which is expected to be in QASM3 syntax to the tableau.

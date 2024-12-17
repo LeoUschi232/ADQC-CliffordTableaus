@@ -1,7 +1,9 @@
 #include "stabilizer_circuit.h"
+#include "improved_simulation_of_stabilizer_circuits/improved_stabilizer_tableau.h"
 #include "gtest/gtest.h"
 
 using StabilizerCircuit = CliffordTableaus::StabilizerCircuit;
+using ImprovedStabilizerTableau = CliffordTableaus::ImprovedStabilizerTableau;
 using namespace std::complex_literals;
 
 TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
@@ -39,5 +41,13 @@ TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
 
 TEST(StabilizerCircuitTest, TestRandomCircuitSet1) {
 
+
+}
+
+TEST(StabilizerCircuitTest, TestCustomCircuitSet1) {
+
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    auto final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_1.qasm", stabilizerTableau);
+    std::cout << final_measurement << std::endl;
 
 }

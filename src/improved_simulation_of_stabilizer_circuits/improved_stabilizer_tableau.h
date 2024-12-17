@@ -22,6 +22,13 @@ namespace CliffordTableaus {
     class ImprovedStabilizerTableau : public StabilizerTableau {
     private:
         /**
+         * It will be convenient to add an additional (2n + 1)st row for scratch space.
+         * Using this scratch space allows one to override valid qubit index checks.
+         * Use only when performing a measurement.
+         */
+        bool using_scratch_space = false;
+
+        /**
          * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
          * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
          * that appear when multiplying Pauli matrices.
@@ -43,6 +50,12 @@ namespace CliffordTableaus {
          * @return The value of the bit.
          */
         uint8_t get(uint index);
+
+        /**
+         * Throws an invalid argument exception with the given message if the scratch space is not being used.
+         * @param message Message to pass to std::invalid_argument.
+         */
+        void throw_invalid_argument(const std::string &message) const;
 
     public:
         /**
