@@ -55,6 +55,17 @@ namespace CliffordTableaus {
          */
         void setCircuit(const std::string &p_circuit_filename);
 
+        /**
+         * Create a random stabilizer circuit and write it to a file.
+         * @param circuit_filename Name of the file to write the circuit to.
+         * @param n_qubits Number of qubits in the system.
+         * @param depth Number of gates in the circuit.
+         * @param gate_seed Seed for the random number generator for selecting gates.
+         * @param qubit_seed Seed for the random number generator for selecting qubits.
+         * @param allow_intermediate_measurement Whether the circuit measures qubits intermediately during execution.
+         * @param measure_all_at_the_end Whether the circuit should measure all qubits at the end.
+         * @param overwrite_file Whether the file should be overwritten if it already exists.
+         */
         static void createRandomStabilizerCircuit(
                 const std::string &circuit_filename,
                 uint n_qubits,
@@ -62,10 +73,21 @@ namespace CliffordTableaus {
                 uint gate_seed = 0,
                 uint qubit_seed = 0,
                 bool allow_intermediate_measurement = false,
-                bool measure_all_at_the_end = true
+                bool measure_all_at_the_end = true,
+                bool overwrite_file = false
         );
 
-        static void writeStabilizerCircuitToFile(const std::string &p_circuit_filename, const std::string &circuit);
+        /**
+         * Write a stabilizer circuit to a file.
+         * @param circuit_filename Name of the file to write the circuit to.
+         * @param circuit Stabilizer circuit in QASM3 format.
+         * @param overwrite_file Whether the file should be overwritten if it already exists.
+         */
+        static void writeStabilizerCircuitToFile(
+                const std::string &circuit_filename,
+                const std::string &circuit,
+                bool overwrite_file
+        );
     };
 
     enum Gate {

@@ -45,7 +45,8 @@ namespace CliffordTableaus {
             uint gate_seed,
             uint qubit_seed,
             bool allow_intermediate_measurement,
-            bool measure_all_at_the_end
+            bool measure_all_at_the_end,
+            bool overwrite_file
     ) {
         std::vector<Gate> allowed_gates = {Gate::CNOT, Gate::HADAMARD, Gate::PHASE};
         if (allow_intermediate_measurement) {
@@ -66,6 +67,14 @@ namespace CliffordTableaus {
         }
         std::uniform_int_distribution<uint> qubit_dist(0, n_qubits - 1);
 
+        // If overwrite_file is true empty it and start writing it anew.
+        // If overwrite_file is false, check if the file exists and throw an error if it does.
+        if (!overwrite_file) {
+            std::ifstream test_file("stabilizer_circuits/" + circuit_filename);
+            if (test_file.good()) {
+                throw std::invalid_argument("File already exists");
+            }
+        }
         std::ofstream file("stabilizer_circuits/" + circuit_filename);
         if (!file.is_open()) {
             throw std::runtime_error("Unable to open file for writing.");
@@ -106,9 +115,10 @@ namespace CliffordTableaus {
 
     void StabilizerCircuit::writeStabilizerCircuitToFile(
             const std::string &circuit_filename,
-            const std::string &circuit
+            const std::string &circuit,
+            bool overwrite_file
     ) {
-        {
+        if (!overwrite_file) {
             std::ifstream test_file("stabilizer_circuits/" + circuit_filename);
             if (test_file.good()) {
                 throw std::invalid_argument("File already exists");
