@@ -1,3 +1,4 @@
+
 #include "stabilizer_circuit.h"
 
 
@@ -18,7 +19,6 @@ namespace CliffordTableaus {
             throw std::runtime_error("Invalid QASM format: missing 'qreg q[n];' on the second line.");
         }
 
-        std::regex qreg_regex(R"(^qreg q\[(\d+)\];$)");
         std::smatch match;
         if (!std::regex_match(line, match, qreg_regex)) {
             throw std::runtime_error("Invalid QASM format: 'qreg q[n];' expected on the second line.");
@@ -32,40 +32,149 @@ namespace CliffordTableaus {
             if (line.empty()) {
                 continue;
             }
-
-            // The +1 are necessary because the qubits are 0-indexed in QASM but 1-indexed in the tableau.
-            if (std::regex_match(line, match, cnot_regex)) {
-                uint control = std::stoul(match[1]) + 1;
-                uint target = std::stoul(match[2]) + 1;
-                tableau.CNOT(control, target);
-                measurement_result.at(control) = 'x';
-                measurement_result.at(target) = 'x';
-            } else if (std::regex_match(line, match, h_regex)) {
-                uint q_index = std::stoul(match[1].str()) + 1;
-                tableau.Hadamard(q_index);
-                measurement_result.at(q_index) = 'x';
-            } else if (std::regex_match(line, match, s_regex)) {
-                uint q_index = std::stoul(match[1].str()) + 1;
-                tableau.Phase(q_index);
-                measurement_result.at(q_index) = 'x';
-            } else if (std::regex_match(line, match, measure_regex)) {
-                uint q_index = std::stoul(match[1].str()) + 1;
-                uint8_t measurement = tableau.Measurement(q_index);
-                measurement_result.at(q_index) = static_cast<char>('0' + measurement);
-            } else {
-                // Check if line starts with a known gate token,
-                // if not, it's unsupported or format is wrong.
-                if (line.rfind("cx", 0) == 0 ||
-                    line.rfind('h', 0) == 0 ||
-                    line.rfind('s', 0) == 0 ||
-                    line.rfind("measure", 0) == 0) {
-                    throw std::invalid_argument("Gate not supported.");
-                } else {
-                    throw std::invalid_argument("Format wrong");
-                }
+            if (!applyGateLine(line, tableau, measurement_result)) {
+                // TODO: For now do not throw, just ignore or break
+                // TODO: In a final version, you might handle error differently.
             }
         }
         return measurement_result;
+    }
+
+
+    std::string StabilizerCircuit::interactiveMode(StabilizerTableau &tableau) {
+        uint n = 0;
+        std::smatch match;
+        while (true) {
+            std::cout << "Initialize the number of qubit register in QASM3 format: qreg q[n];\n";
+            std::string line;
+            if (!std::getline(std::cin, line)) {
+                // End input, just return empty
+                return "";
+            }
+            trimLine(line);
+
+            if (std::regex_match(line, match, qreg_regex)) {
+                n = std::stoul(match[1]);
+                break;
+            } else {
+                std::cout << "Error: Incorrect format. Expected format: qreg q[n];" << std::endl;
+            }
+        }
+
+        tableau.initializeTableau(n);
+        std::string measurement_result(n, 'x');
+
+        std::string line;
+        while (true) {
+            std::cout << "> ";
+            if (!std::getline(std::cin, line)) {
+                // End of input
+                break;
+            }
+            trimLine(line);
+
+            if (line.empty()) {
+                continue;
+            }
+            if (line == "exit" || line == "quit") {
+                break;
+            }
+            if (line == "finish" || line == "measure all") {
+                for (uint q_index = 0; q_index < n; ++q_index) {
+                    if (measurement_result.at(q_index) == 'x') {
+                        uint8_t measurement = tableau.Measurement(q_index + 1);
+                        measurement_result.at(q_index) = static_cast<char>('0' + measurement);
+                    }
+                }
+                break;
+            }
+
+            if (!applyGateLine(line, tableau, measurement_result)) {
+                std::cout << "Error: Invalid input." << std::endl;
+            }
+        }
+
+        return measurement_result;
+    }
+
+    bool StabilizerCircuit::applyGateLine(const std::string &line, StabilizerTableau &tableau, std::string &measurement_result) {
+        std::smatch match;
+        if (std::regex_match(line, match, cnot_regex)) {
+            uint control = std::stoul(match[1]);
+            uint target = std::stoul(match[2]);
+
+            tableau.CNOT(control + 1, target + 1);
+            measurement_result.at(control) = 'x';
+            measurement_result.at(target) = 'x';
+
+            return true;
+        } else if (std::regex_match(line, match, h_regex)) {
+            uint q_index = std::stoul(match[1]);
+
+            tableau.Hadamard(q_index + 1);
+            measurement_result.at(q_index) = 'x';
+
+            return true;
+        } else if (std::regex_match(line, match, s_regex)) {
+            uint q_index = std::stoul(match[1]);
+
+            tableau.Phase(q_index + 1);
+            measurement_result.at(q_index) = 'x';
+
+            return true;
+        } else if (std::regex_match(line, match, measure_regex)) {
+            uint q_index = std::stoul(match[1]);
+            uint8_t measurement = tableau.Measurement(q_index + 1);
+            measurement_result.at(q_index) = static_cast<char>('0' + measurement);
+            return true;
+        } else if (std::regex_match(line, match, x_regex)) {
+            uint q_index = std::stoul(match[1].str());
+
+            auto q = q_index + 1;
+            tableau.Hadamard(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+            measurement_result.at(q_index) = 'x';
+
+            return true;
+        } else if (std::regex_match(line, match, y_regex)) {
+            uint q_index = std::stoul(match[1].str());
+
+            auto q = q_index + 1;
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+            tableau.Phase(q);
+            tableau.Phase(q);
+            tableau.Hadamard(q);
+
+            return true;
+        } else if (std::regex_match(line, match, z_regex)) {
+            uint q_index = std::stoul(match[1].str());
+
+            auto q = q_index + 1;
+            tableau.Phase(q);
+            tableau.Phase(q);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

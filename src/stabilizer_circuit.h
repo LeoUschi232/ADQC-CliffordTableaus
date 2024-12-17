@@ -2,6 +2,7 @@
 
 #include "stabilizer_tableau.h"
 
+#include <iostream>
 #include <cstdint>
 #include <stdexcept>
 #include <cstdint>
@@ -17,6 +18,7 @@
 
 namespace CliffordTableaus {
     using uint = std::size_t;
+    static const std::regex qreg_regex = std::regex(R"(^qreg q\[(\d+)\];$)");
     static const std::regex cnot_regex = std::regex(R"(^cx q\[(\d+)\],q\[(\d+)\];$)");
     static const std::regex h_regex = std::regex(R"(^h q\[(\d+)\];$)");
     static const std::regex s_regex = std::regex(R"(^s q\[(\d+)\];$)");
@@ -35,6 +37,15 @@ namespace CliffordTableaus {
          */
         static std::ofstream retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file);
 
+        /**
+         * Apply the operation given by the line, which is expected to be in QASM3 syntax to the tableau.
+         * In case the operation has an effect on the measurement results, update the measurement result string.
+         * @param line Line in QASM3 syntax which describes the operation to perform.
+         * @param tableau Utilized Tableau to apply the operation to.
+         * @param measurement_result String with running measurement results.
+         * @return Whether the operation was successfully applied.
+         */
+        static bool applyGateLine(const std::string &line, StabilizerTableau &tableau, std::string &measurement_result);
 
     public:
 
@@ -50,6 +61,17 @@ namespace CliffordTableaus {
          */
         static std::string executeCircuit(const std::string &circuit_filename, StabilizerTableau &tableau);
 
+        /**
+         * Launch the interactive mode for executing stabilizer circuits.
+         * The interactive mode allows the user to dynamically and consecutively apply gates to the stabilizer tableau.
+         * Supported gates are Pauli-X, Pauli-Y, Pauli-Z, CNOT, Hadamard, Phase, and Measurement.
+         * Commands must be provided in the QASM3 syntax.
+         * All commands not in QASM3 syntax will default to NO-OP.
+         * Use "exit" or "quit" to exit the interactive mode and output the measurement results.
+         * Use "finish" or "measure all" to measure all remaining qubits and output the measurement results.
+         * @param tableau Stabilizer tableau to use for the interactive mode.
+         */
+        static std::string interactiveMode(StabilizerTableau &tableau);
 
         /**
          * Create a random stabilizer circuit and write it to a file.
@@ -136,8 +158,16 @@ namespace CliffordTableaus {
          * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-Z gate.
          */
         static std::string decomposePauliZ(uint qubit);
-
     };
+
+    static void trimLine(std::string &line) {
+        line.erase(line.begin(), std::find_if(line.begin(), line.end(), [](unsigned char c) {
+            return !std::isspace(c);
+        }));
+        line.erase(std::find_if(line.rbegin(), line.rend(), [](unsigned char c) {
+            return !std::isspace(c);
+        }).base(), line.end());
+    }
 
     enum Gate {
         PAULI_X,
