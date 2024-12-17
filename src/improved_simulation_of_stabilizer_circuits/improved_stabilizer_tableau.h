@@ -54,6 +54,11 @@ namespace CliffordTableaus {
         explicit ImprovedStabilizerTableau(uint n);
 
         /**
+         * Virtual Destructor.
+         */
+        ~ImprovedStabilizerTableau() override = default;
+
+        /**
          * Set the value of the x operator bit for a qubit.
          * @param i Index of the generator.
          * @param j Index of qubit.
@@ -125,5 +130,15 @@ namespace CliffordTableaus {
          * @return The corresponding xz-combination.
          */
         static uint8_t reverse_interpret(char pauli);
+
+        /// Superclass overrides begin.
+        void CNOT(uint control, uint target) override;
+
+        void Hadamard(uint qubit) override;
+
+        void Phase(uint qubit) override;
+
+        uint8_t Measurement(uint qubit) override;
+        /// Superclass overrides end.
     };
 }

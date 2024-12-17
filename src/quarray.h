@@ -9,6 +9,7 @@
 
 namespace CliffordTableaus {
     using namespace std::complex_literals;
+    using uint = std::size_t;
 
     class QuArray {
     private:

@@ -10,7 +10,7 @@ namespace CliffordTableaus {
     using uint = std::size_t;
 
     class StabilizerTableau {
-    private:
+    protected:
         /**
          * The number of qubits in the system.
          */
@@ -30,6 +30,12 @@ namespace CliffordTableaus {
          * Therefore the tableau is (2n+1)x(2n+1) big.
          */
         std::vector<uint8_t> tableau;
+
+        /**
+         * Constructor exclusively for the subclasses.
+         */
+        explicit StabilizerTableau(uint n, uint total_bits) :
+                n(n), total_bits(total_bits), tableau((total_bits + 7) / 8, 0) {}
 
     public:
         /**

@@ -5,6 +5,7 @@
 #include <stdexcept>
 
 namespace CliffordTableaus {
+    using uint = std::size_t;
     /**
      * Random device for generating random bits.
      */

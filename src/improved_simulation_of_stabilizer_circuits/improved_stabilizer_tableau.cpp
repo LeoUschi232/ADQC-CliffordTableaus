@@ -1,14 +1,14 @@
 #include "improved_stabilizer_tableau.h"
 
 namespace CliffordTableaus {
-    ImprovedStabilizerTableau::ImprovedStabilizerTableau(uint n) :
-            n(n), total_bits((2 * n + 1) * (2 * n + 1)), tableau((total_bits + 7) / 8, 0) {
+    ImprovedStabilizerTableau::ImprovedStabilizerTableau(uint n)
+            : StabilizerTableau(n, (2 * n + 1) * (2 * n + 1)) {
         for (int i = 0; i <= 2 * n; ++i) {
             set(i * (2 * n + 1) + i, 1);
         }
     }
 
-    void ImprovedStabilizerTableau::CNOT(CliffordTableaus::uint control, CliffordTableaus::uint target) {
+    void ImprovedStabilizerTableau::CNOT(uint control, uint target) {
         if (control >= n || target >= n || control == target) {
             throw std::invalid_argument("Invalid control or target qubit.");
         }
@@ -24,7 +24,7 @@ namespace CliffordTableaus {
         }
     }
 
-    void ImprovedStabilizerTableau::Hadamard(CliffordTableaus::uint qubit) {
+    void ImprovedStabilizerTableau::Hadamard(uint qubit) {
         if (qubit >= n) {
             throw std::invalid_argument("Invalid qubit index.");
         }
@@ -39,7 +39,7 @@ namespace CliffordTableaus {
         }
     }
 
-    void ImprovedStabilizerTableau::Phase(CliffordTableaus::uint qubit) {
+    void ImprovedStabilizerTableau::Phase(uint qubit) {
         if (qubit >= n) {
             throw std::invalid_argument("Invalid qubit index.");
         }
@@ -51,7 +51,7 @@ namespace CliffordTableaus {
         }
     }
 
-    uint8_t ImprovedStabilizerTableau::Measurement(CliffordTableaus::uint qubit) {
+    uint8_t ImprovedStabilizerTableau::Measurement(uint qubit) {
         if (qubit >= n) {
             throw std::invalid_argument("Invalid qubit index.");
         }
