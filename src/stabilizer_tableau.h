@@ -41,11 +41,7 @@ namespace CliffordTableaus {
         * @param p_n Number of qubits in the system.
         * @param p_total_bits Number of bits necessary to specify the state using the tableau.
         */
-        virtual inline void initializeTableau(uint p_n, uint p_total_bits) {
-            this->n = p_n;
-            this->total_bits = p_total_bits;
-            this->tableau = std::vector<uint8_t>((total_bits + 7) / 8, 0);
-        }
+        void initializeTableau(uint p_n, uint p_total_bits);
 
     public:
         /**
@@ -89,5 +85,23 @@ namespace CliffordTableaus {
          * @return The measurement outcome.
          */
         virtual uint8_t Measurement(uint qubit) = 0;
+
+        /**
+         * Apply the Pauli X gate to the qubit via decomposition of X using Hadamard and Phase gates.
+         * @param qubit Qubit to apply the Pauli-X gate to.
+         */
+        void PauliX(uint qubit);
+
+        /**
+         * Apply the Pauli Y gate to the qubit via decomposition of Y using Hadamard and Phase gates.
+         * @param qubit Qubit to apply the Pauli-Y gate to.
+         */
+        void PauliY(uint qubit);
+
+        /**
+         * Apply the Pauli Z gate to the qubit via decomposition of Z using Phase gates.
+         * @param qubit Qubit to apply the Pauli-Z gate to.
+         */
+        void PauliZ(uint qubit);
     };
 }

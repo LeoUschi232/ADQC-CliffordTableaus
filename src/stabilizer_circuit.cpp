@@ -97,7 +97,8 @@ namespace CliffordTableaus {
         return measurement_result;
     }
 
-    bool StabilizerCircuit::applyGateLine(const std::string &line, StabilizerTableau &tableau, std::string &measurement_result) {
+    bool StabilizerCircuit::applyGateLine(const std::string &line, StabilizerTableau &tableau,
+                                          std::string &measurement_result) {
         std::smatch match;
         if (std::regex_match(line, match, cnot_regex)) {
             uint control = std::stoul(match[1]);
@@ -124,52 +125,30 @@ namespace CliffordTableaus {
             return true;
         } else if (std::regex_match(line, match, measure_regex)) {
             uint q_index = std::stoul(match[1]);
+
             uint8_t measurement = tableau.Measurement(q_index + 1);
             measurement_result.at(q_index) = static_cast<char>('0' + measurement);
+
             return true;
         } else if (std::regex_match(line, match, x_regex)) {
             uint q_index = std::stoul(match[1].str());
 
-            auto q = q_index + 1;
-            tableau.Hadamard(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
+            tableau.PauliX(q_index + 1);
             measurement_result.at(q_index) = 'x';
 
             return true;
         } else if (std::regex_match(line, match, y_regex)) {
             uint q_index = std::stoul(match[1].str());
 
-            auto q = q_index + 1;
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
-            tableau.Phase(q);
-            tableau.Phase(q);
-            tableau.Hadamard(q);
+            tableau.PauliY(q_index + 1);
+            measurement_result.at(q_index) = 'x';
 
             return true;
         } else if (std::regex_match(line, match, z_regex)) {
             uint q_index = std::stoul(match[1].str());
 
-            auto q = q_index + 1;
-            tableau.Phase(q);
-            tableau.Phase(q);
+            tableau.PauliZ(q_index + 1);
+            measurement_result.at(q_index) = 'x';
 
             return true;
         } else {

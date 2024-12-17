@@ -19,6 +19,7 @@ add_library(QuArrayLib
         src/stabilizer_circuit.cpp
         src/stabilizer_circuit.h
         src/stabilizer_tableau.h
+        src/stabilizer_tableau.cpp
 )
 target_include_directories(QuArrayLib PUBLIC src)
 
