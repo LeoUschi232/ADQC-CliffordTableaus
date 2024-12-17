@@ -1,8 +1,28 @@
-# Ignore IDE files
+# IDE project files and huge python virtual environment
 cmake-build-debug
 .idea
 .vscode
 .venv
+
+# CMake-generated files
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+
+# Build artifacts
+CTestTestfile.cmake
+libCliffordTableausLib.a
+test_clifford_tableaus
+
+# Object files and intermediate files
+*.o
+*.so
+*.a
+*.dylib
+*.exe
+*.out
+*.log
+*.tmp
 
 # Ignore LaTeX auxiliary and compilation files
 *.aux
