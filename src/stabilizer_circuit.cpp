@@ -50,9 +50,9 @@ namespace CliffordTableaus {
     ) {
         auto file = retrieveCircuitFile(circuit_filename, overwrite_file);
 
-        std::vector<Gate> allowed_gates = {Gate::CNOT, Gate::PHASE};
+        std::vector<Gate> allowed_gates = {Gate::PAULI_X, Gate::PAULI_Y, Gate::PAULI_Z, Gate::HADAMARD, Gate::PHASE};
         if (n_qubits >= 2) {
-            allowed_gates.push_back(Gate::HADAMARD);
+            allowed_gates.push_back(Gate::CNOT);
         }
         if (allow_intermediate_measurement) {
             allowed_gates.push_back(Gate::MEASURE);
@@ -62,38 +62,59 @@ namespace CliffordTableaus {
         std::mt19937 qubit_generator(qubit_seed);
         std::discrete_distribution<int> gate_distribution;
 
-        if (allow_intermediate_measurement) {
-            // 4 gates: CNOT=3/10, HADAMARD=3/10, PHASE=3/10, MEASURE=1/10
-            gate_distribution = std::discrete_distribution<int>({0.3, 0.3, 0.3, 0.1});
+        if (n_qubits >= 2 && allow_intermediate_measurement) {
+            // 7 gates: X=0.16, Y=0.16, Z=0.16, CNOT=0.16, HADAMARD=0.16, PHASE=0.16, MEASURE=0.04
+            auto p1 = 0.16;
+            auto p2 = 0.04;
+            gate_distribution = std::discrete_distribution<int>({p1, p1, p1, p1, p1, p1, p2});
+        } else if (n_qubits >= 2) {
+            // 6 gates: X=1/6, Y=1/6, Z=1/6, CNOT=1/6, HADAMARD=1/6, PHASE=1/6
+            auto p = 1.0 / 6.0;
+            gate_distribution = std::discrete_distribution<int>({p, p, p, p, p, p});
+        } else if (allow_intermediate_measurement) {
+            // 6 gates: X=0.19, Y=0.19, Z=0.19, HADAMARD=0.19, PHASE=0.19, MEASURE=0.05
+            auto p1 = 0.19;
+            auto p2 = 0.05;
+            gate_distribution = std::discrete_distribution<int>({p1, p1, p1, p1, p1, p1, p2});
         } else {
-            // 3 gates: CNOT=1/3, HADAMARD=1/3, PHASE=1/3
-            auto probability = 1.0 / 3.0;
-            gate_distribution = std::discrete_distribution<int>({probability, probability, probability});
+            // 5 gates: X=1/5, Y=1/5, Z=1/5, HADAMARD=1/5, PHASE=1/5
+            auto p = 0.2;
+            gate_distribution = std::discrete_distribution<int>({p, p, p});
         }
         std::uniform_int_distribution<uint> qubit_dist(0, n_qubits - 1);
 
         file << "OPENQASM 3;\n";
         file << "qreg q[" << n_qubits << "];\n";
         for (int i = 0; i < depth; ++i) {
-            int gate_index = gate_distribution(gate_generator);
-            Gate g = allowed_gates[gate_index];
+            uint q1 = qubit_dist(qubit_generator);
+            uint q2 = 0;
 
-            if (g == Gate::CNOT) {
-                uint q1 = qubit_dist(qubit_generator);
-                uint q2 = qubit_dist(qubit_generator);
-                while (q2 == q1) {
+            switch (allowed_gates[gate_distribution(gate_generator)]) {
+                case Gate::PAULI_X:
+                    file << decomposePauliX(q1);
+                    break;
+                case Gate::PAULI_Y:
+                    file << decomposePauliY(q1);
+                    break;
+                case Gate::PAULI_Z:
+                    file << decomposePauliZ(q1);
+                    break;
+                case Gate::CNOT:
                     q2 = qubit_dist(qubit_generator);
-                }
-                file << "cx q[" << q1 << "],q[" << q2 << "];\n";
-            } else if (g == Gate::HADAMARD) {
-                uint q1 = qubit_dist(qubit_generator);
-                file << "h q[" << q1 << "];\n";
-            } else if (g == Gate::PHASE) {
-                uint q1 = qubit_dist(qubit_generator);
-                file << "s q[" << q1 << "];\n";
-            } else if (g == Gate::MEASURE) {
-                uint q1 = qubit_dist(qubit_generator);
-                file << "measure q[" << q1 << "];\n";
+                    while (q2 == q1) {
+                        q2 = qubit_dist(qubit_generator);
+                    }
+                    file << "cx q[" << q1 << "],q[" << q2 << "];\n";
+                    break;
+                case Gate::HADAMARD:
+                    file << "h q[" << q1 << "];\n";
+                    break;
+                case Gate::PHASE:
+                    file << "s q[" << q1 << "];\n";
+                    break;
+                case Gate::MEASURE:
+                    file << "measure q[" << q1 << "];\n";
+                    break;
             }
         }
 
@@ -168,54 +189,13 @@ namespace CliffordTableaus {
                 file << line << "\n";
             } else if (std::regex_match(line, match, x_regex)) {
                 uint q_index = std::stoul(match[1].str());
-
-                // Decomposition of the Pauli-X-Gate:
-                // X=HZH=HSSH
-                file << "h q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "h q[" << q_index << "];\n";
+                file << decomposePauliX(q_index);
             } else if (std::regex_match(line, match, y_regex)) {
                 uint q_index = std::stoul(match[1].str());
-
-                // Decomposition of the Pauli-Y-Gate:
-                // iY=ZX=SSHSSH
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "h q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "h q[" << q_index << "];\n";
-
-                // Now, the preceding factor i has to be removed by multiplying -i to the superposition of states.
-                // First, apply -i to the |1〉 state.
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-
-                // Second, flip the states using a decomposed X-gate,
-                // and apply -i to the new |1〉, which is the old |0〉.
-                file << "h q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "h q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-
-                // Third, flip the states back to recover the original state,
-                // now with the i factor removed.
-                file << "h q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
-                file << "h q[" << q_index << "];\n";
+                file << decomposePauliY(q_index);
             } else if (std::regex_match(line, match, z_regex)) {
                 uint q_index = std::stoul(match[1].str());
-
-                // Decomposition of the Pauli-Z-Gate:
-                // Z=SS
-                file << "s q[" << q_index << "];\n";
-                file << "s q[" << q_index << "];\n";
+                file << decomposePauliZ(q_index);
             } else {
                 // Check if line starts with a known gate token,
                 // if not, it's unsupported or format is wrong.
@@ -253,6 +233,89 @@ namespace CliffordTableaus {
             throw std::runtime_error("Unable to open file for writing.");
         }
         return file;
+    }
+
+
+    std::string StabilizerCircuit::getCNOT(uint qubit1, uint qubit2) {
+        std::ostringstream builder;
+        builder << "cx q[" << qubit1 << "],q[" << qubit2 << "];\n";
+        return builder.str();
+    }
+
+    std::string StabilizerCircuit::getHadamard(uint qubit) {
+        std::ostringstream builder;
+        builder << "h q[" << qubit << "];\n";
+        return builder.str();
+    }
+
+    std::string StabilizerCircuit::getPhase(uint qubit) {
+        std::ostringstream builder;
+        builder << "s q[" << qubit << "];\n";
+        return builder.str();
+    }
+
+    std::string StabilizerCircuit::getMeasurement(uint qubit) {
+        std::ostringstream builder;
+        builder << "measure q[" << qubit << "];\n";
+        return builder.str();
+    }
+
+
+    std::string StabilizerCircuit::decomposePauliX(uint qubit) {
+        // Decomposition of the Pauli-X-Gate:
+        // X=HZH=HSSH
+        std::ostringstream builder;
+        builder << "h q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "h q[" << qubit << "];\n";
+        return builder.str();
+
+    }
+
+    std::string StabilizerCircuit::decomposePauliY(uint qubit) {
+        // Decomposition of the Pauli-Y-Gate:
+        // iY=ZX=SSHSSH
+        std::ostringstream builder;
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "h q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "h q[" << qubit << "];\n";
+
+        // Now, the preceding factor i has to be removed by multiplying -i to the superposition of states.
+        // First, apply -i to the |1〉 state.
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+
+        // Second, flip the states using a decomposed X-gate,
+        // and apply -i to the new |1〉, which is the old |0〉.
+        builder << "h q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "h q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+
+        // Third, flip the states back to recover the original state,
+        // now with the i factor removed.
+        builder << "h q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n";
+        builder << "h q[" << qubit << "];\n";
+        return builder.str();
+    }
+
+    std::string StabilizerCircuit::decomposePauliZ(uint qubit) {
+        // Decomposition of the Pauli-Z-Gate:
+        // Z=SS
+        std::ostringstream builder;
+        builder << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n";
+        return builder.str();
     }
 
 

@@ -34,6 +34,12 @@ namespace CliffordTableaus {
          */
         void initializeCircuit();
 
+        /**
+         * Retrieve the file containing the circuit.
+         * @param circuit_filename File containing the circuit in QASM3 format.
+         * @param overwrite_file Whether the file should be overwritten if it already exists.
+         * @return An output file stream to the circuit file.
+         */
         static std::ofstream retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file);
 
     public:
@@ -92,6 +98,20 @@ namespace CliffordTableaus {
                 const std::string &circuit,
                 bool overwrite_file
         );
+
+        static std::string getCNOT(uint qubit1, uint qubit2);
+
+        static std::string getHadamard(uint qubit);
+
+        static std::string getPhase(uint qubit);
+
+        static std::string getMeasurement(uint qubit);
+
+        static std::string decomposePauliX(uint qubit);
+
+        static std::string decomposePauliY(uint qubit);
+
+        static std::string decomposePauliZ(uint qubit);
     };
 
     enum Gate {
