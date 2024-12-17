@@ -2,7 +2,7 @@
 
 namespace CliffordTableaus {
     void ImprovedStabilizerTableau::initializeTableau(uint p_n) {
-        StabilizerTableau::initializeTableau(p_n, (2 * n + 1) * (2 * n + 1));
+        StabilizerTableau::initializeTableau(p_n, (2 * p_n + 1) * (2 * p_n + 1));
         // The initial state |0〉^⊗n has ri = 0 for all i ∈ {1 to 2n + 1},
         // and xij = δij and zij = δ(i−n)j for all
         // i ∈ {1 to 2n + 1} and j ∈ {1 to n}.

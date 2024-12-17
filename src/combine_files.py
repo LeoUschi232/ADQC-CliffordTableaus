@@ -14,3 +14,6 @@ with open("output.txt", "w") as output:
         output.write(f"{file}:\n")
         with open(file) as opened:
             output.write(f"{opened.read()}\n\n")
+
+
+
