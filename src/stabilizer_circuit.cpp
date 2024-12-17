@@ -33,8 +33,7 @@ namespace CliffordTableaus {
                 continue;
             }
             if (!applyGateLine(line, tableau, measurement_result)) {
-                // TODO: For now do not throw, just ignore or break
-                // TODO: In a final version, you might handle error differently.
+                throw std::invalid_argument("Error! Expected file in QASM3 format.");
             }
         }
         return measurement_result;
@@ -63,6 +62,11 @@ namespace CliffordTableaus {
 
         tableau.initializeTableau(n);
         std::string measurement_result(n, 'x');
+        std::cout << "Initialized circuit with" << n << " qubits.\n"
+                  << "Available commands:\n"
+                  << "Gates CNOT, H, S, Measure, X, Y, Z applied to qubits in QASM3 format.\n"
+                  << "exit|quit => Terminate interactive mode and print current measurement string.\n"
+                  << "finish|measure all => Measure all remaining qubits and print the measurement string.\n";
 
         std::string line;
         while (true) {
@@ -90,15 +94,17 @@ namespace CliffordTableaus {
             }
 
             if (!applyGateLine(line, tableau, measurement_result)) {
-                std::cout << "Error: Invalid input." << std::endl;
+                std::cout << "Error! Expected input: command in QASM3 format or exit|quit|finish|measure all."
+                          << std::endl;
             }
         }
 
         return measurement_result;
     }
 
-    bool StabilizerCircuit::applyGateLine(const std::string &line, StabilizerTableau &tableau,
-                                          std::string &measurement_result) {
+    bool StabilizerCircuit::applyGateLine(
+            const std::string &line, StabilizerTableau &tableau, std::string &measurement_result
+    ) {
         std::smatch match;
         if (std::regex_match(line, match, cnot_regex)) {
             uint control = std::stoul(match[1]);
@@ -278,7 +284,6 @@ namespace CliffordTableaus {
             }
 
             if (line_number == 2) {
-                std::regex qreg_regex(R"(^qreg q\[(\d+)\];$)");
                 if (!std::regex_match(line, qreg_regex)) {
                     throw std::invalid_argument("The format is wrong.");
                 }
@@ -382,35 +387,35 @@ namespace CliffordTableaus {
         // Decomposition of the Pauli-Y-Gate:
         // iY=ZX=SSHSSH
         std::ostringstream builder;
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "h q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "h q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "h q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "h q[" << qubit << "];\n";
 
         // Now, the preceding factor i has to be removed by multiplying -i to the superposition of states.
         // First, apply -i to the |1〉 state.
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
+        builder << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n";
 
         // Second, flip the states using a decomposed X-gate,
         // and apply -i to the new |1〉, which is the old |0〉.
-        builder << "h q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "h q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
+        builder << "h q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "h q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n";
 
         // Third, flip the states back to recover the original state,
         // now with the i factor removed.
-        builder << "h q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "s q[" << qubit << "];\n";
-        builder << "h q[" << qubit << "];\n";
+        builder << "h q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "s q[" << qubit << "];\n"
+                << "h q[" << qubit << "];\n";
         return builder.str();
     }
 
