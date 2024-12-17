@@ -1,4 +1,4 @@
-#include "clifford_tableau.h"
+#include "improved_stabilizer_tableau.h"
 
 namespace CliffordTableaus {
     ImprovedStabilizerTableau::ImprovedStabilizerTableau(uint n) :

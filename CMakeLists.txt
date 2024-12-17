@@ -14,8 +14,8 @@ add_library(QuArrayLib
         src/quarray.h
         src/improved_simulation_of_stabilizer_circuits/subroutines.cpp
         src/improved_simulation_of_stabilizer_circuits/subroutines.h
-        src/improved_simulation_of_stabilizer_circuits/clifford_tableau.cpp
-        src/improved_simulation_of_stabilizer_circuits/clifford_tableau.h
+        src/improved_simulation_of_stabilizer_circuits/improved_stabilizer_tableau.cpp
+        src/improved_simulation_of_stabilizer_circuits/improved_stabilizer_tableau.h
         src/stabilizer_circuit.cpp
         src/stabilizer_circuit.h
 )
