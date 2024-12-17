@@ -1,6 +1,7 @@
 #pragma once
 
 #include "subroutines.h"
+#include "stabilizer_tableau.h"
 
 #include <cstdint>
 #include <stdexcept>
@@ -18,29 +19,8 @@ namespace CliffordTableaus {
      * which are Pauli operators that together with the stabilizer generators generate the full Pauli group Pn.
      * So the number of bits needed is 2*n*(2*n+1)=4*n^2+2*n.
      */
-    class ImprovedStabilizerTableau {
+    class ImprovedStabilizerTableau : public StabilizerTableau {
     private:
-        /**
-         * The number of qubits in the system.
-         */
-        uint n;
-
-        /**
-         * The total number of bits needed to specify the state.
-         * Also total number of bits in the tableau.
-         */
-        uint total_bits;
-
-        /**
-         * The tableau of stabilizer and destabilizer generators.
-         * The destabilizer generators occupy the first n rows of the tableau.
-         * The stabilizer generators occupy the next n rows.
-         * It is convenient to add an additional (2n+1)-st row for scratch space.
-         * Therefore the tableau is (2n+1)x(2n+1) big.
-         */
-        std::vector<uint8_t> tableau;
-
-
         /**
          * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
          * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
@@ -64,7 +44,6 @@ namespace CliffordTableaus {
          */
         uint8_t get(uint index);
 
-
     public:
         /**
          * Construct a new ImprovedStabilizerTableau object.
@@ -75,42 +54,12 @@ namespace CliffordTableaus {
         explicit ImprovedStabilizerTableau(uint n);
 
         /**
-         * Transform the tableau according to the CNOT gate applied to qubits control and target.
-         * After application the tableau stabilizes the state |ψ〉→ CNOT(control, target)|ψ〉.
-         * @param control Control qubit a.
-         * @param target Target qubit b.
-         */
-        void CNOT(uint control, uint target);
-
-        /**
-         * Transform the tableau according to the Hadamard gate applied to the qubit qubit.
-         * After application the tableau stabilizes the state |ψ〉→ H(qubit)|ψ〉.
-         * @param qubit Qubit to apply the Hadamard gate to.
-         */
-        void Hadamard(uint qubit);
-
-        /**
-         * Transform the tableau according to the Phase gate applied to the qubit qubit.
-         * After application the tableau stabilizes the state |ψ〉→ Phase(qubit)|ψ〉.
-         * @param qubit Qubit to apply the Phase gate to.
-         */
-        void Phase(uint qubit);
-
-        /**
-         * Transform the tableau according to a measurement performed on qubit given by qubit.
-         * @param qubit Qubit to measure.
-         * @return The measurement outcome.
-         */
-        uint8_t Measurement(uint qubit);
-
-        /**
          * Set the value of the x operator bit for a qubit.
          * @param i Index of the generator.
          * @param j Index of qubit.
          * @param x Value of the x operator bit.
          */
         void set_x(uint i, uint j, uint8_t x);
-
 
         /**
          * Set the value of the z operator bit for a qubit.
@@ -119,7 +68,6 @@ namespace CliffordTableaus {
          * @param z Value of the z operator bit.
          */
         void set_z(uint i, uint j, uint8_t z);
-
 
         /**
          * Set the value of the phase operator bit for a qubit.
@@ -135,7 +83,6 @@ namespace CliffordTableaus {
          * @param xz Value of the xz-combination.
          */
         void set_xz(uint i, uint j, uint8_t xz);
-
 
         /**
          * Get the value of the x operator bit for a qubit.
@@ -179,6 +126,4 @@ namespace CliffordTableaus {
          */
         static uint8_t reverse_interpret(char pauli);
     };
-
-
 }

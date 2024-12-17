@@ -18,6 +18,7 @@ add_library(QuArrayLib
         src/improved_simulation_of_stabilizer_circuits/improved_stabilizer_tableau.h
         src/stabilizer_circuit.cpp
         src/stabilizer_circuit.h
+        src/stabilizer_tableau.h
 )
 target_include_directories(QuArrayLib PUBLIC src)
 
