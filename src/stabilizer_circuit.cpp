@@ -48,6 +48,7 @@ namespace CliffordTableaus {
             bool measure_all_at_the_end,
             bool overwrite_file
     ) {
+        auto file = retrieveCircuitFile(circuit_filename, overwrite_file);
 
         std::vector<Gate> allowed_gates = {Gate::CNOT, Gate::PHASE};
         if (n_qubits >= 2) {
@@ -70,19 +71,6 @@ namespace CliffordTableaus {
             gate_distribution = std::discrete_distribution<int>({probability, probability, probability});
         }
         std::uniform_int_distribution<uint> qubit_dist(0, n_qubits - 1);
-
-        // If overwrite_file is true empty it and start writing it anew.
-        // If overwrite_file is false, check if the file exists and throw an error if it does.
-        if (!overwrite_file) {
-            std::ifstream test_file("stabilizer_circuits/" + circuit_filename);
-            if (test_file.good()) {
-                throw std::invalid_argument("File already exists");
-            }
-        }
-        std::ofstream file("stabilizer_circuits/" + circuit_filename);
-        if (!file.is_open()) {
-            throw std::runtime_error("Unable to open file for writing.");
-        }
 
         file << "OPENQASM 3;\n";
         file << "qreg q[" << n_qubits << "];\n";
@@ -122,17 +110,7 @@ namespace CliffordTableaus {
             const std::string &circuit,
             bool overwrite_file
     ) {
-        if (!overwrite_file) {
-            std::ifstream test_file("stabilizer_circuits/" + circuit_filename);
-            if (test_file.good()) {
-                throw std::invalid_argument("File already exists");
-            }
-        }
-
-        std::ofstream file("stabilizer_circuits/" + circuit_filename, std::ios::out | std::ios::trunc);
-        if (!file.is_open()) {
-            throw std::runtime_error("Unable to create file.");
-        }
+        auto file = retrieveCircuitFile(circuit_filename, overwrite_file);
 
         std::istringstream iss(circuit);
         std::string line;
@@ -177,26 +155,104 @@ namespace CliffordTableaus {
             std::regex cnot_regex(R"(^cx q\[(\d+)\],q\[(\d+)\];$)");
             std::regex h_regex(R"(^h q\[(\d+)\];$)");
             std::regex s_regex(R"(^s q\[(\d+)\];$)");
+            std::regex x_regex(R"(^x q\[(\d+)\];$)");
+            std::regex y_regex(R"(^y q\[(\d+)\];$)");
+            std::regex z_regex(R"(^z q\[(\d+)\];$)");
             std::regex measure_regex(R"(^measure q\[(\d+)\];$)");
 
+            std::smatch match;
             if (std::regex_match(line, cnot_regex) ||
                 std::regex_match(line, h_regex) ||
                 std::regex_match(line, s_regex) ||
                 std::regex_match(line, measure_regex)) {
                 file << line << "\n";
+            } else if (std::regex_match(line, match, x_regex)) {
+                uint q_index = std::stoul(match[1].str());
+
+                // Decomposition of the Pauli-X-Gate:
+                // X=HZH=HSSH
+                file << "h q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "h q[" << q_index << "];\n";
+            } else if (std::regex_match(line, match, y_regex)) {
+                uint q_index = std::stoul(match[1].str());
+
+                // Decomposition of the Pauli-Y-Gate:
+                // iY=ZX=SSHSSH
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "h q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "h q[" << q_index << "];\n";
+
+                // Now, the preceding factor i has to be removed by multiplying -i to the superposition of states.
+                // First, apply -i to the |1〉 state.
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+
+                // Second, flip the states using a decomposed X-gate,
+                // and apply -i to the new |1〉, which is the old |0〉.
+                file << "h q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "h q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+
+                // Third, flip the states back to recover the original state,
+                // now with the i factor removed.
+                file << "h q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
+                file << "h q[" << q_index << "];\n";
+            } else if (std::regex_match(line, match, z_regex)) {
+                uint q_index = std::stoul(match[1].str());
+
+                // Decomposition of the Pauli-Z-Gate:
+                // Z=SS
+                file << "s q[" << q_index << "];\n";
+                file << "s q[" << q_index << "];\n";
             } else {
                 // Check if line starts with a known gate token,
                 // if not, it's unsupported or format is wrong.
                 if (line.rfind("cx", 0) == 0 ||
                     line.rfind('h', 0) == 0 ||
                     line.rfind('s', 0) == 0 ||
-                    line.rfind("measure", 0) == 0) {
+                    line.rfind("measure", 0) == 0 ||
+                    line.rfind('x', 0) == 0 ||
+                    line.rfind('y', 0) == 0 ||
+                    line.rfind('z', 0) == 0) {
                     throw std::invalid_argument("Gate not supported.");
                 } else {
                     throw std::invalid_argument("Format wrong");
                 }
             }
         }
+    }
+
+    std::ofstream StabilizerCircuit::retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file) {
+        // Get the directory of the current source file otherwise execution from different location will throw errors.
+        // Ensure the directory exists by creating it if it doesn't.
+        // Finally construct the full path to the file.
+        namespace fs = std::filesystem;
+        fs::path base_directory = fs::path(__FILE__).parent_path() / "stabilizer_circuits";
+        fs::create_directories(base_directory);
+        fs::path file_path = base_directory / circuit_filename;
+
+        // If overwrite_file is true empty it and start writing it anew.
+        // If overwrite_file is false, check if the file exists and throw an error if it does.
+        if (!overwrite_file && fs::exists(file_path)) {
+            throw std::invalid_argument("File already exists.");
+        }
+        std::ofstream file(file_path);
+        if (!file.is_open()) {
+            throw std::runtime_error("Unable to open file for writing.");
+        }
+        return file;
     }
 
 

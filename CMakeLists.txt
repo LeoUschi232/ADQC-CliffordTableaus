@@ -20,8 +20,10 @@ add_library(QuArrayLib
 target_include_directories(QuArrayLib PUBLIC src)
 
 # Test executable
-add_executable(test_quarray tests/test_quarray.cpp
-        tests/test_stabilizer_circuit.cpp)
+add_executable(test_quarray
+        tests/test_quarray.cpp
+        tests/test_stabilizer_circuit.cpp
+)
 target_link_libraries(test_quarray GTest::gtest_main QuArrayLib)
 add_test(NAME QuArrayTests COMMAND test_quarray)
 

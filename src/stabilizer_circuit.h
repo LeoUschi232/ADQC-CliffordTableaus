@@ -11,6 +11,7 @@
 #include <utility>
 #include <random>
 #include <complex>
+#include <filesystem>
 
 namespace CliffordTableaus {
     using uint = std::size_t;
@@ -32,6 +33,8 @@ namespace CliffordTableaus {
          * This method sets the number of qubits in the system to the the number of qubits provided by the circuit.
          */
         void initializeCircuit();
+
+        static std::ofstream retrieveCircuitFile(const std::string &circuit_filename, bool overwrite_file);
 
     public:
         /**
@@ -92,6 +95,9 @@ namespace CliffordTableaus {
     };
 
     enum Gate {
+        PAULI_X,
+        PAULI_Y,
+        PAULI_Z,
         CNOT,
         HADAMARD,
         PHASE,
