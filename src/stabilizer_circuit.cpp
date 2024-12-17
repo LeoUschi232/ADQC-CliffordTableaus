@@ -29,7 +29,7 @@ namespace CliffordTableaus {
             if (line.empty()) {
                 continue;
             }
-            std::cout << line << std::endl;
+            // std::cout << line << std::endl;
             if (!applyGateLine(line, tableau, measurement_result)) {
                 throw std::invalid_argument("Error! Expected file in QASM3 format.");
             }

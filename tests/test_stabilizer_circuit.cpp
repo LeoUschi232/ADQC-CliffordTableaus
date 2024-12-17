@@ -50,9 +50,10 @@ TEST(StabilizerCircuitTest, TestRandomCircuitSet1) {
 }
 
 TEST(StabilizerCircuitTest, TestCustomCircuitSet1) {
-
-    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
-    auto final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_2.qasm", stabilizerTableau);
-    std::cout << "Measurement outcome:" << final_measurement << std::endl;
-
+    auto i = 1;
+    while (true) {
+        std::cout << "Iteration: " << i++ << std::endl;
+        ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+        auto final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_2.qasm", stabilizerTableau);
+    }
 }

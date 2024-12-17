@@ -3,6 +3,8 @@
 #include "subroutines.h"
 #include "stabilizer_tableau.h"
 
+#include <iostream>
+#include <cassert>
 #include <cstdint>
 #include <stdexcept>
 #include <cstdint>
@@ -35,7 +37,7 @@ namespace CliffordTableaus {
          * @param h The generator to update.
          * @param i The generator to add to h.
          */
-        void rowsum(int h, int i);
+        void rowsum(uint h, uint i);
 
         /**
          * Set the value of a bit in the tableau.
@@ -106,14 +108,6 @@ namespace CliffordTableaus {
         void set_r(uint i, uint8_t r);
 
         /**
-         * Set the value of the xz-combination for a qubit.
-         * @param i Index of the generator.
-         * @param j Index of qubit.
-         * @param xz Value of the xz-combination.
-         */
-        void set_xz(uint i, uint j, uint8_t xz);
-
-        /**
          * Get the value of the x operator bit for a qubit.
          * @param i Index of the generator.
          * @param j Index of qubit.
@@ -132,28 +126,5 @@ namespace CliffordTableaus {
          * @param i Index of the generator.
          */
         uint8_t get_r(uint i);
-
-        /**
-         * Get the value of the xz-combination for a qubit.
-         * @param i Index of the generator.
-         * @param j Index of qubit.
-         * @return The value of the xz-combination.
-         */
-        uint8_t get_xz(uint i, uint j);
-
-        /**
-         * Interpret the xz-combination as a Pauli operator.
-         * @param xz Combination of x and z bits.
-         * @return 00 => 'I', 01 => 'Z', 10 => 'X', 11 => 'Y'.
-         */
-        static char interpret(uint8_t xz);
-
-        /**
-         * Reverse interpretation of a Pauli operator.
-         * @param pauli Either 'I', 'Z', 'X', or 'Y'. Everything else will throw an error.
-         * @return The corresponding xz-combination.
-         */
-        static uint8_t reverse_interpret(char pauli);
-
     };
 }

@@ -2,12 +2,8 @@
 
 
 namespace CliffordTableaus {
-    int g(int x1z1x2z2) {
-        x1z1x2z2 &= 0b1111;
-        int x1z1 = x1z1x2z2 >> 2;
-        int x2 = (x1z1x2z2 & 0b10) >> 1;
-        int z2 = x1z1x2z2 & 0b1;
-        switch (x1z1) {
+    int g(int x1, int z1, int x2, int z2) {
+        switch ((x1 << 1) | z1) {
             case 0b00:
                 return 0;
             case 0b11:
@@ -17,7 +13,7 @@ namespace CliffordTableaus {
             case 0b01:
                 return x2 * (1 - 2 * z2);
             default:
-                throw std::invalid_argument("Invalid input.");
+                throw std::invalid_argument("Invalid input to the g-function.");
         }
     }
 

@@ -5,7 +5,6 @@ namespace CliffordTableaus {
         this->n = p_n;
         this->total_bits = p_total_bits;
         this->tableau = std::vector<uint8_t>((total_bits + 7) / 8, 0);
-
     }
 
     void StabilizerTableau::PauliX(uint qubit) {
