@@ -6,7 +6,6 @@ namespace CliffordTableaus {
         for (int i = 0; i <= 2 * n; ++i) {
             set(i * (2 * n + 1) + i, 1);
         }
-
     }
 
     void ImprovedStabilizerTableau::CNOT(uint control, uint target) {

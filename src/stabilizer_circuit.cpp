@@ -2,9 +2,6 @@
 
 
 namespace CliffordTableaus {
-
-
-
     std::string StabilizerCircuit::executeCircuit(const std::string &circuit_filename, StabilizerTableau &tableau) {
         std::ifstream file(circuit_filename);
         if (!file.is_open()) {
@@ -28,7 +25,47 @@ namespace CliffordTableaus {
         }
 
         auto n = std::stoul(match[1]);
-        tableau.initializeTableau()
+        tableau.initializeTableau(n);
+        std::string measurement_result(n, 'x');
+
+        while (std::getline(file, line)) {
+            if (line.empty()) {
+                continue;
+            }
+
+            // The +1 are necessary because the qubits are 0-indexed in QASM but 1-indexed in the tableau.
+            if (std::regex_match(line, match, cnot_regex)) {
+                uint control = std::stoul(match[1]) + 1;
+                uint target = std::stoul(match[2]) + 1;
+                tableau.CNOT(control, target);
+                measurement_result.at(control) = 'x';
+                measurement_result.at(target) = 'x';
+            } else if (std::regex_match(line, match, h_regex)) {
+                uint q_index = std::stoul(match[1].str()) + 1;
+                tableau.Hadamard(q_index);
+                measurement_result.at(q_index) = 'x';
+            } else if (std::regex_match(line, match, s_regex)) {
+                uint q_index = std::stoul(match[1].str()) + 1;
+                tableau.Phase(q_index);
+                measurement_result.at(q_index) = 'x';
+            } else if (std::regex_match(line, match, measure_regex)) {
+                uint q_index = std::stoul(match[1].str()) + 1;
+                uint8_t measurement = tableau.Measurement(q_index);
+                measurement_result.at(q_index) = static_cast<char>('0' + measurement);
+            } else {
+                // Check if line starts with a known gate token,
+                // if not, it's unsupported or format is wrong.
+                if (line.rfind("cx", 0) == 0 ||
+                    line.rfind('h', 0) == 0 ||
+                    line.rfind('s', 0) == 0 ||
+                    line.rfind("measure", 0) == 0) {
+                    throw std::invalid_argument("Gate not supported.");
+                } else {
+                    throw std::invalid_argument("Format wrong");
+                }
+            }
+        }
+        return measurement_result;
     }
 
 
@@ -160,20 +197,6 @@ namespace CliffordTableaus {
                 file << line << "\n";
                 continue;
             }
-
-            // From the third line on, we expect gate instructions
-            // Supported gates and their patterns:
-            // cx q[i],q[j];
-            // h q[i];
-            // s q[i];
-            // measure q[i];
-            std::regex cnot_regex(R"(^cx q\[(\d+)\],q\[(\d+)\];$)");
-            std::regex h_regex(R"(^h q\[(\d+)\];$)");
-            std::regex s_regex(R"(^s q\[(\d+)\];$)");
-            std::regex x_regex(R"(^x q\[(\d+)\];$)");
-            std::regex y_regex(R"(^y q\[(\d+)\];$)");
-            std::regex z_regex(R"(^z q\[(\d+)\];$)");
-            std::regex measure_regex(R"(^measure q\[(\d+)\];$)");
 
             std::smatch match;
             if (std::regex_match(line, cnot_regex) ||

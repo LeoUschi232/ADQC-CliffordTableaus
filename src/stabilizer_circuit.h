@@ -17,6 +17,13 @@
 
 namespace CliffordTableaus {
     using uint = std::size_t;
+    static const std::regex cnot_regex = std::regex(R"(^cx q\[(\d+)\],q\[(\d+)\];$)");
+    static const std::regex h_regex = std::regex(R"(^h q\[(\d+)\];$)");
+    static const std::regex s_regex = std::regex(R"(^s q\[(\d+)\];$)");
+    static const std::regex x_regex = std::regex(R"(^x q\[(\d+)\];$)");
+    static const std::regex y_regex = std::regex(R"(^y q\[(\d+)\];$)");
+    static const std::regex z_regex = std::regex(R"(^z q\[(\d+)\];$)");
+    static const std::regex measure_regex = std::regex(R"(^measure q\[(\d+)\];$)");
 
     class StabilizerCircuit {
     private:
@@ -30,6 +37,7 @@ namespace CliffordTableaus {
 
 
     public:
+
         /**
          * Execute a stabilizer circuit given by the QASM3 code in the file given by circuit_filename
          * using the provided stabilizer tableau.
@@ -40,7 +48,7 @@ namespace CliffordTableaus {
          * @return The final measurement of the executed circuit
          * using '0' and '1' for measured qubits and 'x' for unmeasured qubits.
          */
-        static std::string executeCircuit(const std::string &circuit_filename,  StabilizerTableau &tableau );
+        static std::string executeCircuit(const std::string &circuit_filename, StabilizerTableau &tableau);
 
 
         /**
