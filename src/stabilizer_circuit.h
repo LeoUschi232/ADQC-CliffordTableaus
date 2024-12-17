@@ -4,6 +4,9 @@
 #include <stdexcept>
 #include <cstdint>
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <regex>
 
 namespace CliffordTableaus {
     using uint = std::size_t;
