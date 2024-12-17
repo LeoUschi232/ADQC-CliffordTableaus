@@ -72,7 +72,7 @@ namespace CliffordTableaus {
          * This state is represented by a tableau with its (2n)x(2n) submatrix set to identity.
          * @param n The number of qubits in the system.
          */
-        ImprovedStabilizerTableau(uint n);
+        explicit ImprovedStabilizerTableau(uint n);
 
         /**
          * Transform the tableau according to the CNOT gate applied to qubits control and target.

@@ -36,3 +36,8 @@ TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
             true
     );
 }
+
+TEST(StabilizerCircuitTest, TestRandomCircuitSet1) {
+
+
+}

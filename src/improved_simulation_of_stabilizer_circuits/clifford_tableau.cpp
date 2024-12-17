@@ -59,7 +59,7 @@ namespace CliffordTableaus {
         // Measurement of qubit a in standard basis.
         // First check whether there exists a p with n+1<=p<=2*n such that xpa=1.
         auto a = qubit;
-        int p;
+        uint p;
         for (p = n + 1; p <= 2 * n; ++p) {
             if (get_x(p, a) == 1) {
                 break;
@@ -73,7 +73,7 @@ namespace CliffordTableaus {
             // First call rowsum(i,p) for all i ∈ {1 to 2*n} such that i=/=p and xia = 1.
             for (int i = 1; i <= 2 * n; ++i) {
                 if (i != p && get_x(i, a) == 1) {
-                    rowsum(i, p);
+                    rowsum(i, (int) p);
                 }
             }
 
@@ -109,7 +109,7 @@ namespace CliffordTableaus {
         // Second, call rowsum (2n+1,i+n) for all i ∈ {1 to n} such that xia = 1.
         for (int i = 1; i <= n; ++i) {
             if (get_x(i, a) == 1) {
-                rowsum(2 * n + 1, i + n);
+                rowsum(2 * (int) n + 1, i + (int) n);
             }
         }
 
