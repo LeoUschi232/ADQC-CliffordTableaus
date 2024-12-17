@@ -41,6 +41,11 @@ TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
 
 TEST(StabilizerCircuitTest, TestRandomCircuitSet1) {
 
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+
+    auto filename = "custom_circuit_2.qasm";
+    auto final_measurement = StabilizerCircuit::executeCircuit(filename, stabilizerTableau);
+    std::cout << final_measurement << std::endl;
 
 }
 
@@ -48,6 +53,6 @@ TEST(StabilizerCircuitTest, TestCustomCircuitSet1) {
 
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
     auto final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_2.qasm", stabilizerTableau);
-    std::cout << final_measurement << std::endl;
+    std::cout << "Measurement outcome:" << final_measurement << std::endl;
 
 }

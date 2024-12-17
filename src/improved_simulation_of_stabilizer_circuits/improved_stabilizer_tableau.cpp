@@ -3,7 +3,7 @@
 namespace CliffordTableaus {
     void ImprovedStabilizerTableau::initializeTableau(uint p_n) {
         StabilizerTableau::initializeTableau(p_n, (2 * n + 1) * (2 * n + 1));
-        for (int i = 0; i <= 2 * n; ++i) {
+        for (uint i = 0; i <= 2 * n; ++i) {
             set(i * (2 * n + 1) + i, 1);
         }
     }
@@ -45,7 +45,7 @@ namespace CliffordTableaus {
         }
 
         auto a = qubit;
-        for (int i = 1; i <= 2 * n; ++i) {
+        for (uint i = 1; i <= 2 * n; ++i) {
             set_r(i, get_r(i) ^ (get_x(i, a) & get_z(i, a)));
             auto new_xia = get_z(i, a);
             auto new_zia = get_x(i, a);
@@ -63,7 +63,7 @@ namespace CliffordTableaus {
         }
 
         auto a = qubit;
-        for (int i = 1; i <= 2 * n; ++i) {
+        for (uint i = 1; i <= 2 * n; ++i) {
             set_r(i, get_r(i) ^ (get_x(i, a) & get_z(i, a)));
             set_z(i, a, get_z(i, a) ^ get_x(i, a));
         }
@@ -108,10 +108,9 @@ namespace CliffordTableaus {
             // Third, set the pth row to be identically 0,
             // except that rp is 0 or 1 with equal probability,
             // and zpa = 1.
-            for (int i = 1; i <= 2 * n; ++i) {
-                set_xz(p, i, 0);
+            for (int j = 1; j <= n; ++j) {
+                set_xz(p, j, 0);
             }
-            set_r(p, random_bit());
             set_z(p, a, 1);
 
             // Finally, return rp as the measurement outcome.
@@ -131,7 +130,7 @@ namespace CliffordTableaus {
         // Second, call rowsum (2n+1,i+n) for all i ∈ {1 to n} such that xia = 1.
         for (int i = 1; i <= n; ++i) {
             if (get_x(i, a) == 1) {
-                rowsum(2 * (int) n + 1, i + (int) n);
+                rowsum((2 * (int) n) + 1, i + (int) n);
             }
         }
 
@@ -163,7 +162,6 @@ namespace CliffordTableaus {
         }
     }
 
-
     void ImprovedStabilizerTableau::set(uint index, uint8_t value) {
         uint byte_index = index / 8;
         uint bit_index = index % 8;
@@ -176,6 +174,7 @@ namespace CliffordTableaus {
         uint bit_index = index % 8;
         return (tableau[byte_index] >> bit_index) & 1;
     }
+
 
     void ImprovedStabilizerTableau::set_x(uint i, uint j, uint8_t x) {
         if (i == 0 || j == 0 || i > 2 * n || j > n) {
@@ -232,7 +231,7 @@ namespace CliffordTableaus {
     }
 
     uint8_t ImprovedStabilizerTableau::get_xz(uint i, uint j) {
-        return (get_x(i, j) << 1) & get_z(i, j);
+        return (get_x(i, j) << 1) | get_z(i, j);
     }
 
     char ImprovedStabilizerTableau::interpret(uint8_t xz) {

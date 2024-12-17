@@ -9,8 +9,11 @@ namespace CliffordTableaus {
     }
 
     void StabilizerTableau::PauliX(uint qubit) {
+        if (qubit == 0) {
+            throw std::invalid_argument("Attempted to apply Pauli-X with qubit = 0!");
+        }
         if (qubit > n) {
-            throw std::invalid_argument("Invalid qubit index.");
+            throw std::invalid_argument("Attempted to apply Pauli-X with qubit > n!");
         }
         this->Hadamard(qubit);
         this->PauliZ(qubit);
@@ -18,8 +21,11 @@ namespace CliffordTableaus {
     }
 
     void StabilizerTableau::PauliY(uint qubit) {
+        if (qubit == 0) {
+            throw std::invalid_argument("Attempted to apply Pauli-Y with qubit = 0!");
+        }
         if (qubit > n) {
-            throw std::invalid_argument("Invalid qubit index.");
+            throw std::invalid_argument("Attempted to apply Pauli-Y with qubit > n!");
         }
         this->PauliZ(qubit);
         this->PauliX(qubit);
@@ -34,8 +40,11 @@ namespace CliffordTableaus {
     }
 
     void StabilizerTableau::PauliZ(uint qubit) {
+        if (qubit == 0) {
+            throw std::invalid_argument("Attempted to apply Pauli-Z with qubit = 0!");
+        }
         if (qubit > n) {
-            throw std::invalid_argument("Invalid qubit index.");
+            throw std::invalid_argument("Attempted to apply Pauli-Z with qubit > n!");
         }
         this->Phase(qubit);
         this->Phase(qubit);
