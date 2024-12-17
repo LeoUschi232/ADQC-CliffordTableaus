@@ -104,16 +104,16 @@ namespace CliffordTableaus {
                     while (q2 == q1) {
                         q2 = qubit_dist(qubit_generator);
                     }
-                    file << "cx q[" << q1 << "],q[" << q2 << "];\n";
+                    file << getCNOT(q1, q2);
                     break;
                 case Gate::HADAMARD:
-                    file << "h q[" << q1 << "];\n";
+                    file << getHadamard(q1);
                     break;
                 case Gate::PHASE:
-                    file << "s q[" << q1 << "];\n";
+                    file << getPhase(q1);
                     break;
                 case Gate::MEASURE:
-                    file << "measure q[" << q1 << "];\n";
+                    file << getMeasurement(q1);
                     break;
             }
         }
