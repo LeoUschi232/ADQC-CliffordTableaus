@@ -2,6 +2,7 @@
 
 #include "subroutines.h"
 
+#include <cstdint>
 #include <stdexcept>
 #include <cstdint>
 #include <vector>

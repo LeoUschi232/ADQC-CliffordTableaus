@@ -1,7 +1,5 @@
-
 #include "subroutines.h"
 
-#include <stdexcept>
 
 namespace CliffordTableaus {
     int g(int x1z1x2z2) {

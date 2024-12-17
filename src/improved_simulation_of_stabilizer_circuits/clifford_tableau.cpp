@@ -1,8 +1,5 @@
 #include "clifford_tableau.h"
 
-#include <random>
-#include <cstdint>
-
 namespace CliffordTableaus {
     ImprovedStabilizerTableau::ImprovedStabilizerTableau(uint n) :
             n(n), total_bits((2 * n + 1) * (2 * n + 1)), tableau((total_bits + 7) / 8, 0) {

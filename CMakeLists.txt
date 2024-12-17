@@ -12,10 +12,8 @@ find_package(GTest REQUIRED)
 add_library(QuArrayLib src/quarray.cpp
         src/improved_simulation_of_stabilizer_circuits/subroutines.cpp
         src/improved_simulation_of_stabilizer_circuits/subroutines.h
-        src/quantum_circuit_reader.cpp
-        src/quantum_circuit_reader.h
-        src/random_stabilizer_circuit.cpp
-        src/random_stabilizer_circuit.h
+        src/stabilizer_circuit.cpp
+        src/stabilizer_circuit.h
 )
 target_include_directories(QuArrayLib PUBLIC src)
 
