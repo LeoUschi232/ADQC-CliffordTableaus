@@ -47,7 +47,7 @@ TEST(StabilizerCircuitTest, TestRandomCircuitSet1) {
 TEST(StabilizerCircuitTest, TestCustomCircuitSet1) {
 
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
-    auto final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_1.qasm", stabilizerTableau);
+    auto final_measurement = StabilizerCircuit::executeCircuit("custom_circuit_2.qasm", stabilizerTableau);
     std::cout << final_measurement << std::endl;
 
 }

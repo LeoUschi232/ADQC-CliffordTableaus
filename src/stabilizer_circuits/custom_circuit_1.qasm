@@ -1,10 +1,6 @@
 OPENQASM 3;
-qreg q[4];
+qreg q[2];
 h q[0];
 cx q[0],q[1];
-cx q[0],q[2];
-cx q[0],q[3];
 measure q[0];
 measure q[1];
-measure q[2];
-measure q[3];
