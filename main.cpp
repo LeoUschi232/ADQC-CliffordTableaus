@@ -10,6 +10,16 @@
 
 using namespace CliffordTableaus;
 
+void print_help(const char *program_name) {
+    std::cout << "Usage: " << program_name << " [OPTIONS]\n"
+              << "OPTIONS:\n"
+              << "  -i, --input <input_filename>       Input file containing the circuit in QASM3 format.\n"
+              << "  -s, --stabilizer <stabilizer-id>   Stabilizer algorithm ID (default: 1).\n"
+              << "  -o, --output <output_filename>     Output file for measurement results.\n"
+              << "  -n, --num-shots <num-shots>        Number of shots to execute (default: 1).\n"
+              << "  -h, --help                         Display this help message and exit.\n";
+}
+
 int main(int argc, char *argv[]) {
     std::string input_filename;
     std::string output_filename;
@@ -24,11 +34,12 @@ int main(int argc, char *argv[]) {
             {"stabilizer", required_argument, nullptr, 's'},
             {"output",     required_argument, nullptr, 'o'},
             {"num-shots",  required_argument, nullptr, 'n'},
+            {"help",       no_argument,       nullptr, 'h'},
             {nullptr, 0,                      nullptr, 0}
     };
 
     int opt;
-    while ((opt = getopt_long(argc, argv, "i:s:o:n:", long_options, nullptr)) != -1) {
+    while ((opt = getopt_long(argc, argv, "i:s:o:n:h", long_options, nullptr)) != -1) {
         switch (opt) {
             case 'i':
                 input_filename = optarg;
@@ -42,18 +53,17 @@ int main(int argc, char *argv[]) {
             case 'n':
                 num_shots = std::stoul(optarg);
                 break;
+            case 'h':
+                print_help(argv[0]);
+                return 0;
             default:
-                std::cerr << "Usage: " << argv[0]
-                          << " [--input <input_filename>] [--stabilizer <stabilizer-id>]"
-                          << " [--output <input_filename>] [--num-shots <num-shots>]"
-                          << std::endl;
+                std::cerr << "Invalid option. Use -h or --help for usage information." << std::endl;
                 return 1;
         }
     }
 
     // Select stabilizer tableau
     std::unique_ptr<StabilizerTableau> stabilizerTableau;
-    // NOLINTNEXTLINE
     switch (stabilizer_id) {
         case 1:
             stabilizerTableau = std::make_unique<ImprovedStabilizerTableau>();
@@ -62,7 +72,6 @@ int main(int argc, char *argv[]) {
             std::cerr << "Error: Unsupported stabilizer algorithm ID: " << stabilizer_id << std::endl;
             return 1;
     }
-
 
     try {
         if (input_filename.empty()) {

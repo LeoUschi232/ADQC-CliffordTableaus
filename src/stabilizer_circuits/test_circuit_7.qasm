@@ -1,5 +1,5 @@
 OPENQASM 3;
-qreg q[10];
+qreg q[8];
 
 h q[0];
 
@@ -54,5 +54,3 @@ measure q[4];
 measure q[5];
 measure q[6];
 measure q[7];
-measure q[8];
-measure q[9];

@@ -12,8 +12,15 @@ using ImprovedStabilizerTableau = CliffordTableaus::ImprovedStabilizerTableau;
 TEST(StabilizerCircuitTest, Bernstein16NoError) {
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
     std::string filename = "bernstein_16.qasm";
+    std::string expected = "1111111111111111";
+    std::string actual;
     try {
-        StabilizerCircuit::executeCircuit(filename, stabilizerTableau);
+        actual = StabilizerCircuit::executeCircuit(filename, stabilizerTableau);
+        if (actual != expected) {
+            std::cout << "Bernstein 16 failed." << std::endl;
+            std::cout << "Expected: " << expected << std::endl << "  Actual: " << actual << std::endl;
+            FAIL();
+        }
     } catch (std::exception &e) {
         std::cout << "The following circuits failed: " << filename << std::endl;
         std::cout << "Circuit " << filename << " threw exception: " << e.what() << std::endl;
@@ -148,10 +155,18 @@ TEST(StabilizerCircuitTest, TestCircuit6Output) {
 }
 
 TEST(StabilizerCircuitTest, TestCircuit7Output) {
-    // The seventh test circuit is based on the fourth test circuit and obeys the same conditions.
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    std::string expected = "****00**";
+    std::string actual;
     try {
-        StabilizerCircuit::executeCircuit("test_circuit_7.qasm", stabilizerTableau);
+        actual = StabilizerCircuit::executeCircuit("test_circuit_7.qasm", stabilizerTableau);
+        // For this circuit, the qubits at indices 0,1,2,3,6,7 are indeterminate.
+        // Only qubits 4 and 5 should 100% measure to be |0〉.
+        if (actual[4] != expected[4] && actual[5] != expected[5]) {
+            std::cout << "Test 7 failed." << std::endl;
+            std::cout << "Expected: " << expected << std::endl << "  Actual: " << actual << std::endl;
+            FAIL();
+        }
     } catch (std::exception &e) {
         std::cout << "Test 7 threw exception: " << e.what() << std::endl;
         FAIL();

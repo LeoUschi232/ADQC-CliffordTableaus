@@ -134,12 +134,18 @@ namespace CliffordTableaus {
             }
         }
         if (p <= 2 * n) {
+            // The paper says the following:
             // Case I: Such a p exists.
             // If more than one exists, then let p be the smallest.
             // In this case the measurement outcome is random, so the state needs to be updated.
             // This is done as follows.
             // First call rowsum(i,p) for all i ∈ {1 to 2*n} such that i=/=p and xia = 1.
-            for (int i = 1; i <= 2 * n; ++i) {
+            // However, I have found that stabilizers can in fact anticommute with destabilizers.
+            // This means that the multiplication of the stabilizer gp which anticommutes with the measurement g
+            // must only be performed on top of other stabilizers gi which anticommute with gp
+            // but NOT on top of destabilizers gi which anticommute with gp.
+            // This means, that rowsum(i,p) shall only be called on all i∈{n+1 to 2*n} instead of all i∈{1 to 2*n}.
+            for (uint i = n + 1; i <= 2 * n; ++i) {
                 if (i != p && get_x(i, a) == 1) {
                     rowsum(i, p);
                 }
