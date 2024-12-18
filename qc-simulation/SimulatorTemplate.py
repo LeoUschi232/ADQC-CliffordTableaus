@@ -347,4 +347,6 @@ class Simulator(SimulatorVisitor):
 
         # Expand the bottom of the figure so the kets don't get cut off
         fig.tight_layout()
-        fig.show()
+
+        # Use plt.show(block=True) instead of fig.show()
+        plt.show(block=True)

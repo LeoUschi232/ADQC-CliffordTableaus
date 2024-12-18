@@ -64,6 +64,7 @@ int main(int argc, char *argv[]) {
 
     // Select stabilizer tableau
     std::unique_ptr<StabilizerTableau> stabilizerTableau;
+    // NOLINTNEXTLINE
     switch (stabilizer_id) {
         case 1:
             stabilizerTableau = std::make_unique<ImprovedStabilizerTableau>();
