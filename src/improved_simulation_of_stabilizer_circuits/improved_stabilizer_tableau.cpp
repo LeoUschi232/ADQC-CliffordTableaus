@@ -23,29 +23,34 @@ namespace CliffordTableaus {
 
 
     void ImprovedStabilizerTableau::rowsum(uint h, uint i) {
-        int rh = static_cast<int>(get_r(h));
-        int ri = static_cast<int>(get_r(i));
+        if (h == i) {
+            throw_invalid_argument("Attempted to apply rowsum with h=i!");
+        }
+        if (h == 0) {
+            throw_invalid_argument("Attempted to apply rowsum with h=0!");
+        }
+        if (i == 0) {
+            throw_invalid_argument("Attempted to apply rowsum with i=0!");
+        }
+        if (h > 2 * n) {
+            throw_invalid_argument("Attempted to apply rowsum with h>2n!");
+        }
+        if (i > 2 * n) {
+            throw_invalid_argument("Attempted to apply rowsum with i>2n!");
+        }
+        auto rh = get_r(h);
+        auto ri = get_r(i);
+        for (int j = 1; j <= n; ++j) {
+            auto xh = get_x(h, j);
+            auto zh = get_z(h, j);
+            auto xi = get_x(i, j);
+            auto zi = get_z(i, j);
 
-        int sum_g = 2 * (rh + ri);
-        for (uint j = 1; j <= n; ++j) {
-            int xij = static_cast<int>(get_x(i, j));
-            int zij = static_cast<int>(get_z(i, j));
-            int xhj = static_cast<int>(get_x(h, j));
-            int zhj = static_cast<int>(get_z(h, j));
-            sum_g += g(xij, zij, xhj, zhj);
-        }
-        if (sum_g % 4 == 0) {
-            set_r(h, 0);
-        } else if (sum_g % 4 == 2) {
-            set_r(h, 1);
-        } else {
-            throw std::logic_error("2*rh + 2*ri + sum_g should never be congruent to 1 or 3.");
+            auto matrix_h_times_matrix_i = (rh << 5) | (xh << 4) | (zh << 3) | (xi << 2) | (zi << 1) | ri;
+
+
         }
 
-        for (uint j = 1; j <= n; ++j) {
-            set_x(h, j, get_x(i, j) ^ get_x(h, j));
-            set_z(h, j, get_z(i, j) ^ get_z(h, j));
-        }
     }
 
     void ImprovedStabilizerTableau::CNOT(uint control, uint target) {

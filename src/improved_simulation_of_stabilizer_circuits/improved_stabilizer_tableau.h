@@ -34,6 +34,9 @@ namespace CliffordTableaus {
          * The algorithm uses a subroutine called rowsum (h, i), which sets generator h equal to i + h.
          * Its purpose is to keep track, in particular, of the phase bit rh, including all the factors of i
          * that appear when multiplying Pauli matrices.
+         * The function rowsum represents the group operation in Pn.
+         * This means whichever matrix is represented by h is multiplied by the matrix represented by i
+         * The result are the bits of the matrix represented by hi stored in row h.
          * @param h The generator to update.
          * @param i The generator to add to h.
          */

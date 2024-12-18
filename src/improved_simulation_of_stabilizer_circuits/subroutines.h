@@ -34,6 +34,8 @@ namespace CliffordTableaus {
      */
     int g(int x1, int z1, int x2, int z2);
 
+
+
     /**
      * Generate a random bit, either 0 or 1 with equal probability.
      * @return Random bit, either 0 or 1.
