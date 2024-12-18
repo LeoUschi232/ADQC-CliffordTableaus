@@ -12,7 +12,6 @@ CMakeFiles/
 # Build artifacts
 CTestTestfile.cmake
 libCliffordTableausLib.a
-test_clifford_tableaus
 
 # Object files and intermediate files
 *.o
@@ -29,8 +28,6 @@ test_clifford_tableaus
 *.bbl
 *.blg
 *.bcf
-*.log
-*.out
 *.run.xml
 *.toc
 *.fls

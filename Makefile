@@ -285,29 +285,29 @@ src/stabilizer_tableau.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CliffordTableausLib.dir/build.make CMakeFiles/CliffordTableausLib.dir/src/stabilizer_tableau.cpp.s
 .PHONY : src/stabilizer_tableau.cpp.s
 
-tests/test_stabilizer_circuit.o: tests/test_stabilizer_circuit.cpp.o
-.PHONY : tests/test_stabilizer_circuit.o
+tests/test_improved_stabilizer_tableau.o: tests/test_improved_stabilizer_tableau.cpp.o
+.PHONY : tests/test_improved_stabilizer_tableau.o
 
 # target to build an object file
-tests/test_stabilizer_circuit.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_clifford_tableaus.dir/build.make CMakeFiles/test_clifford_tableaus.dir/tests/test_stabilizer_circuit.cpp.o
-.PHONY : tests/test_stabilizer_circuit.cpp.o
+tests/test_improved_stabilizer_tableau.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_clifford_tableaus.dir/build.make CMakeFiles/test_clifford_tableaus.dir/tests/test_improved_stabilizer_tableau.cpp.o
+.PHONY : tests/test_improved_stabilizer_tableau.cpp.o
 
-tests/test_stabilizer_circuit.i: tests/test_stabilizer_circuit.cpp.i
-.PHONY : tests/test_stabilizer_circuit.i
+tests/test_improved_stabilizer_tableau.i: tests/test_improved_stabilizer_tableau.cpp.i
+.PHONY : tests/test_improved_stabilizer_tableau.i
 
 # target to preprocess a source file
-tests/test_stabilizer_circuit.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_clifford_tableaus.dir/build.make CMakeFiles/test_clifford_tableaus.dir/tests/test_stabilizer_circuit.cpp.i
-.PHONY : tests/test_stabilizer_circuit.cpp.i
+tests/test_improved_stabilizer_tableau.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_clifford_tableaus.dir/build.make CMakeFiles/test_clifford_tableaus.dir/tests/test_improved_stabilizer_tableau.cpp.i
+.PHONY : tests/test_improved_stabilizer_tableau.cpp.i
 
-tests/test_stabilizer_circuit.s: tests/test_stabilizer_circuit.cpp.s
-.PHONY : tests/test_stabilizer_circuit.s
+tests/test_improved_stabilizer_tableau.s: tests/test_improved_stabilizer_tableau.cpp.s
+.PHONY : tests/test_improved_stabilizer_tableau.s
 
 # target to generate assembly for a file
-tests/test_stabilizer_circuit.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_clifford_tableaus.dir/build.make CMakeFiles/test_clifford_tableaus.dir/tests/test_stabilizer_circuit.cpp.s
-.PHONY : tests/test_stabilizer_circuit.cpp.s
+tests/test_improved_stabilizer_tableau.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_clifford_tableaus.dir/build.make CMakeFiles/test_clifford_tableaus.dir/tests/test_improved_stabilizer_tableau.cpp.s
+.PHONY : tests/test_improved_stabilizer_tableau.cpp.s
 
 # Help Target
 help:
@@ -336,9 +336,9 @@ help:
 	@echo "... src/stabilizer_tableau.o"
 	@echo "... src/stabilizer_tableau.i"
 	@echo "... src/stabilizer_tableau.s"
-	@echo "... tests/test_stabilizer_circuit.o"
-	@echo "... tests/test_stabilizer_circuit.i"
-	@echo "... tests/test_stabilizer_circuit.s"
+	@echo "... tests/test_improved_stabilizer_tableau.o"
+	@echo "... tests/test_improved_stabilizer_tableau.i"
+	@echo "... tests/test_improved_stabilizer_tableau.s"
 .PHONY : help
 
 

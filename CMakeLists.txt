@@ -23,7 +23,7 @@ target_include_directories(CliffordTableausLib PUBLIC src)
 
 # Test executable
 add_executable(test_clifford_tableaus
-        tests/test_stabilizer_circuit.cpp
+        tests/test_improved_stabilizer_tableau.cpp
 )
 target_link_libraries(test_clifford_tableaus GTest::gtest_main CliffordTableausLib)
 add_test(NAME CliffordTableausTests COMMAND test_clifford_tableaus)
