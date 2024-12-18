@@ -7,7 +7,7 @@ import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-filepath = "zMainCircuits/random_circuit_1.qasm"
+filepath = "zMainCircuits/test_circuit_10.qasm"
 
 with open(filepath, "r") as program:
     qasm_code = program.read()

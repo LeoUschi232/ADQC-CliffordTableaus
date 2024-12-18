@@ -73,7 +73,7 @@ namespace CliffordTableaus {
         for (int i = 1; i <= 2 * n; ++i) {
             auto xia_zib = get_x(i, a) & get_z(i, b);
             auto xib_zia_1 = get_x(i, b) ^ get_z(i, a) ^ 1;
-            set_r(i, get_r(i) ^ xia_zib & xib_zia_1);
+            set_r(i, get_r(i) ^ (xia_zib & xib_zia_1));
             set_x(i, b, get_x(i, b) ^ get_x(i, a));
             set_z(i, a, get_z(i, a) ^ get_z(i, b));
         }

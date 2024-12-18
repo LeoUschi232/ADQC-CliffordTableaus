@@ -213,3 +213,43 @@ TEST(StabilizerCircuitTest, TestCircuit8Output) {
     }
 }
 
+
+TEST(StabilizerCircuitTest, TestCircuit9Output) {
+    auto nr_shots = 500;
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    std::string expected = "0000|0001|0010|0011|1100|1101|1110|1111";
+    std::string actual;
+    try {
+        for (int shot = 1; shot <= nr_shots; shot++) {
+            actual = StabilizerCircuit::executeCircuit("test_circuit_9.qasm", stabilizerTableau);
+            if (expected.find(actual) == std::string::npos) {
+                std::cout << "Test 9 failed on shot: " << shot << std::endl;
+                std::cout << "Expected: " << expected << std::endl << "  Actual: " << actual << std::endl;
+                FAIL();
+            }
+        }
+    } catch (std::exception &e) {
+        std::cout << "Test 9 threw exception: " << e.what() << std::endl;
+        FAIL();
+    }
+}
+
+TEST(StabilizerCircuitTest, TestCircuit10ßOutput) {
+    auto nr_shots = 500;
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    std::string expected = "0000|0001|0010|0011|1100|1101|1110|1111";
+    std::string actual;
+    try {
+        for (int shot = 1; shot <= nr_shots; shot++) {
+            actual = StabilizerCircuit::executeCircuit("test_circuit_9.qasm", stabilizerTableau);
+            if (expected.find(actual) == std::string::npos) {
+                std::cout << "Test 10 failed on shot: " << shot << std::endl;
+                std::cout << "Expected: " << expected << std::endl << "  Actual: " << actual << std::endl;
+                FAIL();
+            }
+        }
+    } catch (std::exception &e) {
+        std::cout << "Test 10 threw exception: " << e.what() << std::endl;
+        FAIL();
+    }
+}

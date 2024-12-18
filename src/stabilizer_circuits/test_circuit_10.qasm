@@ -1,0 +1,14 @@
+OPENQASM 3;
+qreg q[4];
+h q[0];
+h q[1];
+h q[2];
+y q[0];
+cx q[2],q[3];
+z q[1];
+s q[2];
+s q[0];
+measure q[0];
+measure q[1];
+measure q[2];
+measure q[3];
