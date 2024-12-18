@@ -122,7 +122,8 @@ namespace CliffordTableaus {
         uint8_t get_z(uint i, uint j);
 
         /**
-         * Get the value of the phase operator bit for a qubit.
+         * Get the value of the phase operator bit-pair for a qubit.
+         * The r variable consists of 2 bits to encode the possible values: 1, i, -1, -i.
          * @param i Index of the generator.
          */
         uint8_t get_r(uint i);
