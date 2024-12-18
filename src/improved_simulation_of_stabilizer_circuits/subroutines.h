@@ -21,6 +21,9 @@ namespace CliffordTableaus {
      */
     static std::uniform_int_distribution<> distribution(0, 1);
 
+
+    int matrix_interpret_multiply_interpret(int r1, int x1, int z1, int r2, int x2, int z2);
+
     /**
      * Let g (x1, z1, x2, z2) be a function that takes 4 bits as input, and that returns the exponent
      * to which i is raised (either 0, 1, or −1) when the Pauli matrices represented by x1z1 and x2z2 are multiplied.
@@ -33,8 +36,6 @@ namespace CliffordTableaus {
      * @return The exponent to which i is raised when the Pauli matrices represented by x1z1 and x2z2 are multiplied.
      */
     int g(int x1, int z1, int x2, int z2);
-
-
 
     /**
      * Generate a random bit, either 0 or 1 with equal probability.
