@@ -33,31 +33,31 @@ class TestOptimization(TestCase):
             self.assertTrue(test_passed, msg=f"Optimization failed on test file: {test_circuit_path}")
 
     def test_circuit1(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit1.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit1.qasm")
 
     def test_circuit2(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit2.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit2.qasm")
 
     def test_circuit3(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit3.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit3.qasm")
 
     def test_circuit4(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit4.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit4.qasm")
 
     def test_circuit5(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit5.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit5.qasm")
 
     def test_circuit6(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit6.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit6.qasm")
 
     def test_circuit7(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit7.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit7.qasm")
 
     def test_circuit8(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit8.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit8.qasm")
 
     def test_circuit9(self):
-        self.test_circuit(test_circuit_path="moreTestCircuits/testCircuit9.qasm")
+        self.test_circuit(test_circuit_path="unitTestCircuits/testCircuit9.qasm")
 
     def visualize(self, unoptimized_statevector, optimized_statevector, filepath):
         if len(unoptimized_statevector) != len(optimized_statevector):

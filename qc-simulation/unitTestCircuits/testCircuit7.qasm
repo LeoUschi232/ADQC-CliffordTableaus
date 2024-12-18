@@ -1,0 +1,12 @@
+OPENQASM 3;
+qreg q[4];
+h q[0];
+h q[1];
+h q[2];
+h q[3];
+ccx q[0], q[1], q[2];
+ccy q[1], q[2], q[3];
+ccz q[0], q[2], q[3];
+cct q[1], q[0], q[3];
+ccs q[2], q[3], q[0];
+cch q[0], q[1], q[3];

@@ -1,0 +1,18 @@
+OPENQASM 3;
+qreg q[2];
+h q[0];
+h q[1];
+cz q[0], q[1];
+rz(pi/2) q[0];
+rz(0.5*pi) q[1];
+h q[0];
+h q[1];
+x q[0];
+x q[1];
+h q[1];
+cx q[1], q[0];
+h q[1];
+x q[0];
+x q[1];
+h q[0];
+h q[1];
