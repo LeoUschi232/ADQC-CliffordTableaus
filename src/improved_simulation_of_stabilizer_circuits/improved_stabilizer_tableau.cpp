@@ -26,7 +26,8 @@ namespace CliffordTableaus {
         int rh = static_cast<int>(get_r(h));
         int ri = static_cast<int>(get_r(i));
 
-        int sum_g = 0;
+        int sum_g = (2 * (rh + ri)) % 4;
+        assert(sum_g == 0 || sum_g == 2);
         for (uint j = 1; j <= n; ++j) {
             int xij = static_cast<int>(get_x(i, j));
             int zij = static_cast<int>(get_z(i, j));
@@ -34,14 +35,14 @@ namespace CliffordTableaus {
             int zhj = static_cast<int>(get_z(h, j));
             sum_g += g(xij, zij, xhj, zhj);
         }
-        sum_g += 2 * (rh + ri);
+        sum_g = ((sum_g % 4) + 4) % 4;
 
-        if (sum_g % 4 == 0) {
+        if (sum_g == 0) {
             set_r(h, 0);
-        } else if (sum_g % 4 == 2) {
+        } else if (sum_g == 2) {
             set_r(h, 1);
         } else {
-            throw std::logic_error("2*rh + 2*ri + sum_g should never be congruent to 1 or 3.");
+            throw std::logic_error("Sum-g should never be congruent to 1 or 3.");
         }
 
         for (uint j = 1; j <= n; ++j) {
@@ -88,12 +89,14 @@ namespace CliffordTableaus {
 
         auto a = qubit;
         for (uint i = 1; i <= 2 * n; ++i) {
-            set_r(i, get_r(i) ^ (get_x(i, a) & get_z(i, a)));
-            auto new_xia = get_z(i, a);
-            auto new_zia = get_x(i, a);
-            set_x(i, a, new_xia);
-            set_z(i, a, new_zia);
+            auto xia = get_x(i, a);
+            auto zia = get_z(i, a);
+            set_r(i, get_r(i) ^ (xia & zia));
+            set_x(i, a, zia);
+            set_z(i, a, xia);
         }
+        // For Debug NOLINTNEXTLINE
+        return;
     }
 
     void ImprovedStabilizerTableau::Phase(uint qubit) {
@@ -109,6 +112,8 @@ namespace CliffordTableaus {
             set_r(i, get_r(i) ^ (get_x(i, a) & get_z(i, a)));
             set_z(i, a, get_z(i, a) ^ get_x(i, a));
         }
+        // For Debug NOLINTNEXTLINE
+        return;
     }
 
     uint8_t ImprovedStabilizerTableau::Measurement(uint qubit) {
@@ -136,7 +141,7 @@ namespace CliffordTableaus {
             // First call rowsum(i,p) for all i ∈ {1 to 2*n} such that i=/=p and xia = 1.
             for (int i = 1; i <= 2 * n; ++i) {
                 if (i != p && get_x(i, a) == 1) {
-                    rowsum(i, (int) p);
+                    rowsum(i, p);
                 }
             }
 
@@ -177,7 +182,7 @@ namespace CliffordTableaus {
         // Second, call rowsum (2n+1,i+n) for all i ∈ {1 to n} such that xia = 1.
         for (int i = 1; i <= n; ++i) {
             if (get_x(i, a) == 1) {
-                rowsum(2 * (int) n + 1, i + (int) n);
+                rowsum(2 * n + 1, i + n);
             }
         }
 
