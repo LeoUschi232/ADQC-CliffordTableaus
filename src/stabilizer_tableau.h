@@ -87,6 +87,12 @@ namespace CliffordTableaus {
         virtual uint8_t Measurement(uint qubit) = 0;
 
         /**
+         * Apply the Identity gate to the qubit.
+         * @param qubit Qubit to apply the Identity gate to.
+         */
+        void Identity(uint qubit) const;
+
+        /**
          * Apply the Pauli X gate to the qubit via decomposition of X using Hadamard and Phase gates.
          * @param qubit Qubit to apply the Pauli-X gate to.
          */

@@ -102,7 +102,14 @@ namespace CliffordTableaus {
             const std::string &line, StabilizerTableau &tableau, std::string &measurement_result
     ) {
         std::smatch match;
-        if (std::regex_match(line, match, cnot_regex)) {
+        if (std::regex_match(line, match, id_regex)) {
+            uint q_index = std::stoul(match[1]);
+
+            // Measurement result is not affected by the identity gate
+            tableau.Identity(q_index + 1);
+
+            return true;
+        } else if (std::regex_match(line, match, cnot_regex)) {
             uint control = std::stoul(match[1]);
             uint target = std::stoul(match[2]);
 
@@ -171,12 +178,12 @@ namespace CliffordTableaus {
     ) {
         auto file = createCircuitFile(circuit_filename, overwrite_file);
 
-        std::vector<Gate> allowed_gates = {Gate::PAULI_X, Gate::PAULI_Y, Gate::PAULI_Z, Gate::HADAMARD, Gate::PHASE};
+        std::vector<Gate> allowed_gates = {PAULI_X, PAULI_Y, PAULI_Z, HADAMARD, PHASE};
         if (n_qubits >= 2) {
-            allowed_gates.push_back(Gate::CNOT);
+            allowed_gates.push_back(CNOT);
         }
         if (allow_intermediate_measurement) {
-            allowed_gates.push_back(Gate::MEASURE);
+            allowed_gates.push_back(MEASURE);
         }
 
         std::mt19937 gate_generator(gate_seed);
@@ -211,29 +218,31 @@ namespace CliffordTableaus {
             uint q2 = 0;
 
             switch (allowed_gates[gate_distribution(gate_generator)]) {
-                case Gate::PAULI_X:
+                case IDENTITY:
+                    throw std::logic_error("Identity gate should not be selected.");
+                case PAULI_X:
                     file << getPauliX(q1);
                     break;
-                case Gate::PAULI_Y:
+                case PAULI_Y:
                     file << getPauliY(q1);
                     break;
-                case Gate::PAULI_Z:
+                case PAULI_Z:
                     file << getPauliZ(q1);
                     break;
-                case Gate::CNOT:
+                case CNOT:
                     q2 = qubit_dist(qubit_generator);
                     while (q2 == q1) {
                         q2 = qubit_dist(qubit_generator);
                     }
                     file << getCNOT(q1, q2);
                     break;
-                case Gate::HADAMARD:
+                case HADAMARD:
                     file << getHadamard(q1);
                     break;
-                case Gate::PHASE:
+                case PHASE:
                     file << getPhase(q1);
                     break;
-                case Gate::MEASURE:
+                case MEASURE:
                     file << getMeasurement(q1);
                     break;
             }
@@ -288,24 +297,21 @@ namespace CliffordTableaus {
             }
 
             std::smatch match;
-            if (std::regex_match(line, cnot_regex) ||
+            if (std::regex_match(line, id_regex) ||
+                std::regex_match(line, cnot_regex) ||
                 std::regex_match(line, h_regex) ||
                 std::regex_match(line, s_regex) ||
-                std::regex_match(line, measure_regex)) {
+                std::regex_match(line, x_regex) ||
+                std::regex_match(line, y_regex) ||
+                std::regex_match(line, z_regex) ||
+                std::regex_match(line, measure_regex)
+                    ) {
                 file << line << "\n";
-            } else if (std::regex_match(line, match, x_regex)) {
-                uint q_index = std::stoul(match[1].str());
-                file << getPauliX(q_index);
-            } else if (std::regex_match(line, match, y_regex)) {
-                uint q_index = std::stoul(match[1].str());
-                file << getPauliY(q_index);
-            } else if (std::regex_match(line, match, z_regex)) {
-                uint q_index = std::stoul(match[1].str());
-                file << getPauliZ(q_index);
             } else {
                 // Check if line starts with a known gate token,
                 // if not, it's unsupported or format is wrong.
-                if (line.rfind("cx", 0) == 0 ||
+                if (line.rfind("id", 0) == 0 ||
+                    line.rfind("cx", 0) == 0 ||
                     line.rfind('h', 0) == 0 ||
                     line.rfind('s', 0) == 0 ||
                     line.rfind("measure", 0) == 0 ||
@@ -384,6 +390,12 @@ namespace CliffordTableaus {
     std::string StabilizerCircuit::getMeasurement(uint qubit) {
         std::ostringstream builder;
         builder << "measure q[" << qubit << "];\n";
+        return builder.str();
+    }
+
+    std::string StabilizerCircuit::getIdentity(uint qubit) {
+        std::ostringstream builder;
+        builder << "id q[" << qubit << "];\n";
         return builder.str();
     }
 

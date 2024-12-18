@@ -19,6 +19,7 @@
 namespace CliffordTableaus {
     using uint = std::size_t;
     static const std::regex qreg_regex = std::regex(R"(^qreg q\[(\d+)\];$)");
+    static const std::regex id_regex = std::regex(R"(^id q\[(\d+)\];$)");
     static const std::regex cnot_regex = std::regex(R"(^cx q\[(\d+)\],q\[(\d+)\];$)");
     static const std::regex h_regex = std::regex(R"(^h q\[(\d+)\];$)");
     static const std::regex s_regex = std::regex(R"(^s q\[(\d+)\];$)");
@@ -147,6 +148,13 @@ namespace CliffordTableaus {
 
 
         /**
+         * Get the string of a line of QASM3 code which applies the identity gate to the qubit.
+         * @param qubit Qubit to apply the identity gate to.
+         * @return Line of QASM3 code corresponding to the application of the identity gate to the qubit.
+         */
+        static std::string getIdentity(uint qubit);
+
+        /**
          * Get the string of a line of QASM3 code which applies the Pauli-X gate to the qubit.
          * @param qubit Qubit to apply the Pauli-X gate to.
          * @return Line of QASM3 code corresponding to the application of the Pauli-X gate to the qubit.
@@ -185,6 +193,7 @@ namespace CliffordTableaus {
      * Supported gates in the stabilizer circuit.
      */
     enum Gate {
+        IDENTITY,
         PAULI_X,
         PAULI_Y,
         PAULI_Z,

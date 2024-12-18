@@ -21,6 +21,33 @@ namespace CliffordTableaus {
         using_scratch_space = false;
     }
 
+
+    void ImprovedStabilizerTableau::rowsum(uint h, uint i) {
+        int rh = static_cast<int>(get_r(h));
+        int ri = static_cast<int>(get_r(i));
+
+        int sum_g = 2 * (rh + ri);
+        for (uint j = 1; j <= n; ++j) {
+            int xij = static_cast<int>(get_x(i, j));
+            int zij = static_cast<int>(get_z(i, j));
+            int xhj = static_cast<int>(get_x(h, j));
+            int zhj = static_cast<int>(get_z(h, j));
+            sum_g += g(xij, zij, xhj, zhj);
+        }
+        if (sum_g % 4 == 0) {
+            set_r(h, 0);
+        } else if (sum_g % 4 == 2) {
+            set_r(h, 1);
+        } else {
+            throw std::logic_error("2*rh + 2*ri + sum_g should never be congruent to 1 or 3.");
+        }
+
+        for (uint j = 1; j <= n; ++j) {
+            set_x(h, j, get_x(i, j) ^ get_x(h, j));
+            set_z(h, j, get_z(i, j) ^ get_z(h, j));
+        }
+    }
+
     void ImprovedStabilizerTableau::CNOT(uint control, uint target) {
         if (control == 0) {
             throw_invalid_argument("Attempted to apply CNOT with control qubit = 0!");
@@ -158,31 +185,6 @@ namespace CliffordTableaus {
         return measurement;
     }
 
-    void ImprovedStabilizerTableau::rowsum(uint h, uint i) {
-        int rh = static_cast<int>(get_r(h));
-        int ri = static_cast<int>(get_r(i));
-
-        int sum_g = 2 * (rh + ri);
-        for (uint j = 1; j <= n; ++j) {
-            int xij = static_cast<int>(get_x(i, j));
-            int zij = static_cast<int>(get_z(i, j));
-            int xhj = static_cast<int>(get_x(h, j));
-            int zhj = static_cast<int>(get_z(h, j));
-            sum_g += g(xij, zij, xhj, zhj);
-        }
-        if (sum_g % 4 == 0) {
-            set_r(h, 0);
-        } else if (sum_g % 4 == 2) {
-            set_r(h, 1);
-        } else {
-            throw std::logic_error("The sum of rh, ri and g should never be congruent to 1 or 3.");
-        }
-
-        for (uint j = 1; j <= n; ++j) {
-            set_x(h, j, get_x(i, j) ^ get_x(h, j));
-            set_z(h, j, get_z(i, j) ^ get_z(h, j));
-        }
-    }
 
     void ImprovedStabilizerTableau::set(uint index, uint8_t value) {
         uint byte_index = index / 8;

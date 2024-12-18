@@ -7,6 +7,15 @@ namespace CliffordTableaus {
         this->tableau = std::vector<uint8_t>((total_bits + 7) / 8, 0);
     }
 
+    void StabilizerTableau::Identity(uint qubit) const {
+        if (qubit == 0) {
+            throw std::invalid_argument("Attempted to apply Identity with qubit = 0!");
+        }
+        if (qubit > n) {
+            throw std::invalid_argument("Attempted to apply Identity with qubit > n!");
+        }
+    }
+
     void StabilizerTableau::PauliX(uint qubit) {
         if (qubit == 0) {
             throw std::invalid_argument("Attempted to apply Pauli-X with qubit = 0!");
