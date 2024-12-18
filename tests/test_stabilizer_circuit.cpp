@@ -50,63 +50,86 @@ TEST(StabilizerCircuitTest, TestImprovedStabilizerTableauNoError) {
  * This test expects specific output from the measurement.
  */
 TEST(StabilizerCircuitTest, TestImprovedStabilizerTableauOutput) {
-    std::vector<int> failures = {};
-    std::string measurement;
+    // The tuple consists of these attributes in the following order:
+    // 1. Test circuit index
+    // 2. [optional] String of thrown exception
+    // 3. Expected measurement result
+    // 4. [optional] Actual measurement result
+    std::vector<std::tuple<int, std::string, std::string, std::string>> failures = {};
+    std::string actual;
+    std::string expected;
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
 
-    measurement = StabilizerCircuit::executeCircuit("test_circuit_1.qasm", stabilizerTableau);
-    std::cout << "First measurement: " << measurement << std::endl;
-    if (measurement != "11010") {
-        failures.push_back(1);
-    }
-
-    measurement = StabilizerCircuit::executeCircuit("test_circuit_2.qasm", stabilizerTableau);
-    std::cout << "Second measurement: " << measurement << std::endl;
-    char q0 = measurement.at(0);
-    char q1 = measurement.at(1);
-    char q2 = measurement.at(2);
-    char q3 = measurement.at(3);
-    if (q0 != q1 || q2 != q3) {
-        failures.push_back(2);
+    try {
+        expected = "11010";
+        actual = StabilizerCircuit::executeCircuit("test_circuit_1.qasm", stabilizerTableau);
+        if (actual != expected) {
+            failures.emplace_back(1, "", expected, actual);
+        }
+    } catch (std::exception &e) {
+        failures.emplace_back(1, e.what(), expected, "");
     }
 
 
-    measurement = StabilizerCircuit::executeCircuit("test_circuit_3.qasm", stabilizerTableau);
-    std::cout << "Third measurement: " << measurement << std::endl;
-    if (measurement != "0000000000" &&
-        measurement != "0000011111" &&
-        measurement != "1111100000" &&
-        measurement != "1111111111") {
-        failures.push_back(3);
+    try {
+        expected = "00000|00001|00110|00111|11000|11001|11110|11111";
+        actual = StabilizerCircuit::executeCircuit("test_circuit_2.qasm", stabilizerTableau);
+
+        // Check if actual is a substring of expected.
+        if (expected.find(actual) == std::string::npos) {
+            failures.emplace_back(2, "", expected, actual);
+        }
+    } catch (std::exception &e) {
+        failures.emplace_back(2, e.what(), expected, "");
+    }
+
+    try {
+        expected = "0000000000|0000011111|1111100000|1111111111";
+        actual = StabilizerCircuit::executeCircuit("test_circuit_3.qasm", stabilizerTableau);
+
+        // Check if actual is a substring of expected.
+        if (expected.find(actual) == std::string::npos) {
+            failures.emplace_back(2, "", expected, actual);
+        }
+    } catch (std::exception &e) {
+        failures.emplace_back(2, e.what(), expected, "");
     }
 
     // All the fourth circuit has to do is not throw any errors.
     // The measurement result is irrelevant.
     try {
-        measurement = StabilizerCircuit::executeCircuit("test_circuit_4.qasm", stabilizerTableau);
-        std::cout << "Fourth measurement: " << measurement << std::endl;
+        StabilizerCircuit::executeCircuit("test_circuit_4.qasm", stabilizerTableau);
     } catch (std::exception &e) {
-        failures.push_back(4);
-        std::cout << "Fourth measurement threw the following exception: " << e.what() << std::endl;
+        failures.emplace_back(4, e.what(), "", "");
     }
 
     try {
-        measurement = StabilizerCircuit::executeCircuit("test_circuit_5.qasm", stabilizerTableau);
-        std::cout << "Fifth measurement: " << measurement << std::endl;
-        if (measurement != "011") {
-            failures.push_back(5);
+        expected = "011";
+        actual = StabilizerCircuit::executeCircuit("test_circuit_5.qasm", stabilizerTableau);
+        if (actual != expected) {
+            failures.emplace_back(5, "", expected, actual);
         }
     } catch (std::exception &e) {
-        failures.push_back(5);
-        std::cout << "Fifth measurement threw the following exception: " << e.what() << std::endl;
+        failures.emplace_back(5, e.what(), expected, "");
     }
 
     if (!failures.empty()) {
         std::cout << "The following tests failed: ";
         for (int i = 0; i < failures.size() - 1; ++i) {
-            std::cout << failures[i] << ", ";
+            std::cout << std::get<0>(failures[i]) << ", ";
         }
-        std::cout << failures[failures.size() - 1] << std::endl;
+        std::cout << std::get<0>(failures[failures.size() - 1]) << std::endl;
+
+        for (auto failure: failures) {
+            if (!std::get<1>(failure).empty()) {
+                std::cout << "Test " << std::get<0>(failure) << " threw exception: " << std::get<1>(failure)
+                          << std::endl;
+            } else {
+                std::cout << "Test " << std::get<0>(failure) << " failed.\n"
+                          << "Expected: " << std::get<2>(failure) << "\n"
+                          << "  Actual: " << std::get<3>(failure) << std::endl;
+            }
+        }
         FAIL();
     }
 }
