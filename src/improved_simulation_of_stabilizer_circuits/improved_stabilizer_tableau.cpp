@@ -26,7 +26,7 @@ namespace CliffordTableaus {
         int rh = static_cast<int>(get_r(h));
         int ri = static_cast<int>(get_r(i));
 
-        int sum_g = 2 * (rh + ri);
+        int sum_g = 0;
         for (uint j = 1; j <= n; ++j) {
             int xij = static_cast<int>(get_x(i, j));
             int zij = static_cast<int>(get_z(i, j));
@@ -34,6 +34,8 @@ namespace CliffordTableaus {
             int zhj = static_cast<int>(get_z(h, j));
             sum_g += g(xij, zij, xhj, zhj);
         }
+        sum_g += 2 * (rh + ri);
+
         if (sum_g % 4 == 0) {
             set_r(h, 0);
         } else if (sum_g % 4 == 2) {
