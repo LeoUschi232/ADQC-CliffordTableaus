@@ -234,7 +234,7 @@ TEST(StabilizerCircuitTest, TestCircuit9Output) {
     }
 }
 
-TEST(StabilizerCircuitTest, TestCircuit10ßOutput) {
+TEST(StabilizerCircuitTest, TestCircuit10Output) {
     auto nr_shots = 500;
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
     std::string expected = "0000|0001|0010|0011|1100|1101|1110|1111";

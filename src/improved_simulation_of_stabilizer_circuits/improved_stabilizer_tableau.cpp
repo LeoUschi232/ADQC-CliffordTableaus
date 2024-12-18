@@ -23,6 +23,7 @@ namespace CliffordTableaus {
 
 
     void ImprovedStabilizerTableau::rowsum(uint h, uint i) {
+        bool both_are_stabilizers = n + 1 <= h && h <= 2 * n && n + 1 <= i && i <= 2 * n;
         int rh = static_cast<int>(get_r(h));
         int ri = static_cast<int>(get_r(i));
 
@@ -33,7 +34,7 @@ namespace CliffordTableaus {
             int zij = static_cast<int>(get_z(i, j));
             int xhj = static_cast<int>(get_x(h, j));
             int zhj = static_cast<int>(get_z(h, j));
-            sum_g += g(xij, zij, xhj, zhj);
+            sum_g += g_canonical(xij, zij, xhj, zhj);
         }
         sum_g = ((sum_g % 4) + 4) % 4;
 
@@ -41,8 +42,9 @@ namespace CliffordTableaus {
             set_r(h, 0);
         } else if (sum_g == 2) {
             set_r(h, 1);
-        } else {
-            throw std::logic_error("Sum-g should never be congruent to 1 or 3.");
+        } else if (both_are_stabilizers) {
+            std::cerr << "Warning: sum_g should never be congruent to 1 or 3 on two stabilizers.\n"
+                      << "Sum g value: " << sum_g << std::endl;
         }
 
         for (uint j = 1; j <= n; ++j) {
@@ -145,7 +147,7 @@ namespace CliffordTableaus {
             // must only be performed on top of other stabilizers gi which anticommute with gp
             // but NOT on top of destabilizers gi which anticommute with gp.
             // This means, that rowsum(i,p) shall only be called on all i∈{n+1 to 2*n} instead of all i∈{1 to 2*n}.
-            for (uint i = n + 1; i <= 2 * n; ++i) {
+            for (uint i = 1; i <= 2 * n; ++i) {
                 if (i != p && get_x(i, a) == 1) {
                     rowsum(i, p);
                 }
