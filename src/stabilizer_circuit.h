@@ -145,28 +145,33 @@ namespace CliffordTableaus {
          */
         static std::string getMeasurement(uint qubit);
 
+
         /**
-         * Decompose the Pauli-X gate into a sequence of CNOt, Hadamard, and Phase gates.
+         * Get the string of a line of QASM3 code which applies the Pauli-X gate to the qubit.
          * @param qubit Qubit to apply the Pauli-X gate to.
-         * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-X gate.
+         * @return Line of QASM3 code corresponding to the application of the Pauli-X gate to the qubit.
          */
-        static std::string decomposePauliX(uint qubit);
+        static std::string getPauliX(uint qubit);
 
         /**
-         * Decompose the Pauli-Y gate into a sequence of CNOt, Hadamard, and Phase gates.
+         * Get the string of a line of QASM3 code which applies the Pauli-Y gate to the qubit.
          * @param qubit Qubit to apply the Pauli-Y gate to.
-         * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-Y gate.
+         * @return Line of QASM3 code corresponding to the application of the Pauli-Y gate to the qubit.
          */
-        static std::string decomposePauliY(uint qubit);
+        static std::string getPauliY(uint qubit);
 
         /**
-         * Decompose the Pauli-Z gate into a sequence of CNOt, Hadamard, and Phase gates.
+         * Get the string of a line of QASM3 code which applies the Pauli-Z gate to the qubit.
          * @param qubit Qubit to apply the Pauli-Z gate to.
-         * @return Lines of QASM3 code corresponding to the decomposition of the Pauli-Z gate.
+         * @return Line of QASM3 code corresponding to the application of the Pauli-Z gate to the qubit.
          */
-        static std::string decomposePauliZ(uint qubit);
+        static std::string getPauliZ(uint qubit);
     };
 
+    /**
+     * Trim the line by removing leading and trailing whitespace.
+     * @param line Line to trim the leading and trailing whitespace from.
+     */
     static void trimLine(std::string &line) {
         line.erase(line.begin(), std::find_if(line.begin(), line.end(), [](unsigned char c) {
             return !std::isspace(c);
@@ -176,6 +181,9 @@ namespace CliffordTableaus {
         }).base(), line.end());
     }
 
+    /**
+     * Supported gates in the stabilizer circuit.
+     */
     enum Gate {
         PAULI_X,
         PAULI_Y,

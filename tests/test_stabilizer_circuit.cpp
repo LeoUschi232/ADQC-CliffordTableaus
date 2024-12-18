@@ -10,6 +10,7 @@ using StabilizerCircuit = CliffordTableaus::StabilizerCircuit;
 using ImprovedStabilizerTableau = CliffordTableaus::ImprovedStabilizerTableau;
 using namespace std::complex_literals;
 
+
 /**
  * This test doesn't expect any specific output from the measurement.
  * It simply tests whether the circuits get executed without errors.

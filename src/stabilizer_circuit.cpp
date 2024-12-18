@@ -212,13 +212,13 @@ namespace CliffordTableaus {
 
             switch (allowed_gates[gate_distribution(gate_generator)]) {
                 case Gate::PAULI_X:
-                    file << decomposePauliX(q1);
+                    file << getPauliX(q1);
                     break;
                 case Gate::PAULI_Y:
-                    file << decomposePauliY(q1);
+                    file << getPauliY(q1);
                     break;
                 case Gate::PAULI_Z:
-                    file << decomposePauliZ(q1);
+                    file << getPauliZ(q1);
                     break;
                 case Gate::CNOT:
                     q2 = qubit_dist(qubit_generator);
@@ -295,13 +295,13 @@ namespace CliffordTableaus {
                 file << line << "\n";
             } else if (std::regex_match(line, match, x_regex)) {
                 uint q_index = std::stoul(match[1].str());
-                file << decomposePauliX(q_index);
+                file << getPauliX(q_index);
             } else if (std::regex_match(line, match, y_regex)) {
                 uint q_index = std::stoul(match[1].str());
-                file << decomposePauliY(q_index);
+                file << getPauliY(q_index);
             } else if (std::regex_match(line, match, z_regex)) {
                 uint q_index = std::stoul(match[1].str());
-                file << decomposePauliZ(q_index);
+                file << getPauliZ(q_index);
             } else {
                 // Check if line starts with a known gate token,
                 // if not, it's unsupported or format is wrong.
@@ -387,63 +387,21 @@ namespace CliffordTableaus {
         return builder.str();
     }
 
-
-    std::string StabilizerCircuit::decomposePauliX(uint qubit) {
-        // Decomposition of the Pauli-X-Gate:
-        // X=HZH=HSSH
+    std::string StabilizerCircuit::getPauliX(uint qubit) {
         std::ostringstream builder;
-        builder << "h q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "h q[" << qubit << "];\n";
-        return builder.str();
-
-    }
-
-    std::string StabilizerCircuit::decomposePauliY(uint qubit) {
-        // Decomposition of the Pauli-Y-Gate:
-        // iY=ZX=SSHSSH
-        std::ostringstream builder;
-        builder << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "h q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "h q[" << qubit << "];\n";
-
-        // Now, the preceding factor i has to be removed by multiplying -i to the superposition of states.
-        // First, apply -i to the |1〉 state.
-        builder << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n";
-
-        // Second, flip the states using a decomposed X-gate,
-        // and apply -i to the new |1〉, which is the old |0〉.
-        builder << "h q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "h q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n";
-
-        // Third, flip the states back to recover the original state,
-        // now with the i factor removed.
-        builder << "h q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n"
-                << "h q[" << qubit << "];\n";
+        builder << "x q[" << qubit << "];\n";
         return builder.str();
     }
 
-    std::string StabilizerCircuit::decomposePauliZ(uint qubit) {
-        // Decomposition of the Pauli-Z-Gate:
-        // Z=SS
+    std::string StabilizerCircuit::getPauliY(uint qubit) {
         std::ostringstream builder;
-        builder << "s q[" << qubit << "];\n"
-                << "s q[" << qubit << "];\n";
+        builder << "y q[" << qubit << "];\n";
         return builder.str();
     }
 
-
+    std::string StabilizerCircuit::getPauliZ(uint qubit) {
+        std::ostringstream builder;
+        builder << "z q[" << qubit << "];\n";
+        return builder.str();
+    }
 }
