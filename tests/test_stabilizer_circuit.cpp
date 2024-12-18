@@ -2,60 +2,48 @@
 #include "improved_simulation_of_stabilizer_circuits/improved_stabilizer_tableau.h"
 #include "gtest/gtest.h"
 
+#include <exception>
+#include <vector>
+#include <map>
+
 using StabilizerCircuit = CliffordTableaus::StabilizerCircuit;
 using ImprovedStabilizerTableau = CliffordTableaus::ImprovedStabilizerTableau;
 using namespace std::complex_literals;
 
-TEST(StabilizerCircuitTest, CreateRandomCircuitSet1) {
-    StabilizerCircuit::createRandomStabilizerCircuit(
-            "random_circuit_1.qasm",
-            5,
-            10,
-            0,
-            0,
-            false,
-            true,
-            true
-    );
-    StabilizerCircuit::createRandomStabilizerCircuit(
-            "random_circuit_2.qasm",
-            25,
-            100,
-            10,
-            20,
-            false,
-            true,
-            true
-    );
-    StabilizerCircuit::createRandomStabilizerCircuit(
-            "random_circuit_3.qasm",
-            100,
-            500,
-            15,
-            50,
-            false,
-            true,
-            true
-    );
-}
-
 /**
- * This test doesn'T expect any specific output from the measurement.
+ * This test doesn't expect any specific output from the measurement.
  * It simply tests whether the circuits get executed without errors.
  */
 TEST(StabilizerCircuitTest, TestImprovedStabilizerTableauNoError) {
-    std::string measurement;
+    std::vector<std::string> filenames = {
+            "bernstein_16.qasm",
+            "random_circuit_1.qasm",
+            "random_circuit_2.qasm",
+            "random_circuit_3.qasm"
+    };
+
+    std::map<std::string, std::string> failures = {};
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
 
-    measurement = StabilizerCircuit::executeCircuit("bernstein_16.qasm", stabilizerTableau);
-    std::cout << "First measurement: " << measurement << std::endl;
-    measurement = StabilizerCircuit::executeCircuit("random_circuit_1.qasm", stabilizerTableau);
-    std::cout << "Second measurement: " << measurement << std::endl;
-
-    measurement = StabilizerCircuit::executeCircuit("random_circuit_2.qasm", stabilizerTableau);
-    std::cout << "Third measurement: " << measurement << std::endl;
-    measurement = StabilizerCircuit::executeCircuit("random_circuit_3.qasm", stabilizerTableau);
-    std::cout << "Fourth measurement: " << measurement << std::endl;
+    for (const std::string &filename: filenames) {
+        try {
+            StabilizerCircuit::executeCircuit(filename, stabilizerTableau);
+        } catch (std::exception &e) {
+            failures[filename] = e.what();
+        }
+    }
+    if (!failures.empty()) {
+        auto failures_iterator = failures.begin();
+        std::cout << "The following circuits failed: " << failures_iterator->first;
+        while (++failures_iterator != failures.end()) {
+            std::cout << ", " << failures_iterator->first;
+        }
+        std::cout << std::endl;
+        for (auto const &[filename, error]: failures) {
+            std::cout << "Circuit " << filename << " threw exception: " << error << std::endl;
+        }
+        FAIL();
+    }
 }
 
 /**
