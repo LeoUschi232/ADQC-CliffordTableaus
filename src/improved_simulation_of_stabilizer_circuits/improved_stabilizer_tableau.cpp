@@ -13,9 +13,9 @@ namespace CliffordTableaus {
             set_r(n + i, 0);
         }
         using_scratch_space = true;
-        for (uint i = 1; i <= n; ++i) {
-            set_x(2 * n + 1, i, 0);
-            set_z(2 * n + 1, i, 0);
+        for (uint j = 1; j <= n; ++j) {
+            set_x(2 * n + 1, j, 0);
+            set_z(2 * n + 1, j, 0);
         }
         set_r(2 * n + 1, 0);
         using_scratch_space = false;
@@ -89,7 +89,6 @@ namespace CliffordTableaus {
         if (qubit > n) {
             throw_invalid_argument("Attempted to measure qubit > n!");
         }
-        using_scratch_space = true;
 
         // Measurement of qubit a in standard basis.
         // First check whether there exists a p with n+1<=p<=2*n such that xpa=1.
@@ -139,6 +138,7 @@ namespace CliffordTableaus {
         // The only task is to determine whether 0 or 1 is observed.
         // This is done as follows.
         // First set the (2n+1)st row to be identically 0.
+        using_scratch_space = true;
         for (int j = 1; j <= n; ++j) {
             set_x(2 * n + 1, j, 0);
             set_z(2 * n + 1, j, 0);

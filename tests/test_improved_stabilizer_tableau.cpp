@@ -9,13 +9,6 @@
 using StabilizerCircuit = CliffordTableaus::StabilizerCircuit;
 using ImprovedStabilizerTableau = CliffordTableaus::ImprovedStabilizerTableau;
 
-/**
- * The following tests are refactored so that each circuit is tested separately.
- * The failure conditions and error messages remain the same as before.
- */
-
-// From the first TEST block (TestImprovedStabilizerTableauNoError):
-
 TEST(StabilizerCircuitTest, Bernstein16NoError) {
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
     std::string filename = "bernstein_16.qasm";
@@ -63,8 +56,6 @@ TEST(StabilizerCircuitTest, RandomCircuit3NoError) {
         FAIL();
     }
 }
-
-// From the second TEST block (TestImprovedStabilizerTableauOutput):
 
 TEST(StabilizerCircuitTest, TestCircuit1Output) {
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
@@ -118,6 +109,8 @@ TEST(StabilizerCircuitTest, TestCircuit3Output) {
 }
 
 TEST(StabilizerCircuitTest, TestCircuit4Output) {
+    // The fourth test circuit needs only to run without errors.
+    // It is not expected to produce any specific output format.
     ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
     try {
         StabilizerCircuit::executeCircuit("test_circuit_4.qasm", stabilizerTableau);
