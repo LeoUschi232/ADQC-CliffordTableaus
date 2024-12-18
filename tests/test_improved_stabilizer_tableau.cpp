@@ -146,3 +146,26 @@ TEST(StabilizerCircuitTest, TestCircuit6Output) {
         FAIL();
     }
 }
+
+TEST(StabilizerCircuitTest, TestCircuit7Output) {
+    // The seventh test circuit is based on the fourth test circuit and obeys the same conditions.
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    try {
+        StabilizerCircuit::executeCircuit("test_circuit_7.qasm", stabilizerTableau);
+    } catch (std::exception &e) {
+        std::cout << "Test 7 threw exception: " << e.what() << std::endl;
+        FAIL();
+    }
+}
+
+TEST(StabilizerCircuitTest, TestCircuit8Output) {
+    // The seventh test circuit is based on the fourth test circuit and obeys the same conditions.
+    ImprovedStabilizerTableau stabilizerTableau = ImprovedStabilizerTableau();
+    try {
+        StabilizerCircuit::executeCircuit("test_circuit_8.qasm", stabilizerTableau);
+    } catch (std::exception &e) {
+        std::cout << "Test 8 threw exception: " << e.what() << std::endl;
+        FAIL();
+    }
+}
+

@@ -86,11 +86,11 @@ namespace CliffordTableaus {
 
         auto a = qubit;
         for (uint i = 1; i <= 2 * n; ++i) {
-            set_r(i, get_r(i) ^ (get_x(i, a) & get_z(i, a)));
             auto new_xia = get_z(i, a);
             auto new_zia = get_x(i, a);
             set_x(i, a, new_xia);
             set_z(i, a, new_zia);
+            set_r(i, get_r(i) ^ (get_x(i, a) & get_z(i, a)));
         }
     }
 
