@@ -247,7 +247,38 @@ unused classoptions:
 ) (./tum/tumuser.sty)
 (/usr/share/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty))
 (/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty)
-(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(/usr/share/texmf-dist/tex/latex/braket/braket.sty)
+(/usr/share/texmf-dist/tex/latex/doublestroke/dsfont.sty)
+(/usr/share/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texmf-dist/tex/latex/setspace/setspace.sty)
+
+! LaTeX Error: Option clash for package geometry.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.18 
+     
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.def))
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-compat.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/standard.bbx))
+(/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.cfg)
+(/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
 (./CliffordTableausPresentation.aux)
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -267,7 +298,11 @@ h.dict)
 (/usr/share/texmf-dist/tex/latex/translator/translator-numbers-dictionary-Engli
 sh.dict)
 (/usr/share/texmf-dist/tex/latex/translator/translator-theorem-dictionary-Engli
-sh.dict) (./CliffordTableausPresentation.nav)
+sh.dict) (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx))
+(./CliffordTableausPresentation.bbl) (./CliffordTableausPresentation.nav)
 (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd)
 (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd)
 (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd)
@@ -276,19 +311,57 @@ sh.dict) (./CliffordTableausPresentation.nav)
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fonts/map/
 pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
 /tum/resources/TUM_Tower.png>] (./CliffordTableausPresentation.toc) [2]
-[3] [4] (./CliffordTableausPresentation.toc) [5] [6]
-(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/urw/he
-lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on CliffordTableausPresentation.pdf (6 pages, 261585 bytes).
+Overfull \vbox (3.51547pt too high) detected at line 120
+[3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dis
+t/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mat
+hex.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Overfull \vbox (4.19783pt too high) detected at line 143
+[4]
+Overfull \vbox (6.54987pt too high) detected at line 181
+[5] [6] [7] (./CliffordTableausPresentation.toc) [8]
+Overfull \vbox (5.68053pt too high) detected at line 255
+[9]
+
+! LaTeX Error: \begin{itemize} on input line 292 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292     \end{frame}
+                     
+
+Overfull \vbox (7.19241pt too high) detected at line 292
+[10]
+Overfull \vbox (7.40376pt too high) detected at line 336
+[11] [12] (./CliffordTableausPresentation.aux) )
+(see the transcript file for additional information)</usr/share/texmf-dist/font
+s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
+0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
+dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/
+lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/
+texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/
+public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/
+msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
+b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
+/helvetic/uhvro8a.pfb>
+Output written on CliffordTableausPresentation.pdf (12 pages, 377919 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
 INFO - Reading 'CliffordTableausPresentation.bcf'
-INFO - Found 0 citekeys in bib section 0
+INFO - Found 2 citekeys in bib section 0
+INFO - Processing section 0
+INFO - Looking for bibtex file 'bibliography.bib' for section 0
+INFO - LaTeX decoding ...
+INFO - Found BibTeX data source 'bibliography.bib'
+INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+INFO - No sort tailoring available for locale 'en-US'
 INFO - Writing 'CliffordTableausPresentation.bbl' with encoding 'UTF-8'
 INFO - Output to CliffordTableausPresentation.bbl
-WARN - The file 'CliffordTableausPresentation.bcf' does not contain any citations!
-INFO - WARNINGS: 1
 This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
@@ -538,7 +611,38 @@ unused classoptions:
 ) (./tum/tumuser.sty)
 (/usr/share/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty))
 (/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty)
-(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(/usr/share/texmf-dist/tex/latex/braket/braket.sty)
+(/usr/share/texmf-dist/tex/latex/doublestroke/dsfont.sty)
+(/usr/share/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texmf-dist/tex/latex/setspace/setspace.sty)
+
+! LaTeX Error: Option clash for package geometry.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.18 
+     
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.def))
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-compat.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/standard.bbx))
+(/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.cfg)
+(/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
 (./CliffordTableausPresentation.aux)
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -558,7 +662,11 @@ h.dict)
 (/usr/share/texmf-dist/tex/latex/translator/translator-numbers-dictionary-Engli
 sh.dict)
 (/usr/share/texmf-dist/tex/latex/translator/translator-theorem-dictionary-Engli
-sh.dict) (./CliffordTableausPresentation.nav)
+sh.dict) (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx))
+(./CliffordTableausPresentation.bbl) (./CliffordTableausPresentation.nav)
 (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd)
 (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd)
 (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd)
@@ -567,8 +675,40 @@ sh.dict) (./CliffordTableausPresentation.nav)
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fonts/map/
 pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
 /tum/resources/TUM_Tower.png>] (./CliffordTableausPresentation.toc) [2]
-[3] [4] (./CliffordTableausPresentation.toc) [5] [6]
-(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/urw/he
-lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on CliffordTableausPresentation.pdf (6 pages, 261585 bytes).
+Overfull \vbox (3.51547pt too high) detected at line 120
+[3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dis
+t/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mat
+hex.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Overfull \vbox (4.19783pt too high) detected at line 143
+[4]
+Overfull \vbox (6.54987pt too high) detected at line 181
+[5] [6] [7] (./CliffordTableausPresentation.toc) [8]
+Overfull \vbox (5.68053pt too high) detected at line 255
+[9]
+
+! LaTeX Error: \begin{itemize} on input line 292 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292     \end{frame}
+                     
+
+Overfull \vbox (7.19241pt too high) detected at line 292
+[10]
+Overfull \vbox (7.40376pt too high) detected at line 336
+[11] [12] (./CliffordTableausPresentation.aux) )
+(see the transcript file for additional information)</usr/share/texmf-dist/font
+s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
+0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
+dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/
+lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/
+texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/
+public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/
+msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
+b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
+/helvetic/uhvro8a.pfb>
+Output written on CliffordTableausPresentation.pdf (12 pages, 377919 bytes).
 Transcript written on CliffordTableausPresentation.log.
