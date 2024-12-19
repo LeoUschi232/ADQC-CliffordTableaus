@@ -61,43 +61,43 @@
     \fullfootcite{01_QuantumComputationAndQuantumInformation}
 \end{frame}
 
-\begin{frame}{Unitary Operations}{Transformation Properties}
+\begin{frame}{Unitary Operations}{Transformation under Conjugation}
     \[
         \renewcommand{\arraystretch}{1.0}
         \begin{array}{|c|c|c|}
             \hline
-            \textbf{Operation}    & \textbf{Input} & \textbf{Output} \\
+            \textbf{Operation}      & \textbf{Input} & \textbf{Output} \\
             \hline
-            \text{controlled-NOT} & X_1            & X_1 X_2         \\
+            \multirow{4}{*}{\(CX\)} & X_1            & X_1 X_2         \\
             & X_2            & X_2             \\
             & Z_1            & Z_1             \\
             & Z_2            & Z_1 Z_2         \\
             \hline
-            H                     & X              & Z               \\
+            \multirow{2}{*}{\(H\)}  & X              & Z               \\
             & Z              & X               \\
             \hline
-            S                     & X              & Y               \\
+            \multirow{2}{*}{\(S\)}  & X              & Y               \\
             & Z              & Z               \\
             \hline
         \end{array}
         \quad
         \begin{array}{|c|c|c|}
             \hline
-            \textbf{Operation} & \textbf{Input} & \textbf{Output} \\
+            \textbf{Operation}     & \textbf{Input} & \textbf{Output} \\
             \hline
-            X                  & X              & X               \\
+            \multirow{2}{*}{\(X\)} & X              & X               \\
             & Z              & -Z              \\
             \hline
-            Y                  & X              & -X              \\
+            \multirow{2}{*}{\(Y\)} & X              & -X              \\
             & Z              & -Z              \\
             \hline
-            Z                  & X              & -X              \\
+            \multirow{2}{*}{\(Z\)} & X              & -X              \\
             & Z              & Z               \\
             \hline
         \end{array}
     \]
 
-    \vspace*{10mm}
+    \vspace*{5mm}
 
     \fullfootcite{01_QuantumComputationAndQuantumInformation}
 \end{frame}

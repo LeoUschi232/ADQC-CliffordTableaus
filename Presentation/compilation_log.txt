@@ -251,6 +251,7 @@ unused classoptions:
 (/usr/share/texmf-dist/tex/latex/doublestroke/dsfont.sty)
 (/usr/share/texmf-dist/tex/latex/float/float.sty)
 (/usr/share/texmf-dist/tex/latex/setspace/setspace.sty)
+(/usr/share/texmf-dist/tex/latex/multirow/multirow.sty)
 
 ! LaTeX Error: Option clash for package geometry.
 
@@ -258,7 +259,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.18 \usepackage
+l.19 \usepackage
                 {footmisc}
 (/usr/share/texmf-dist/tex/latex/footmisc/footmisc.sty)
 (/usr/share/texmf-dist/tex/latex/natbib/natbib.sty)
@@ -451,9 +452,10 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 Overfull \vbox (29.57372pt too high) detected at line 62
 [56]
 Overfull \vbox (29.57372pt too high) detected at line 62
-[57]
-Overfull \vbox (2.00519pt too high) detected at line 103
-[58]) [59] (./CliffordTableausPresentation.aux) )
+[57] [58]) (./frameset9_Measurement.tex [59] [60] [61] [62] [63] [64] [65]
+[66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
+[81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85] [86]
+(./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -465,7 +467,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (59 pages, 467327 bytes).
+Output written on CliffordTableausPresentation.pdf (86 pages, 518895 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -475,8 +477,8 @@ INFO - Processing section 0
 INFO - Looking for bibtex file 'bibliography.bib' for section 0
 INFO - LaTeX decoding ...
 INFO - Found BibTeX data source 'bibliography.bib'
-INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
 INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
 INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
 INFO - No sort tailoring available for locale 'en-US'
 INFO - Writing 'CliffordTableausPresentation.bbl' with encoding 'UTF-8'
@@ -734,6 +736,7 @@ unused classoptions:
 (/usr/share/texmf-dist/tex/latex/doublestroke/dsfont.sty)
 (/usr/share/texmf-dist/tex/latex/float/float.sty)
 (/usr/share/texmf-dist/tex/latex/setspace/setspace.sty)
+(/usr/share/texmf-dist/tex/latex/multirow/multirow.sty)
 
 ! LaTeX Error: Option clash for package geometry.
 
@@ -741,7 +744,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.18 \usepackage
+l.19 \usepackage
                 {footmisc}
 (/usr/share/texmf-dist/tex/latex/footmisc/footmisc.sty)
 (/usr/share/texmf-dist/tex/latex/natbib/natbib.sty)
@@ -934,9 +937,10 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 Overfull \vbox (29.57372pt too high) detected at line 62
 [56]
 Overfull \vbox (29.57372pt too high) detected at line 62
-[57]
-Overfull \vbox (2.00519pt too high) detected at line 103
-[58]) [59] (./CliffordTableausPresentation.aux) )
+[57] [58]) (./frameset9_Measurement.tex [59] [60] [61] [62] [63] [64] [65]
+[66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
+[81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85] [86]
+(./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -948,5 +952,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (59 pages, 467327 bytes).
+Output written on CliffordTableausPresentation.pdf (86 pages, 518895 bytes).
 Transcript written on CliffordTableausPresentation.log.

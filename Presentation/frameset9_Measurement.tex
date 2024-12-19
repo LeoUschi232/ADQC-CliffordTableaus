@@ -1,34 +1,190 @@
-\begin{frame}{Measurement}
-    \textbf{Measurement} is the process of extracting information from a quantum state. \\
+\begin{frame}{Measurement}{Main Principles}
+    We want to measure observable \(g\in\mathcal{P}_n\)
+    of state \(\ket{\psi}\),
+    stabilized by \(\left\langle g_i\mid i\in\natur,1\leq i\leq l\right\rangle\). \\
+
     \onslide<2->{
         \vspace*{2mm}
-        \textbf{Projective Measurement:}
-        \begin{itemize}
-            \setlength{\itemsep}{1.25\baselineskip}
-            \onslide<3->{
-                \item \textbf{State:}
-                \(\ket{\psi}\in\hilbert\)
-            }
+        \textbf{Two possibilities:}
+        \vspace*{1mm}
+    }
+    \begin{enumerate}
+        \setlength{\itemsep}{0.25\baselineskip}
+        \onslide<2->{
+            \item
+            \(g\) commutes with all generators of the stabilizer. \\
+        }
+        \onslide<3->{
+            \(\qquad\Longrightarrow\)
+            Measurement outcome is deterministic.
+        }
+        \onslide<4->{
+            \item
+            \(g\) anti-commutes with at least 1 generator of the stabilizer. \\
+        }
+        \onslide<5->{
+            \(\qquad\Longrightarrow\)
+            Measurement outcome is not deterministic.
+        }
+    \end{enumerate}
+
+    \vspace*{25mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Measurement}{Deterministic case}
+    \(g\) commutes with all \(g_i\) and assume \(g\) does not have a global phase.
+
+    \onslide<2->{
+        \[
+            \forall i\holds
+            g_ig\ket{\psi}
+            =gg_i\ket{\psi}
+            =g\ket{\psi}
+            \means
+            g\ket{\psi}\in V_S
+        \]
+    }
+    \onslide<3->{
+        \[
+            g^2\ket{\psi}
+            =I\ket{\psi}
+            =\ket{\psi}
+            \means
+            g\ket{\psi}
+            =\pm\ket{\psi}
+            \means
+            g\in S\veebar (-g)\in S
+        \]
+    }
+    \[
+        \begin{aligned}
             \onslide<4->{
-                \item \textbf{Observable:}
-                \(M=\left\{M_i\right\}_{1\leq i\leq n}\)
+                g&\in S
+                &&\means
+                g\ket{\psi}
+                =\ket{\psi}
+                &&\means
+                \text{Measurement yields }+1 \\
             }
             \onslide<5->{
-                \item \textbf{Outcome:}
-                \(i\in\left\{1,\ldots,n\right\}\)
+                (-g)&\in S
+                &&\means
+                g\ket{\psi}
+                =-\ket{\psi}
+                &&\means
+                \text{Measurement yields }-1
             }
-            \onslide<6->{
-                \item \textbf{Probability:}
-                \(p_i=\left\|\braket{\psi}{M_i}{\psi}\right\|^2\)
-            }
-            \onslide<7->{
-                \item \textbf{Post-Measurement State:}
-                \(\ket{\psi_i}=\frac{M_i\ket{\psi}}{\sqrt{p_i}}\)
-            }
-        \end{itemize}
+        \end{aligned}
+    \]
+
+    \vspace*{2mm}
+    \onslide<6->{
+        In both cases the measurement does not disturb the state of the system,
+        and leaves the stabilizer invariant.
     }
 
-    \vspace*{10mm}
+    \vspace*{5mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Measurement}{Non-deterministic case preliminaries}
+    Without loss of generality, let \(g\) anti-commute with \(g_1\) and \(g\) does not have a global phase.
+    \vspace*{1mm}
+    \[
+        \begin{aligned}
+            \onslide<2->{
+                &\forall g_j\with j\neq1\aand g_jg=-gg_j:
+                \text{ Replace }g_j\with g_j'=g_1g_j \\
+            }
+            \onslide<3->{
+                &\qquad\Longrightarrow g_j'g=g_1g_jg=-g_1gg_j=gg_1g_j=gg_j' \\
+            }
+            \onslide<4->{
+                &\qquad\qquad\Longrightarrow g\text{ commutes with }g_j'
+            }
+        \end{aligned}
+    \]
+    \onslide<5->{
+        \(\Longrightarrow\)
+        \(g\) only commutes with \(g_1\). \\
+    }
+    \vspace*{1mm}
+    \onslide<6->{
+        Because \(g\) has eigenvalues \(\pm1\),
+        the measurement operators are: \(M_{\pm g}=\frac{I\pm g}{2}\)
+    }
+
+    \vspace*{15mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Measurement}{Non-deterministic case continuation}
+    Measurement probabilities:
+    \[
+        p(+1)
+        =\text{tr}\left(
+        \frac{I+g}{2}\ket{\psi}\bra{\psi}
+        \right)
+        \tacticalAnd
+        p(-1)
+        =\text{tr}\left(
+        \frac{I-g}{2}\ket{\psi}\bra{\psi}
+        \right)
+    \]
+    \[
+        \begin{aligned}
+            \onslide<2->{
+                p(+1)
+                &=\text{tr}\left(
+                \frac{I+g}{2}\ket{\psi}\bra{\psi}
+                \right)
+            }
+            \onslide<3->{
+                =\text{tr}\left(
+                \frac{I+g}{2}g_1\ket{\psi}\bra{\psi}
+                \right)
+            }
+            \onslide<4->{
+                =\text{tr}\left(
+                g_1\frac{I-g}{2}\ket{\psi}\bra{\psi}
+                \right) \\
+            }
+            \onslide<5->{
+                &=\text{tr}\left(
+                \frac{I-g}{2}\ket{\psi}\bra{\psi}g_1
+                \right)
+            }
+            \onslide<6->{
+                =\text{tr}\left(
+                \frac{I-g}{2}\ket{\psi}\bra{\psi}g_1^{\dagger}
+                \right)
+            }
+            \onslide<7->{
+                =\text{tr}\left(
+                \frac{I-g}{2}\ket{\psi}\bra{\psi}
+                \right)
+            }
+            \onslide<8->{
+                =p(-1)
+            }
+        \end{aligned}
+    \]
+    \onslide<9->{
+        \[
+            p(+1)=p(-1)
+            \aand
+            p(+1)+p(-1)=1
+            \means
+            p(+1)=p(-1)
+            =\frac{1}{2}
+        \]
+    }
+
+    \vspace*{5mm}
 
     \fullfootcite{01_QuantumComputationAndQuantumInformation}
 \end{frame}
