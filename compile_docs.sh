@@ -4,6 +4,7 @@
 cd "$(dirname "$0")" || exit
 cd Presentation || exit
 
+# Ensure pdflatex can find the tum/ files
 export TEXINPUTS=./tum//:
 
 echo "Presentation Compilation stage 1..."
@@ -15,6 +16,4 @@ biber CliffordTableausPresentation >> compilation_log.txt
 echo "Presentation Compilation stage 3..."
 pdflatex -interaction=nonstopmode CliffordTableausPresentation.tex >> compilation_log.txt
 
-# Move back to the original directory
-echo " Compilation finished"
-cd ..
+echo "Compilation finished"

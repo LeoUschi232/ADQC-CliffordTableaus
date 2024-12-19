@@ -1,38 +1,5 @@
-% File: tumbeamer.sty Copyright (C) 2019 The LaTeX4EI Team
-% Provides the TUM Corporate Design beamer class.
-%
-% It may be distributed and/or modified under the conditions of the
-% LaTeX Project Public License (LPPL), either version 1.3c of this
-% license or (at your option) any later version. The latest version
-% of this license is in the file
-%
-%    https://www.latex-project.org/lppl.txt
-%
-% This file is part of the "tum-templates bundle" (The Work in LPPL)
-% and all files in that bundle must be distributed together.
-%
-%
-% ----------------------------------------------------------------------------
-%
-% The development version of the bundle can be found at
-%
-%    https://gitlab.lrz.de/latex4ei/tum-templates
-%
-% for those people who are interested.
-%
-% ----------------------------------------------------------------------------
-%
-% Version history:
-% v1.0 2020/10/01 Initial version.
-% v2.0 2021/04/19 Implement scale factor for TUM tower, handle captions with
-%                 tumcaptions.sty, and add pdf metadata.
-%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tumbeamer}[2021/04/19 v2.0]
-
-
-% .:: Load required packages
-% ----------------------------------------------------------------------------
 
 \RequirePackage{pgfkeys}
 \RequirePackage{pgfopts}
@@ -40,11 +7,6 @@
 \RequirePackage{tikz}
 \RequirePackage{etoolbox}
 
-
-% .:: Package options for tumbeamer class
-% ----------------------------------------------------------------------------
-
-% print debug info to logfile
 \typeout{Global options before any option parsing.}
 \typeout{classoptions: \@classoptionslist}
 \typeout{unused classoptions: \@unusedoptionlist}
@@ -277,9 +239,6 @@
 % load default color theme
 \pgfkeys{/TUM/beamer/colortheme=TUM default}
 
-
-% .:: Custom backgrounds
-% ----------------------------------------------------------------------------
 
 \newlength{\@tum@titlewidth@}
 \newlength{\@tum@authorwidth@}
@@ -1254,10 +1213,6 @@
   \TUMframestyle{content page}
 }
 
-
-% .:: Set default PDF metadata
-% ----------------------------------------------------------------------------
-
 \AtEndPreamble{
   \hypersetup{
     % pdfauthor and pdftitle are set automatically by beamer
@@ -1270,3 +1225,7 @@
     pdfpagelayout=SinglePage,
   }
 }
+
+\renewcommand{\theChairName}{\(\qquad\)}
+\renewcommand{\theDepartmentName}{\(\qquad\)}
+

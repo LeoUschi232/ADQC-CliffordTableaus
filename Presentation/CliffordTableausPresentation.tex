@@ -1,18 +1,17 @@
-\documentclass[english,aspectratio=169]{tum/tumbeamer}
+\documentclass[english,aspectratio=169]{tumbeamer}
 
 
 % load additional packages
 \usepackage{booktabs}
-\usepackage[backend=biber,style=numeric-comp,sorting=none]{biblatex}
 
 
 % presentation metadata
-\title{Presentation title}
-\subtitle{Subtitle of the presentation}
-\author{Author Name}
+\title{Clifford Tableaus and \\ the Stabilizer Algorithm}
+\subtitle{}
+\author{Leonard Uscinowicz}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[12/08/2019]{December 8\textsuperscript{th}, 2019}
+\date[20/12/2024]{December 20\textsuperscript{th}, 2024}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -29,13 +28,43 @@
     footline on = {every page, title page=false},
 }
 
-% Current default for bibliography
-\addbibresource{bibliography.bib}
 
 \begin{document}
-
+    \renewcommand{\theChairName}{\(\qquad\)}
+    \renewcommand{\theDepartmentName}{\(\qquad\)}
     \maketitle
 
-    \newpage
-    \printbibliography
+    \section{First Section}
+    \begin{frame}{Frame Title}{Subtitle}
+        \begin{itemize}
+            \item This is the first frame.
+            \item It contains some bullet points.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Anoter frame of section one}
+        \centering
+        \vfill
+        \begin{tabular}{llcr}
+            \toprule
+            first & second & third & fourth \\
+            \midrule
+            1     & 2      & 3     & 4      \\
+            10    & 20     & 30    & 40     \\
+            100   & 200    & 300   & 400    \\
+            \bottomrule
+        \end{tabular}
+        \vfill
+    \end{frame}
+
+    \section{Second Section}
+    \begin{frame}{Frame of section two}
+        \begin{enumerate}
+            \item one
+            \item two
+            \item three
+            \item four
+        \end{enumerate}
+    \end{frame}
+
 \end{document}
