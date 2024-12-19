@@ -1,46 +1,51 @@
 \begin{frame}{Check Matrix}{Structure}
     Suppose \(S=\left\langle g_i\mid i\in\natur,1\leq i\leq l\right\rangle\). \\
 
-    \vspace*{2mm}
-    \(\textbf{Check Matrix }H_S\widehat{=}\)Extremely useful way of presenting the generators \\
-
-    \vspace*{2mm}
-    \(H_S\) is an \(l\times 2n\) binary matrix whose rows correspond to the generators \(g_1\) through \(g_l\). \\
-    \[
-        \text{Example:}\qquad
-        l\left\{\begin{matrix}
-                    \, \\ \, \\ \, \\ \, \\ \, \\ \,
-        \end{matrix}\right.
-        \left[\begin{matrix}
-                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
-        \end{matrix}\right.
-        \underbrace{
-            \begin{matrix}
-                0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-                0 & 1 & 1 & 0 & 0 & 1 & 1 \\
-                1 & 0 & 1 & 0 & 1 & 0 & 1 \\
-                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 0 & 0 & 0 & 0
-            \end{matrix}
-        }_{n}
-        \left|\begin{matrix}
-                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
-        \end{matrix}\right.
-        \underbrace{
-            \begin{matrix}
-                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-                0 & 1 & 1 & 0 & 0 & 1 & 1 \\
-                1 & 0 & 1 & 0 & 1 & 0 & 1
-            \end{matrix}
-        }_{n}
-        \left]\begin{matrix}
-                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
-        \end{matrix}\right.
-    \]
+    \onslide<2->{
+        \vspace*{2mm}
+        Extremely useful way of presenting the generators: \(\textbf{Check Matrix }H_S\) \\
+    }
+    \onslide<3->{
+        \vspace*{2mm}
+        \(H_S\) is an \(l\times 2n\) binary matrix whose rows correspond to the generators \(g_1\) through \(g_l\). \\
+    }
+    \onslide<4->{
+        \[
+            \text{Example:}\qquad
+            l\left\{\begin{matrix}
+                        \, \\ \, \\ \, \\ \, \\ \, \\ \,
+            \end{matrix}\right.
+            \left[\begin{matrix}
+                      \, \\ \, \\ \, \\ \, \\ \, \\ \,
+            \end{matrix}\right.
+            \underbrace{
+                \begin{matrix}
+                    0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+                    0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+                    1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 0
+                \end{matrix}
+            }_{n}
+            \left|\begin{matrix}
+                      \, \\ \, \\ \, \\ \, \\ \, \\ \,
+            \end{matrix}\right.
+            \underbrace{
+                \begin{matrix}
+                    0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+                    0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+                    1 & 0 & 1 & 0 & 1 & 0 & 1
+                \end{matrix}
+            }_{n}
+            \left]\begin{matrix}
+                      \, \\ \, \\ \, \\ \, \\ \, \\ \,
+            \end{matrix}\right.
+        \]
+    }
 
     \vspace*{2mm}
 
@@ -53,35 +58,51 @@
         \setlength{\itemsep}{0.25\baselineskip}
         \item
         Row \(i\) corresponds to generator \(g_i\in S\).
-        \item
-        Left \(l\times n\) submatrix contains 1s to indicate which generators contain \(X\)s.
-        \item
-        Right \(l\times n\) submatrix contains 1s to indicate which generators contain \(Z\)s.
-        \item
-        Presence of 1 in both submatrices indicates \(Y\) in that generator.
+        \onslide<2->{
+            \item
+            Left \(l\times n\) submatrix contains 1s to indicate which generators contain \(X\)s.
+        }
+        \onslide<3->{
+            \item
+            Right \(l\times n\) submatrix contains 1s to indicate which generators contain \(Z\)s.
+        }
+        \onslide<4->{
+            \item
+            Presence of 1 in both submatrices indicates \(Y\) in that generator.
+        }
     \end{itemize}
 
-    \vspace*{2mm}
-    More explicitly, with \(h_{i,j}\) denoting the element of \(H_S\) at row \(i\) and column \(j\):
-    \vspace*{2mm}
+    \onslide<5->{
+        \vspace*{2mm}
+        More explicitly, with \(h_{i,j}\) denoting the element of \(H_S\) at row \(i\) and column \(j\):
+        \vspace*{2mm}
+    }
     \begin{itemize}
         \setlength{\itemsep}{0.25\baselineskip}
-        \item
-        If \(g_i\) contains \(I\) on the \(j^{\text{th}}\) qubit
-        \(\Longrightarrow\)
-        \(h_{i,j}=0\) and \(h_{i,n+j}=0\).
-        \item
-        If \(g_i\) contains \(X\) on the \(j^{\text{th}}\) qubit
-        \(\Longrightarrow\)
-        \(h_{i,j}=1\) and \(h_{i,n+j}=0\).
-        \item
-        If \(g_i\) contains \(Z\) on the \(j^{\text{th}}\) qubit
-        \(\Longrightarrow\)
-        \(h_{i,j}=0\) and \(h_{i,n+j}=1\).
-        \item
-        If \(g_i\) contains \(Y\) on the \(j^{\text{th}}\) qubit
-        \(\Longrightarrow\)
-        \(h_{i,j}=1\) and \(h_{i,n+j}=1\).
+        \onslide<5->{
+            \item
+            If \(g_i\) contains \(I\) on the \(j^{\text{th}}\) qubit
+            \(\Longrightarrow\)
+            \(h_{i,j}=0\) and \(h_{i,n+j}=0\).
+        }
+        \onslide<6->{
+            \item
+            If \(g_i\) contains \(X\) on the \(j^{\text{th}}\) qubit
+            \(\Longrightarrow\)
+            \(h_{i,j}=1\) and \(h_{i,n+j}=0\).
+        }
+        \onslide<7->{
+            \item
+            If \(g_i\) contains \(Z\) on the \(j^{\text{th}}\) qubit
+            \(\Longrightarrow\)
+            \(h_{i,j}=0\) and \(h_{i,n+j}=1\).
+        }
+        \onslide<8->{
+            \item
+            If \(g_i\) contains \(Y\) on the \(j^{\text{th}}\) qubit
+            \(\Longrightarrow\)
+            \(h_{i,j}=1\) and \(h_{i,n+j}=1\).
+        }
     \end{itemize}
 
     \vspace*{4mm}
