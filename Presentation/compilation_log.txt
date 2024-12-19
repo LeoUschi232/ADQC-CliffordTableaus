@@ -169,24 +169,174 @@ Package hyperref Message: Stopped early.
 Global options after beamer option parsing.
 classoptions: english,aspectratio=169
 unused classoptions: 
+(./tum/tumbase.sty (/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)) (./tum/tumcolors.sty
+(/usr/share/texmf-dist/tex/latex/colortbl/colortbl.sty
+(/usr/share/texmf-dist/tex/latex/tools/array.sty))
+Global options after tumcolors option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+) (./tum/tumlogo.sty
+Global options after tumlogo option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+) (./tum/tumlang.sty
+Global options after tumlang option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+(/usr/share/texmf-dist/tex/generic/babel/babel.sty
+(/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
+(/usr/share/texmf-dist/tex/generic/babel-german/ngerman.ldf
+(/usr/share/texmf-dist/tex/generic/babel-german/ngermanb.ldf
 
-! LaTeX Error: File `tumbase.sty' not found.
+Package babel Warning: No hyphenation patterns were preloaded for
+(babel)                the language 'German (new orthography)' into the format.
 
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
+(babel)                Please, configure your TeX system to add them and
+(babel)                rebuild the format. Now I will use the patterns
+(babel)                preloaded for \language=0 instead on input line 48.
 
-Enter file name: 
-! Emergency stop.
-<read *> 
-         
-l.124 \RequirePackage
-                     {tumcolors}^^M
-!  ==> Fatal error occurred, no output PDF file produced!
+)) (/usr/share/texmf-dist/tex/generic/babel-english/english.ldf))
+(/usr/share/texmf-dist/tex/generic/babel/locale/en/babel-english.tex)
+(/usr/share/texmf-dist/tex/generic/babel/locale/de/babel-ngerman.tex))
+(./tum/tumcaptions.sty (/usr/share/texmf-dist/tex/latex/silence/silence.sty)
+(/usr/share/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texmf-dist/tex/latex/caption/caption3.sty
+(/usr/share/texmf-dist/tex/latex/caption/caption-beamer.sto)))
+(/usr/share/texmf-dist/tex/latex/caption/subcaption.sty)) (./tum/tumfonts.sty
+Global options after tumfonts option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+(/usr/share/texmf-dist/tex/latex/lm/lmodern.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/helvet.sty)
+(/usr/share/texmf-dist/tex/latex/newtxtt/newtxtt.sty
+`newtxtt' v1.051, 2014/12/23 Typewriter text macros based on txfonts (msharpe)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd))
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texmf-dist/tex/generic/xkeyval/xkvutils.tex))))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/was/upgreek.sty)) (./tum/tumboxes.sty
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/environ/environ.sty
+(/usr/share/texmf-dist/tex/latex/trimspaces/trimspaces.sty)))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.2.0'
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill-common.sty)
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.code.tex))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.2.0'
+)) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.2.0'
+(/usr/share/texmf-dist/tex/latex/pdfcol/pdfcol.sty))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.2.0'
+) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.2.0'
+)
+Global options after tumboxes option parsing.
+classoptions: english
+unused classoptions: 
+) (./tum/tumuser.sty)
+(/usr/share/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty))
+(/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.def))
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-compat.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric-comp.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/standard.bbx)))
+(/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.cfg)
+(/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+No file CliffordTableausPresentation.aux.
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(/usr/share/texmf-dist/tex/latex/translator/translator-basic-dictionary-English
+.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-
+English.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-environment-dictionary-E
+nglish.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-months-dictionary-Englis
+h.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-numbers-dictionary-Engli
+sh.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-theorem-dictionary-Engli
+sh.dict) (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx))
+(./CliffordTableausPresentation.bbl)
+No file CliffordTableausPresentation.nav.
+(/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(/usr/share/texmf-dist/tex/latex/lm/omllmm.fd)
+(/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd)
+(/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fonts/map/
+pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
+/tum/resources/TUM_Tower.png>]
+
+LaTeX Warning: Empty bibliography on input line 40.
+
+(./CliffordTableausPresentation.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `CliffordTableausPresentation.out' has cha
+nged.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                CliffordTableausPresentation
+(biblatex)                and rerun LaTeX afterwards.
+
+ )</usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on CliffordTableausPresentation.pdf (1 page, 256626 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
-ERROR - Cannot find 'CliffordTableausPresentation.bcf'!
-INFO - ERRORS: 1
+INFO - Reading 'CliffordTableausPresentation.bcf'
+INFO - Found 0 citekeys in bib section 0
+INFO - Writing 'CliffordTableausPresentation.bbl' with encoding 'UTF-8'
+INFO - Output to CliffordTableausPresentation.bbl
+WARN - The file 'CliffordTableausPresentation.bcf' does not contain any citations!
+INFO - WARNINGS: 1
 This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
@@ -358,17 +508,144 @@ Package hyperref Message: Stopped early.
 Global options after beamer option parsing.
 classoptions: english,aspectratio=169
 unused classoptions: 
+(./tum/tumbase.sty (/usr/share/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty)) (./tum/tumcolors.sty
+(/usr/share/texmf-dist/tex/latex/colortbl/colortbl.sty
+(/usr/share/texmf-dist/tex/latex/tools/array.sty))
+Global options after tumcolors option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+) (./tum/tumlogo.sty
+Global options after tumlogo option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+) (./tum/tumlang.sty
+Global options after tumlang option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+(/usr/share/texmf-dist/tex/generic/babel/babel.sty
+(/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
+(/usr/share/texmf-dist/tex/generic/babel-german/ngerman.ldf
+(/usr/share/texmf-dist/tex/generic/babel-german/ngermanb.ldf
 
-! LaTeX Error: File `tumbase.sty' not found.
+Package babel Warning: No hyphenation patterns were preloaded for
+(babel)                the language 'German (new orthography)' into the format.
 
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
+(babel)                Please, configure your TeX system to add them and
+(babel)                rebuild the format. Now I will use the patterns
+(babel)                preloaded for \language=0 instead on input line 48.
 
-Enter file name: 
-! Emergency stop.
-<read *> 
-         
-l.124 \RequirePackage
-                     {tumcolors}^^M
-!  ==> Fatal error occurred, no output PDF file produced!
+)) (/usr/share/texmf-dist/tex/generic/babel-english/english.ldf))
+(/usr/share/texmf-dist/tex/generic/babel/locale/en/babel-english.tex)
+(/usr/share/texmf-dist/tex/generic/babel/locale/de/babel-ngerman.tex))
+(./tum/tumcaptions.sty (/usr/share/texmf-dist/tex/latex/silence/silence.sty)
+(/usr/share/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texmf-dist/tex/latex/caption/caption3.sty
+(/usr/share/texmf-dist/tex/latex/caption/caption-beamer.sto)))
+(/usr/share/texmf-dist/tex/latex/caption/subcaption.sty)) (./tum/tumfonts.sty
+Global options after tumfonts option parsing.
+classoptions: english,aspectratio=169
+unused classoptions: 
+(/usr/share/texmf-dist/tex/latex/lm/lmodern.sty)
+(/usr/share/texmf-dist/tex/latex/psnfss/helvet.sty)
+(/usr/share/texmf-dist/tex/latex/newtxtt/newtxtt.sty
+`newtxtt' v1.051, 2014/12/23 Typewriter text macros based on txfonts (msharpe)
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd))
+(/usr/share/texmf-dist/tex/latex/base/textcomp.sty)
+(/usr/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texmf-dist/tex/generic/xkeyval/xkvutils.tex))))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texmf-dist/tex/latex/was/upgreek.sty)) (./tum/tumboxes.sty
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/environ/environ.sty
+(/usr/share/texmf-dist/tex/latex/trimspaces/trimspaces.sty)))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.2.0'
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill-common.sty)
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.code.tex))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.2.0'
+)) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.2.0'
+(/usr/share/texmf-dist/tex/latex/pdfcol/pdfcol.sty))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.2.0'
+) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.2.0'
+)
+Global options after tumboxes option parsing.
+classoptions: english
+unused classoptions: 
+) (./tum/tumuser.sty)
+(/usr/share/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty))
+(/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.sty
+(/usr/share/texmf-dist/tex/latex/logreq/logreq.def))
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-compat.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def)
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric-comp.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/standard.bbx)))
+(/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.cfg)
+(/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+(./CliffordTableausPresentation.aux)
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(./CliffordTableausPresentation.out) (./CliffordTableausPresentation.out)
+(/usr/share/texmf-dist/tex/latex/translator/translator-basic-dictionary-English
+.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-
+English.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-environment-dictionary-E
+nglish.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-months-dictionary-Englis
+h.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-numbers-dictionary-Engli
+sh.dict)
+(/usr/share/texmf-dist/tex/latex/translator/translator-theorem-dictionary-Engli
+sh.dict) (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx)
+(/usr/share/texmf-dist/tex/latex/biblatex/lbx/german.lbx))
+(./CliffordTableausPresentation.bbl) (./CliffordTableausPresentation.nav)
+(/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(/usr/share/texmf-dist/tex/latex/lm/omllmm.fd)
+(/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd)
+(/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fonts/map/
+pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
+/tum/resources/TUM_Tower.png>]
+
+LaTeX Warning: Empty bibliography on input line 40.
+
+(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/urw/he
+lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on CliffordTableausPresentation.pdf (1 page, 256626 bytes).
 Transcript written on CliffordTableausPresentation.log.
