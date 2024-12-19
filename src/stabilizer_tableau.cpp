@@ -35,14 +35,10 @@ namespace CliffordTableaus {
         if (qubit > n) {
             throw std::invalid_argument("Attempted to apply Pauli-Y with qubit > n!");
         }
+        this->PauliX(qubit);
         this->PauliZ(qubit);
-        this->PauliX(qubit);
-        this->Phase(qubit);
-        this->Phase(qubit);
         this->Phase(qubit);
         this->PauliX(qubit);
-        this->Phase(qubit);
-        this->Phase(qubit);
         this->Phase(qubit);
         this->PauliX(qubit);
     }

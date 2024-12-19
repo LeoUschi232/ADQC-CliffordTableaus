@@ -1,2 +1,27 @@
 \begin{frame}{Stabilizer Circuit}
+    \textbf{Mainly:} \\
+    Circuit consisting solely of \(CX\), \(H\), \(S\) and \(M\) gates.
+
+    \onslide<2->{
+        \vspace*{2mm}
+        Can actually also implement \(X\), \(Y\), \(Z\) and \(SWAP\).
+    }
+    \[
+        \begin{aligned}
+            \onslide<3->{
+                Z&=SS \\
+            }
+            \onslide<4->{
+                X&=HZH
+            }
+            \onslide<5->{
+                Y=XZSXSX \\
+            }
+            \onslide<6->{
+                SWAP(1,2)=CX(1,2)CX(2,1)CX(1,2)
+            }
+
+        \end{aligned}
+    \]
+
 \end{frame}
