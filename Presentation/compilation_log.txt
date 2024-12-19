@@ -258,16 +258,73 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.18 
-     
+l.18 \usepackage
+                {footmisc}
+(/usr/share/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(/usr/share/texmf-dist/tex/latex/natbib/natbib.sty)
 (/usr/share/texmf-dist/tex/latex/biblatex/biblatex.sty
 (/usr/share/texmf-dist/tex/latex/logreq/logreq.sty
 (/usr/share/texmf-dist/tex/latex/logreq/logreq.def))
 (/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+
+! Package biblatex Error: Incompatible package 'natbib'.
+
+See the biblatex package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.212 \blx@packageincompatibility
+                                 
+
+! LaTeX Error: Command \bibhang already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.908 \newlength{\bibhang}
+                          
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+
+! LaTeX Error: Command \citename already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12630 ...*{\citename}{\blx@citexpunct{citename}}
+                                                  
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-compat.def)
-(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def)
-(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def
+
+! LaTeX Error: Command \bibfont already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.339 ...ommand*{\bibfont}{\normalfont\normalsize}
+                                                  
+
+Package biblatex Warning: Redefining '\citeauthor'.
+
+
+Package biblatex Warning: Redefining '\citeyear'.
+
+
+! LaTeX Error: Command \Citeauthor already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2306 ...e\citeauthor*}{\bibsentence\citeauthor}}
+                                                  
+) (/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
 (/usr/share/texmf-dist/tex/latex/biblatex/bbx/standard.bbx))
 (/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx)
 (/usr/share/texmf-dist/tex/latex/biblatex/biblatex.cfg)
@@ -275,6 +332,8 @@ l.18
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
 (/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)))
+(/usr/share/texmf-dist/tex/latex/mathtools/mathtools.sty
+(/usr/share/texmf-dist/tex/latex/mathtools/mhsetup.sty))
 
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
@@ -311,30 +370,37 @@ sh.dict) (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx)
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fonts/map/
 pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
 /tum/resources/TUM_Tower.png>] (./CliffordTableausPresentation.toc) [2]
-Overfull \vbox (3.51547pt too high) detected at line 120
-[3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dis
-t/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mat
-hex.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Overfull \vbox (4.19783pt too high) detected at line 143
-[4]
-Overfull \vbox (6.54987pt too high) detected at line 181
-[5] [6] [7] (./CliffordTableausPresentation.toc) [8]
-Overfull \vbox (5.68053pt too high) detected at line 255
-[9]
+(./frameset1_PauliMatrices.tex [3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-m
+athit.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf
+-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf-dist/fonts/enc/dvips/l
+m/lm-mathsy.enc}]) (./frameset2_GroupTheory.tex [4])
+(./frameset3_PauliGroup.tex
 
-! LaTeX Error: \begin{itemize} on input line 292 ended by \end{enumerate}.
+! LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.292     \end{frame}
-                     
+l.33 \end{frame}
+                
+[5] [6]) (./frameset4_GroupGenerators.tex [7])
+(./CliffordTableausPresentation.toc) [8] (./frameset5_StabilizerGroups.tex
+Overfull \vbox (1.70103pt too high) detected at line 25
+[9]
 
-Overfull \vbox (7.19241pt too high) detected at line 292
-[10]
-Overfull \vbox (7.40376pt too high) detected at line 336
-[11] [12] (./CliffordTableausPresentation.aux) )
+! LaTeX Error: \begin{itemize} on input line 59 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.59 \end{frame}
+                
+[10]) (./frameset6_StabilizerConditions.tex [11] [12])
+(./frameset7_CheckMatrix.tex
+Overfull \vbox (0.45827pt too high) detected at line 48
+[13] [14] [15]) [16] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -346,7 +412,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (12 pages, 377919 bytes).
+Output written on CliffordTableausPresentation.pdf (16 pages, 387928 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -356,8 +422,8 @@ INFO - Processing section 0
 INFO - Looking for bibtex file 'bibliography.bib' for section 0
 INFO - LaTeX decoding ...
 INFO - Found BibTeX data source 'bibliography.bib'
-INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
 INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
 INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
 INFO - No sort tailoring available for locale 'en-US'
 INFO - Writing 'CliffordTableausPresentation.bbl' with encoding 'UTF-8'
@@ -622,16 +688,73 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.18 
-     
+l.18 \usepackage
+                {footmisc}
+(/usr/share/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(/usr/share/texmf-dist/tex/latex/natbib/natbib.sty)
 (/usr/share/texmf-dist/tex/latex/biblatex/biblatex.sty
 (/usr/share/texmf-dist/tex/latex/logreq/logreq.sty
 (/usr/share/texmf-dist/tex/latex/logreq/logreq.def))
 (/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+
+! Package biblatex Error: Incompatible package 'natbib'.
+
+See the biblatex package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.212 \blx@packageincompatibility
+                                 
+
+! LaTeX Error: Command \bibhang already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.908 \newlength{\bibhang}
+                          
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+
+! LaTeX Error: Command \citename already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12630 ...*{\citename}{\blx@citexpunct{citename}}
+                                                  
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-compat.def)
-(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def)
-(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+(/usr/share/texmf-dist/tex/latex/biblatex/biblatex.def
+
+! LaTeX Error: Command \bibfont already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.339 ...ommand*{\bibfont}{\normalfont\normalsize}
+                                                  
+
+Package biblatex Warning: Redefining '\citeauthor'.
+
+
+Package biblatex Warning: Redefining '\citeyear'.
+
+
+! LaTeX Error: Command \Citeauthor already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2306 ...e\citeauthor*}{\bibsentence\citeauthor}}
+                                                  
+) (/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
 (/usr/share/texmf-dist/tex/latex/biblatex/bbx/standard.bbx))
 (/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx)
 (/usr/share/texmf-dist/tex/latex/biblatex/biblatex.cfg)
@@ -639,6 +762,8 @@ l.18
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
 (/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)))
+(/usr/share/texmf-dist/tex/latex/mathtools/mathtools.sty
+(/usr/share/texmf-dist/tex/latex/mathtools/mhsetup.sty))
 
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
@@ -675,30 +800,37 @@ sh.dict) (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx)
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fonts/map/
 pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
 /tum/resources/TUM_Tower.png>] (./CliffordTableausPresentation.toc) [2]
-Overfull \vbox (3.51547pt too high) detected at line 120
-[3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dis
-t/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mat
-hex.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Overfull \vbox (4.19783pt too high) detected at line 143
-[4]
-Overfull \vbox (6.54987pt too high) detected at line 181
-[5] [6] [7] (./CliffordTableausPresentation.toc) [8]
-Overfull \vbox (5.68053pt too high) detected at line 255
-[9]
+(./frameset1_PauliMatrices.tex [3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-m
+athit.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf
+-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf-dist/fonts/enc/dvips/l
+m/lm-mathsy.enc}]) (./frameset2_GroupTheory.tex [4])
+(./frameset3_PauliGroup.tex
 
-! LaTeX Error: \begin{itemize} on input line 292 ended by \end{enumerate}.
+! LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.292     \end{frame}
-                     
+l.33 \end{frame}
+                
+[5] [6]) (./frameset4_GroupGenerators.tex [7])
+(./CliffordTableausPresentation.toc) [8] (./frameset5_StabilizerGroups.tex
+Overfull \vbox (1.70103pt too high) detected at line 25
+[9]
 
-Overfull \vbox (7.19241pt too high) detected at line 292
-[10]
-Overfull \vbox (7.40376pt too high) detected at line 336
-[11] [12] (./CliffordTableausPresentation.aux) )
+! LaTeX Error: \begin{itemize} on input line 59 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.59 \end{frame}
+                
+[10]) (./frameset6_StabilizerConditions.tex [11] [12])
+(./frameset7_CheckMatrix.tex
+Overfull \vbox (0.45827pt too high) detected at line 48
+[13] [14] [15]) [16] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -710,5 +842,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (12 pages, 377919 bytes).
+Output written on CliffordTableausPresentation.pdf (16 pages, 387928 bytes).
 Transcript written on CliffordTableausPresentation.log.

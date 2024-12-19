@@ -1,0 +1,43 @@
+\begin{frame}{Pauli Matrixes}
+    \[
+        I=\begin{pmatrix}
+              1 & 0 \\ 0 & 1
+        \end{pmatrix}
+        \qquad
+        X=\begin{pmatrix}
+              0 & 1 \\ 1 & 0
+        \end{pmatrix}
+        \qquad
+        Y=\begin{pmatrix}
+              0 & -i \\ i & 0
+        \end{pmatrix}
+        \qquad
+        Z=\begin{pmatrix}
+              1 & 0 \\ 0 & -1
+        \end{pmatrix}
+    \]
+    \newline
+    \textbf{Products of Pauli matrices:}
+    \begin{gather*}
+        I^2=X^2=Y^2=Z^2=I \\
+        IX=XI=X
+        \qquad
+        IY=YI=Y
+        \qquad
+        IZ=ZI=Z \\
+        \begin{aligned}
+            &XY=iZ
+            \qquad
+            &&YX=-iZ \\
+            &YZ=iX
+            \qquad
+            &&ZY=-iX \\
+            &ZX=iY
+            \qquad
+            &&XZ=-iY
+        \end{aligned}
+    \end{gather*}
+    \vspace*{4mm}
+
+    \fullfootcite{02_ImprovedSimulationOfStabilizerCircuits}
+\end{frame}

@@ -1,0 +1,81 @@
+\begin{frame}{Stabilizer Conditions}{Commutativity Proof}
+    \vspace*{-3mm}
+    Let \(V_S\) be non-trivial. \\
+
+    \vspace*{2mm}
+    Let \(g_1,g_2\in S\). \\
+
+    \vspace*{2mm}
+    \(\Longrightarrow\)
+    \(g_1\) and \(g_2\) are tensor products of Pauli matrices. \\
+
+    \vspace*{2mm}
+    \(\Longrightarrow\)
+    \(g_1\) and \(g_2\) must either commute or anti-commute. \\
+
+    \vspace*{2mm}
+    \(\qquad\)
+    Suppose \(g_1\) and \(g_2\) anti-commute:
+    \[
+        \ket{\psi}
+        =g_1g_2\ket{\psi}
+        =-g_2g_1\ket{\psi}
+        =-\ket{\psi}
+        \equivalent
+        \ket{\psi}=\Vec{0}
+        \means
+        V_S\text{ is trivial.}
+    \]
+
+    \vspace*{2mm}
+    \(\Longrightarrow\)
+    \(g_1\) and \(g_2\) anti-commuting leads to a contradiction. \\
+
+    \vspace*{2mm}
+    \(\Longrightarrow\)
+    \(g_1\) and \(g_2\) commute.
+
+    \vspace*{5mm}
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Stabilizer Conditions}{Strict Identity Proof}
+    Let \(V_S\) be non-trivial. \\
+    \[
+        \begin{aligned}
+            &(-I)\in S
+            &&\means
+            \ket{\psi}
+            =(-I)\ket{\psi}
+            =-\ket{\psi}
+            &&\equivalent
+            \ket{\psi}=\Vec{0}
+            &&\means
+            V_S\text{ is trivial.} \\
+            &(iI)\in S
+            &&\means
+            \ket{\psi}
+            =(iI)\ket{\psi}
+            =i\ket{\psi}
+            &&\equivalent
+            \ket{\psi}=\Vec{0}
+            &&\means
+            V_S\text{ is trivial.} \\
+            &(-iI)\in S
+            &&\means
+            \ket{\psi}
+            =(-iI)\ket{\psi}
+            =-i\ket{\psi}
+            &&\equivalent
+            \ket{\psi}=\Vec{0}
+            &&\means
+            V_S\text{ is trivial.}
+        \end{aligned}
+    \]
+    \(-I\in S,\,iI\in S,\,-iI\in S\)
+    lead to contradictions.
+
+    \vspace*{20mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}

@@ -1,0 +1,59 @@
+\begin{frame}{Stabilizer Groups}{Definitions}
+    \begin{itemize}
+        \setlength{\itemsep}{1.25\baselineskip}
+        \item
+        Element \(g\in \mathcal{P}_n\) \textbf{stabilizes} \(\ket{\psi}\) iff \(g\ket{\psi}=\ket{\psi}\). \\
+        \(\ket{\psi}\) is eigenstate of \(g\) with eigenvalue \(+1\).
+        \item
+        \(S\widehat{=}\)Subgroup of the Pauli Group \(\mathcal{P}_n\): \(S\subseteq\mathcal{P}_n\).
+        \item
+        \(V_S\widehat{=}\)Set of \(n\)-qubit states stabilized by \(S\):
+    \end{itemize}
+    \vspace*{4mm}
+    \[
+        V_S=\left\{
+        \ket{\psi}
+        \mid
+        S\subseteq \mathcal{P}_n,
+        \forall g\in S\holds
+        g\ket{\psi}=\ket{\psi}
+        \right\}
+    \]
+    \vspace*{15mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+
+\begin{frame}{Stabilizer Groups}{Properties}
+    Not just any subgroup \(S\) of the Pauli group can be used as the stabilizer
+    for a non-trivial vector space \(V_S\). \\
+    \vspace*{2mm}
+    \textbf{Example:}
+    \(S=\{\pm I,\pm X\}\)
+    \[
+        (-I)\in S
+        \aand
+        (-I)\ket{\psi}=-\ket{\psi}
+        \means
+        \ket{\psi}=\Vec{0}
+        \means
+        V_S=\begin{Bmatrix}
+                \Vec{0}
+        \end{Bmatrix}\,\text{(trivial)}
+    \]
+
+    \vspace*{3mm}
+    Conditions for \(S\) such that \(V_S\) not trivial:
+    \vspace*{2mm}
+    \begin{itemize}
+        \setlength{\itemsep}{0.75\baselineskip}
+        \item \textbf{Commutativity:}
+        \(\forall g_1,g_2\in S\holds g_1g_2=g_2g_1\)
+        \item \textbf{Strict Identity:}
+        \(-I\not\in S,\,iI\not\in S,\,-iI\not\in S\)
+    \end{enumerate}
+    \vspace*{7mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}

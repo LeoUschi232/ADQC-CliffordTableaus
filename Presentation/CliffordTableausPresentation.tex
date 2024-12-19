@@ -15,6 +15,12 @@
 
 % Packages with parameters
 \usepackage[left=15mm, right=15mm, top=7mm, bottom=7mm]{geometry}
+\usepackage{footmisc}
+\renewcommand{\footnotemargin}{0.5em}
+\setlength{\footnotesep}{0.2em}
+\usepackage{natbib}
+\setlength{\bibsep}{0pt}
+
 
 % Personlized math operators
 \DeclareMathOperator{\tacticalAnd}{\qquad\land\qquad}
@@ -36,6 +42,17 @@
 \DeclareMathOperator{\argmax}{\text{argmax}}
 \DeclareMathOperator{\argmin}{\text{argmin}}
 \DeclareMathOperator{\sign}{\text{sign}}
+
+
+\newcommand{\fullfootcite}[1]{%
+    \begin{spacing}{0.5}%
+    {%
+        \footnotesize%
+        \cite*{#1}
+        \fullcite{#1}%
+    }%
+    \end{spacing}%
+}
 
 
 % presentation metadata
@@ -62,7 +79,9 @@
 }
 
 \usepackage{biblatex}
+\usepackage{mathtools}
 \addbibresource{bibliography.bib}
+\setlength{\bibsep}{0pt}
 
 \begin{document}
     \renewcommand{\theChairName}{\(\qquad\)}
@@ -72,288 +91,26 @@
 
     \section{Preliminary Definitions}
     \label{sec:preliminary-definitions}
-    \begin{frame}{Pauli Matrixes}
-        \[
-            I=\begin{pmatrix}
-                  1 & 0 \\ 0 & 1
-            \end{pmatrix}
-            \qquad
-            X=\begin{pmatrix}
-                  0 & 1 \\ 1 & 0
-            \end{pmatrix}
-            \qquad
-            Y=\begin{pmatrix}
-                  0 & -i \\ i & 0
-            \end{pmatrix}
-            \qquad
-            Z=\begin{pmatrix}
-                  1 & 0 \\ 0 & -1
-            \end{pmatrix}
-        \]
-        \newline
-        \textbf{Products of Pauli matrices:}
-        \begin{gather*}
-            I^2=X^2=Y^2=Z^2=I \\
-            IX=XI=X
-            \qquad
-            IY=YI=Y
-            \qquad
-            IZ=ZI=Z \\
-            \begin{aligned}
-                &XY=iZ
-                \qquad
-                &&YX=-iZ \\
-                &YZ=iX
-                \qquad
-                &&ZY=-iX \\
-                &ZX=iY
-                \qquad
-                &&XZ=-iY
-            \end{aligned}
-        \end{gather*}
-        \vspace*{4mm}
 
-        {\footnotesize
-        \cite*{02_ImprovedSimulationOfStabilizerCircuits}
-        \fullcite{02_ImprovedSimulationOfStabilizerCircuits}
-        }
-    \end{frame}
+    \input{frameset1_PauliMatrices}
 
-    \begin{frame}{Group Theory}
-        \textbf{Group} \((G,\cdot)\) is a non-empty set \(G\) \\
-        with a binary group multiplication operation \("\cdot"\) \\
-        with the properties: \newline
-        \begin{itemize}
-            \setlength{\itemsep}{1.25\baselineskip}
-            \item \textbf{Closure:}
-            \(\forall g_1,g_2\in G\Longrightarrow g_1\cdot g_2\in G\)
-            \item \textbf{Associativity:}
-            \(\forall g_1,g_2,g_3\in G\Longrightarrow g_1\cdot(g_2\cdot g_3)=(g_1\cdot g_2)\cdot g_3\)
-            \item \textbf{Identity:}
-            \(\exists e\in G\suchthat\forall g\in G\Longrightarrow e\cdot g=g\cdot e=g\)
-            \item \textbf{Inverse:}
-            \(\forall g\in G\Longrightarrow\exists g^{-1}\in G\suchthat g\cdot g^{-1}=g^{-1}\cdot g=e\)
-        \end{itemize}
-        \vspace*{4mm}
+    \input{frameset2_GroupTheory}
 
-        {\footnotesize
-        \cite*{01_QuantumComputationAndQuantumInformation}
-        \fullcite{01_QuantumComputationAndQuantumInformation}
-        }
-    \end{frame}
+    \input{frameset3_PauliGroup}
 
-    \begin{frame}{Pauli Group}
-        \textbf{Pauli Group}
-        \(\mathcal{P}_n\)
-        is defined as the group of \(n\)-qubit Pauli operators. \\
-        It consists of all tensor products of \(n\) Pauli matrices, \\
-        together with a phase factor of \(\pm 1\) or \(\pm i\).
-        \begin{gather*}
-            \mathcal{P}_1=\left\{
-            \pm I,\pm iI,
-            \pm X,\pm iX,
-            \pm Y,\pm iY,
-            \pm Z,\pm iZ
-            \right\} \\
-            \mathcal{P}_n
-            =\left\{
-            \left.
-            i^m\bigotimes_{j=1}^n\sigma_{k_j}
-            \right|
-            m,k_j\in\left\{0,1,2,3\right\},
-            \sigma_0=I,
-            \sigma_1=X,
-            \sigma_2=Y,
-            \sigma_3=Z
-            \right\}
-        \end{gather*}
-        \newline
-        Size of a Pauli Group:
-        \(\left|\mathcal{P}_n\right|=4^{n+1}\)
-        \vspace*{10mm}
-
-        {\footnotesize
-        \cite*{02_ImprovedSimulationOfStabilizerCircuits}
-        \fullcite{02_ImprovedSimulationOfStabilizerCircuits} \\
-        \cite*{01_QuantumComputationAndQuantumInformation}
-        \fullcite{01_QuantumComputationAndQuantumInformation}
-        }
-    \end{frame}
-
-    \begin{frame}{Pauli Group Operation}
-        Given two Pauli operators
-        \(P=i^{m_P}\bigotimes_{j=1}^{n}P_j\)
-        and
-        \(Q=i^{m_Q}\bigotimes_{j=1}^{n}Q_j\),
-        their product, as necessitated by Group Definition, is:
-        \[
-            P\cdot Q=i^{m_P+m_Q}\bigotimes_{j=1}^{n}P_jQ_j
-        \]
-        \newline
-        \(P\) commutes with \(Q\) if the number of indices \(j\) such that \(P_j\) anti-commutes with \(Q_j\) is even.
-        \vspace*{25mm}
-
-        {\footnotesize
-        \cite*{02_ImprovedSimulationOfStabilizerCircuits}
-        \fullcite{02_ImprovedSimulationOfStabilizerCircuits}
-        }
-    \end{frame}
-
-    \begin{frame}{Group Generators}
-        A set of \(l\) elements \(\left\{g_i\right\}_{1\leq i\leq l}\)
-        generates a group \(G\) if every element \(g\in G\) can be written as a product of the generators. \\
-        In this case, the group \(G\) can be written in terms of its generators:
-        \[
-            G=\left\langle g_i\mid i\in\natur,1\leq i\leq l\right\rangle
-        \]
-        \[
-            \textbf{Examples:}\qquad
-            \begin{matrix}
-                \mathcal{P}_1=\left\langle X,Z,iI\right\rangle \\
-                \left\langle X\right\rangle = \left\{I,X\right\}
-            \end{matrix}
-        \]
-        \vspace*{20mm}
-
-        {\footnotesize
-        \cite*{01_QuantumComputationAndQuantumInformation}
-        \fullcite{01_QuantumComputationAndQuantumInformation}
-        }
-    \end{frame}
+    \input{frameset4_GroupGenerators}
 
 
     \section{Stabilizer Formalism}
     \label{sec:stabilizer-formalism}
 
-    \begin{frame}{Stabilizer Groups}{Definitions}
-        \begin{itemize}
-            \setlength{\itemsep}{1.25\baselineskip}
-            \item
-            Element \(g\in \mathcal{P}_n\) \textbf{stabilizes} \(\ket{\psi}\) iff \(g\ket{\psi}=\ket{\psi}\). \\
-            \(\ket{\psi}\) is eigenstate of \(g\) with eigenvalue \(+1\).
-            \item
-            \(S\widehat{=}\)Subgroup of the Pauli Group \(\mathcal{P}_n\): \(S\subseteq\mathcal{P}_n\).
-            \item
-            \(V_S\widehat{=}\)Set of \(n\)-qubit states stabilized by \(S\):
-        \end{itemize}
-        \vspace*{4mm}
-        \[
-            V_S=\left\{
-            \ket{\psi}
-            \mid
-            S\subseteq \mathcal{P}_n,
-            \forall g\in S\holds
-            g\ket{\psi}=\ket{\psi}
-            \right\}
-        \]
-        \vspace*{10mm}
+    \input{frameset5_StabilizerGroups}
 
-        {\footnotesize
-        \cite*{01_QuantumComputationAndQuantumInformation}
-        \fullcite{01_QuantumComputationAndQuantumInformation}
-        }
-    \end{frame}
+    \input{frameset6_StabilizerConditions}
 
+    \input{frameset7_CheckMatrix}
 
-    \begin{frame}{Stabilizer Groups}{Properties}
-        Not just any subgroup \(S\) of the Pauli group can be used as the stabilizer
-        for a non-trivial vector space \(V_S\). \\
-        \vspace*{2mm}
-        \textbf{Example:}
-        \(S=\{\pm I,\pm X\}\)
-        \[
-            (-I)\in S
-            \aand
-            (-I)\ket{\psi}=-\ket{\psi}
-            \means
-            \ket{\psi}=\Vec{0}
-            \means
-            V_S=\begin{Bmatrix}
-                    \Vec{0}
-            \end{Bmatrix}\,\text{(trivial)}
-        \]
-
-        \vspace*{3mm}
-        Conditions for \(S\) such that \(V_S\) not trivial:
-        \vspace*{2mm}
-        \begin{itemize}
-            \setlength{\itemsep}{0.75\baselineskip}
-            \item \textbf{Commutativity:}
-            \(\forall g_1,g_2\in S\holds g_1g_2=g_2g_1\)
-            \item \textbf{Strict Identity:}
-            \(-I\not\in S,\,iI\not\in S,\,-iI\not\in S,\)
-        \end{enumerate}
-        \vspace*{7mm}
-
-        {\footnotesize
-        \cite*{01_QuantumComputationAndQuantumInformation}
-        \fullcite{01_QuantumComputationAndQuantumInformation}
-        }
-    \end{frame}
-
-    \begin{frame}{Stabilizer Conditions}{Commutativity Proof}
-        \vspace*{-3mm}
-        Let \(V_S\) be non-trivial. \\
-
-        \vspace*{2mm}
-        Let \(g_1,g_2\in S\). \\
-
-        \vspace*{2mm}
-        \(\Longrightarrow\)
-        \(g_1\) and \(g_2\) are tensor products of Pauli matrices. \\
-
-        \vspace*{2mm}
-        \(\Longrightarrow\)
-        \(g_1\) and \(g_2\) must either commute or anti-commute. \\
-
-        \vspace*{2mm}
-        \(\qquad\)
-        Suppose \(g_1\) and \(g_2\) anti-commute:
-        \[
-            \ket{\psi}
-            =g_1g_2\ket{\psi}
-            =-g_2g_1\ket{\psi}
-            =-\ket{\psi}
-            \equivalent
-            \ket{\psi}=\Vec{0}
-            \means
-            V_S\text{ is trivial.}
-        \]
-
-        \vspace*{2mm}
-        \(\Longrightarrow\)
-        \(g_1\) and \(g_2\) anti-commuting leads to a contradiction. \\
-
-        \vspace*{2mm}
-        \(\Longrightarrow\)
-        \(g_1\) and \(g_2\) commute.
-
-        \vspace*{5mm}
-        {\footnotesize
-        \cite*{01_QuantumComputationAndQuantumInformation}
-        \fullcite{01_QuantumComputationAndQuantumInformation}
-        }
-    \end{frame}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    \begin{frame}{Refernces}
+    \begin{frame}{References}
         \printbibliography
     \end{frame}
 

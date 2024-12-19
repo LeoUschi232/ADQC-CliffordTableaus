@@ -1,0 +1,50 @@
+\begin{frame}{Pauli Group}{Definitions}
+    \(\mathcal{P}_n\)
+    is defined as the group of \(n\)-qubit Pauli operators. \\
+    It consists of all tensor products of \(n\) Pauli matrices, \\
+    together with a phase factor of \(\pm 1\) or \(\pm i\).
+    \begin{gather*}
+        \mathcal{P}_1=\left\{
+        \pm I,\pm iI,
+        \pm X,\pm iX,
+        \pm Y,\pm iY,
+        \pm Z,\pm iZ
+        \right\} \\
+        \mathcal{P}_n
+        =\left\{
+        \left.
+        i^m\bigotimes_{j=1}^n\sigma_{k_j}
+        \right|
+        m,k_j\in\left\{0,1,2,3\right\},
+        \sigma_0=I,
+        \sigma_1=X,
+        \sigma_2=Y,
+        \sigma_3=Z
+        \right\}
+    \end{gather*}
+    \newline
+    Size of a Pauli Group:
+    \(\left|\mathcal{P}_n\right|=4^{n+1}\)
+
+    \vspace*{5mm}
+
+    \fullfootcite{02_ImprovedSimulationOfStabilizerCircuits} \\
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Pauli Group}{Operations}
+    Given two Pauli operators
+    \(P=i^{m_P}\bigotimes_{j=1}^{n}P_j\)
+    and
+    \(Q=i^{m_Q}\bigotimes_{j=1}^{n}Q_j\),
+    their product, as necessitated by Group Definition, is:
+    \[
+        P\cdot Q=i^{m_P+m_Q}\bigotimes_{j=1}^{n}P_jQ_j
+    \]
+    \newline
+    \(P\) commutes with \(Q\) if the number of indices \(j\) such that \(P_j\) anti-commutes with \(Q_j\) is even.
+
+    \vspace*{25mm}
+
+    \fullfootcite{02_ImprovedSimulationOfStabilizerCircuits}
+\end{frame}

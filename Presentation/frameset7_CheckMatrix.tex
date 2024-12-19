@@ -1,0 +1,143 @@
+\begin{frame}{Check Matrix}{Structure}
+    Suppose \(S=\left\langle g_i\mid i\in\natur,1\leq i\leq l\right\rangle\). \\
+
+    \vspace*{2mm}
+    \(\textbf{Check Matrix }H_S\widehat{=}\)Extremely useful way of presenting the generators \\
+
+    \vspace*{2mm}
+    \(H_S\) is an \(l\times 2n\) binary matrix whose rows correspond to the generators \(g_1\) through \(g_l\). \\
+    \[
+        \text{Example:}\qquad
+        l\left\{\begin{matrix}
+                    \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+        \left[\begin{matrix}
+                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+        \underbrace{
+            \begin{matrix}
+                0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+                0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0
+            \end{matrix}
+        }_{n}
+        \left|\begin{matrix}
+                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+        \underbrace{
+            \begin{matrix}
+                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+                0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 & 0 & 1
+            \end{matrix}
+        }_{n}
+        \left]\begin{matrix}
+                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+    \]
+
+    \vspace*{2mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+
+\begin{frame}{Check Matrix}{Interpretation}
+    \begin{itemize}
+        \setlength{\itemsep}{0.25\baselineskip}
+        \item
+        Row \(i\) corresponds to generator \(g_i\in S\).
+        \item
+        Left \(l\times n\) submatrix contains 1s to indicate which generators contain \(X\)s.
+        \item
+        Right \(l\times n\) submatrix contains 1s to indicate which generators contain \(Z\)s.
+        \item
+        Presence of 1 in both submatrices indicates \(Y\) in that generator.
+    \end{itemize}
+
+    \vspace*{2mm}
+    More explicitly, with \(h_{i,j}\) denoting the element of \(H_S\) at row \(i\) and column \(j\):
+    \vspace*{2mm}
+    \begin{itemize}
+        \setlength{\itemsep}{0.25\baselineskip}
+        \item
+        If \(g_i\) contains \(I\) on the \(j^{\text{th}}\) qubit
+        \(\Longrightarrow\)
+        \(h_{i,j}=0\) and \(h_{i,n+j}=0\).
+        \item
+        If \(g_i\) contains \(X\) on the \(j^{\text{th}}\) qubit
+        \(\Longrightarrow\)
+        \(h_{i,j}=1\) and \(h_{i,n+j}=0\).
+        \item
+        If \(g_i\) contains \(Z\) on the \(j^{\text{th}}\) qubit
+        \(\Longrightarrow\)
+        \(h_{i,j}=0\) and \(h_{i,n+j}=1\).
+        \item
+        If \(g_i\) contains \(Y\) on the \(j^{\text{th}}\) qubit
+        \(\Longrightarrow\)
+        \(h_{i,j}=1\) and \(h_{i,n+j}=1\).
+    \end{itemize}
+
+    \vspace*{4mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Check Matrix}{Example Steane Code}
+    For Readability tensor product operator signs are left out.
+    \(\sigma_i\sigma_j\) corresponds to \(\sigma_i\otimes\sigma_j\). \\
+    \[
+        \left[\begin{matrix}
+                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+        \begin{matrix}
+            0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+            0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+            1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0
+        \end{matrix}
+        \left|\begin{matrix}
+                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+        \begin{matrix}
+            0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+            0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+            1 & 0 & 1 & 0 & 1 & 0 & 1
+        \end{matrix}
+        \left]\begin{matrix}
+                  \, \\ \, \\ \, \\ \, \\ \, \\ \,
+        \end{matrix}\right.
+        \widehat{=}
+        \,\,\,
+        {
+            \renewcommand{\arraystretch}{1.25}
+            \begin{array}{|c|c|}
+                \hline
+                \text{Generator} & \text{Operator} \\
+                \hline
+                g_1              & I\,I\,I\,XXXX   \\
+                g_2              & I\,XXI\,I\,XX   \\
+                g_3              & XI\,XI\,XI\,X   \\
+                g_4              & I\,I\,I\,ZZZZ   \\
+                g_5              & I\,ZZI\,I\,ZZ   \\
+                g_6              & ZI\,ZI\,ZI\,Z   \\
+                \hline
+            \end{array}
+        }
+    \]
+
+    \vspace*{4mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
