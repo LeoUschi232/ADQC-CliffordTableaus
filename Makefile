@@ -153,6 +153,19 @@ test_clifford_tableaus/fast:
 .PHONY : test_clifford_tableaus/fast
 
 #=============================================================================
+# Target rules for targets named generate_random_circuits
+
+# Build rule for target.
+generate_random_circuits: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 generate_random_circuits
+.PHONY : generate_random_circuits
+
+# fast build rule for target.
+generate_random_circuits/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_random_circuits.dir/build.make CMakeFiles/generate_random_circuits.dir/build
+.PHONY : generate_random_circuits/fast
+
+#=============================================================================
 # Target rules for targets named clifford_tableau
 
 # Build rule for target.
@@ -285,6 +298,30 @@ src/stabilizer_tableau.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CliffordTableausLib.dir/build.make CMakeFiles/CliffordTableausLib.dir/src/stabilizer_tableau.cpp.s
 .PHONY : src/stabilizer_tableau.cpp.s
 
+tests/generate_random_circuits.o: tests/generate_random_circuits.cpp.o
+.PHONY : tests/generate_random_circuits.o
+
+# target to build an object file
+tests/generate_random_circuits.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_random_circuits.dir/build.make CMakeFiles/generate_random_circuits.dir/tests/generate_random_circuits.cpp.o
+.PHONY : tests/generate_random_circuits.cpp.o
+
+tests/generate_random_circuits.i: tests/generate_random_circuits.cpp.i
+.PHONY : tests/generate_random_circuits.i
+
+# target to preprocess a source file
+tests/generate_random_circuits.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_random_circuits.dir/build.make CMakeFiles/generate_random_circuits.dir/tests/generate_random_circuits.cpp.i
+.PHONY : tests/generate_random_circuits.cpp.i
+
+tests/generate_random_circuits.s: tests/generate_random_circuits.cpp.s
+.PHONY : tests/generate_random_circuits.s
+
+# target to generate assembly for a file
+tests/generate_random_circuits.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/generate_random_circuits.dir/build.make CMakeFiles/generate_random_circuits.dir/tests/generate_random_circuits.cpp.s
+.PHONY : tests/generate_random_circuits.cpp.s
+
 tests/test_improved_stabilizer_tableau.o: tests/test_improved_stabilizer_tableau.cpp.o
 .PHONY : tests/test_improved_stabilizer_tableau.o
 
@@ -320,6 +357,7 @@ help:
 	@echo "... test"
 	@echo "... CliffordTableausLib"
 	@echo "... clifford_tableau"
+	@echo "... generate_random_circuits"
 	@echo "... test_clifford_tableaus"
 	@echo "... main.o"
 	@echo "... main.i"
@@ -336,6 +374,9 @@ help:
 	@echo "... src/stabilizer_tableau.o"
 	@echo "... src/stabilizer_tableau.i"
 	@echo "... src/stabilizer_tableau.s"
+	@echo "... tests/generate_random_circuits.o"
+	@echo "... tests/generate_random_circuits.i"
+	@echo "... tests/generate_random_circuits.s"
 	@echo "... tests/test_improved_stabilizer_tableau.o"
 	@echo "... tests/test_improved_stabilizer_tableau.i"
 	@echo "... tests/test_improved_stabilizer_tableau.s"

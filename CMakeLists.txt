@@ -8,7 +8,7 @@ enable_testing()
 # Ensure GTest is found
 find_package(GTest REQUIRED)
 
-# QuArray library
+# Clifford Tableaus library
 add_library(CliffordTableausLib
         src/improved_simulation_of_stabilizer_circuits/subroutines.cpp
         src/improved_simulation_of_stabilizer_circuits/subroutines.h
@@ -27,6 +27,13 @@ add_executable(test_clifford_tableaus
 )
 target_link_libraries(test_clifford_tableaus GTest::gtest_main CliffordTableausLib)
 add_test(NAME CliffordTableausTests COMMAND test_clifford_tableaus)
+
+# Generator executable
+add_executable(generate_random_circuits
+        tests/generate_random_circuits.cpp
+)
+target_link_libraries(generate_random_circuits GTest::gtest_main CliffordTableausLib)
+add_test(NAME GenerateRandomCircuits COMMAND generate_random_circuits)
 
 # Main executable
 add_executable(clifford_tableau main.cpp)
