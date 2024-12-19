@@ -4,21 +4,17 @@
 #include <unordered_map>
 #include <algorithm>
 #include <getopt.h>
+
 #include "stabilizer_circuit.h"
 #include "stabilizer_tableau.h"
 #include "improved_stabilizer_tableau.h"
 
 using namespace CliffordTableaus;
 
-void print_help(const char *program_name) {
-    std::cout << "Usage: " << program_name << " [OPTIONS]\n"
-              << "OPTIONS:\n"
-              << "  -i, --input <input_filename>       Input file containing the circuit in QASM3 format.\n"
-              << "  -s, --stabilizer <stabilizer-id>   Stabilizer algorithm ID (default: 1).\n"
-              << "  -o, --output <output_filename>     Output file for measurement results.\n"
-              << "  -n, --num-shots <num-shots>        Number of shots to execute (default: 1).\n"
-              << "  -h, --help                         Display this help message and exit.\n";
-}
+void print_help(const char *program_name);
+
+void print_progress(unsigned int current, unsigned int total);
+
 
 int main(int argc, char *argv[]) {
     std::string input_filename;
@@ -82,10 +78,17 @@ int main(int argc, char *argv[]) {
         } else {
             // Read circuit from file
             std::unordered_map<std::string, unsigned int> measurement_results;
+            std::cout << "Measurement of " << input_filename << " in progress..." << std::endl;
             for (unsigned int shot = 0; shot < num_shots; ++shot) {
                 std::string measurement = StabilizerCircuit::executeCircuit(input_filename, *stabilizerTableau);
                 ++measurement_results[measurement];
+
+                if (shot % (num_shots / 100) == 0) {
+                    print_progress(shot + 1, num_shots);
+                }
             }
+            print_progress(num_shots, num_shots);
+            std::cout << std::endl;
 
             // Sort and output results
             std::vector<std::pair<std::string, unsigned int>> sorted_results(
@@ -103,9 +106,6 @@ int main(int argc, char *argv[]) {
             }
             output << "}";
 
-            // Print to console
-            std::cout << "Measurement results: " << output.str() << std::endl;
-
             // Write to file if output filename is provided
             if (!output_filename.empty()) {
                 std::ofstream out_file(output_filename);
@@ -115,6 +115,9 @@ int main(int argc, char *argv[]) {
                 }
                 out_file << output.str();
                 out_file.close();
+            } else {
+                // Print to console if no output filename is provided.
+                std::cout << "Measurement results:\n" << output.str() << std::endl;
             }
         }
     } catch (const std::exception &e) {
@@ -123,4 +126,31 @@ int main(int argc, char *argv[]) {
     }
 
     return 0;
+}
+
+void print_help(const char *program_name) {
+    std::cout << "Usage: " << program_name << " [OPTIONS]\n"
+              << "OPTIONS:\n"
+              << "  -i, --input <input_filename>       Input file containing the circuit in QASM3 format.\n"
+              << "  -s, --stabilizer <stabilizer-id>   Stabilizer algorithm ID (default: 1).\n"
+              << "  -o, --output <output_filename>     Output file for measurement results.\n"
+              << "  -n, --num-shots <num-shots>        Number of shots to execute (default: 1).\n"
+              << "  -h, --help                         Display this help message and exit.\n";
+}
+
+void print_progress(unsigned int current, unsigned int total) {
+    int progress = static_cast<int>(100.0 * current / total);
+    int bar_width = 50; // Width of the progress bar
+    int pos = bar_width * progress / 100;
+
+    std::cout << "[";
+    for (int i = 0; i < bar_width; ++i) {
+        if (i < pos)
+            std::cout << "=";
+        else if (i == pos)
+            std::cout << ">";
+        else
+            std::cout << " ";
+    }
+    std::cout << "] " << progress << "%\r" << std::flush;
 }

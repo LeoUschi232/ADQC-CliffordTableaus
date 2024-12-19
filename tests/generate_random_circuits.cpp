@@ -33,7 +33,7 @@ using ImprovedStabilizerTableau = CliffordTableaus::ImprovedStabilizerTableau;
 TEST(StabilizerCircuitTest, GenerateRandomCircuit4) {
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_4.qasm",
-            100,
+            25,
             500,
             0,
             0,
@@ -46,7 +46,7 @@ TEST(StabilizerCircuitTest, GenerateRandomCircuit4) {
 TEST(StabilizerCircuitTest, GenerateRandomCircuit5) {
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_5.qasm",
-            200,
+            50,
             1000,
             0,
             0,
@@ -59,7 +59,7 @@ TEST(StabilizerCircuitTest, GenerateRandomCircuit5) {
 TEST(StabilizerCircuitTest, GenerateRandomCircuit6) {
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_6.qasm",
-            500,
+            100,
             2500,
             0,
             0,
@@ -72,7 +72,7 @@ TEST(StabilizerCircuitTest, GenerateRandomCircuit6) {
 TEST(StabilizerCircuitTest, GenerateRandomCircuit7) {
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_7.qasm",
-            100,
+            25,
             500,
             10,
             10,
@@ -84,8 +84,8 @@ TEST(StabilizerCircuitTest, GenerateRandomCircuit7) {
 
 TEST(StabilizerCircuitTest, GenerateRandomCircuit8) {
     StabilizerCircuit::createRandomStabilizerCircuit(
-            "random_circuit_5.qasm",
-            200,
+            "random_circuit_8.qasm",
+            50,
             1000,
             10,
             10,
@@ -98,7 +98,7 @@ TEST(StabilizerCircuitTest, GenerateRandomCircuit8) {
 TEST(StabilizerCircuitTest, GenerateRandomCircuit9) {
     StabilizerCircuit::createRandomStabilizerCircuit(
             "random_circuit_9.qasm",
-            500,
+            100,
             2500,
             10,
             10,
