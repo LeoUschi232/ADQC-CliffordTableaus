@@ -6,7 +6,6 @@ cd Presentation || exit
 
 export TEXINPUTS=./tum//:
 
-
 echo "Presentation Compilation stage 1..."
 pdflatex -interaction=nonstopmode CliffordTableausPresentation.tex > compilation_log.txt
 
