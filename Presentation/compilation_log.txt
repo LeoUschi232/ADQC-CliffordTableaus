@@ -277,10 +277,9 @@ sh.dict) (./CliffordTableausPresentation.nav)
 pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
 /tum/resources/TUM_Tower.png>] (./CliffordTableausPresentation.toc) [2]
 [3] [4] (./CliffordTableausPresentation.toc) [5] [6]
-(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/public
-/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uh
-vb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on CliffordTableausPresentation.pdf (6 pages, 271002 bytes).
+(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/urw/he
+lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on CliffordTableausPresentation.pdf (6 pages, 261585 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -569,8 +568,7 @@ sh.dict) (./CliffordTableausPresentation.nav)
 pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc} <.
 /tum/resources/TUM_Tower.png>] (./CliffordTableausPresentation.toc) [2]
 [3] [4] (./CliffordTableausPresentation.toc) [5] [6]
-(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/public
-/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uh
-vb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on CliffordTableausPresentation.pdf (6 pages, 271002 bytes).
+(./CliffordTableausPresentation.aux) )</usr/share/texmf-dist/fonts/type1/urw/he
+lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on CliffordTableausPresentation.pdf (6 pages, 261585 bytes).
 Transcript written on CliffordTableausPresentation.log.
