@@ -440,12 +440,20 @@ Overfull \vbox (0.96979pt too high) detected at line 53
 Overfull \vbox (0.96979pt too high) detected at line 53
 [38]
 Overfull \vbox (0.96979pt too high) detected at line 53
-[39] [40] [41] [42] [43] [44] [45] [46] [47] [48]) [49]
-(./CliffordTableausPresentation.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
+[39] [40] [41] [42] [43] [44] [45] [46] [47] [48])
+(./frameset8_UnitaryOperations.tex [49] [50] [51] [52]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[53]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[54]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[55]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[56]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[57]
+Overfull \vbox (2.00519pt too high) detected at line 103
+[58]) [59] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -457,7 +465,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (49 pages, 449153 bytes).
+Output written on CliffordTableausPresentation.pdf (59 pages, 467327 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -467,8 +475,8 @@ INFO - Processing section 0
 INFO - Looking for bibtex file 'bibliography.bib' for section 0
 INFO - LaTeX decoding ...
 INFO - Found BibTeX data source 'bibliography.bib'
-INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
 INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
 INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
 INFO - No sort tailoring available for locale 'en-US'
 INFO - Writing 'CliffordTableausPresentation.bbl' with encoding 'UTF-8'
@@ -915,8 +923,20 @@ Overfull \vbox (0.96979pt too high) detected at line 53
 Overfull \vbox (0.96979pt too high) detected at line 53
 [38]
 Overfull \vbox (0.96979pt too high) detected at line 53
-[39] [40] [41] [42] [43] [44] [45] [46] [47] [48]) [49]
-(./CliffordTableausPresentation.aux) )
+[39] [40] [41] [42] [43] [44] [45] [46] [47] [48])
+(./frameset8_UnitaryOperations.tex [49] [50] [51] [52]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[53]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[54]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[55]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[56]
+Overfull \vbox (29.57372pt too high) detected at line 62
+[57]
+Overfull \vbox (2.00519pt too high) detected at line 103
+[58]) [59] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -928,5 +948,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (49 pages, 449153 bytes).
+Output written on CliffordTableausPresentation.pdf (59 pages, 467327 bytes).
 Transcript written on CliffordTableausPresentation.log.

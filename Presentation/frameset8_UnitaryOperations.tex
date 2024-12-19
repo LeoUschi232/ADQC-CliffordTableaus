@@ -1,0 +1,103 @@
+\begin{frame}{Unitary Operations}{Main Revelation}
+    Suppose \(U\) is a unitary operator, \(\ket{\psi}\in V_S\) and \(g\in S\).
+    \onslide<2->{
+        \[
+            U\ket{\psi}
+            =Ug\ket{\psi}
+            =UgI\ket{\psi}
+            =UgU^{\dagger}U\ket{\psi}
+            =\left(UgU^{\dagger}\right)U\ket{\psi}
+        \]
+    }
+    \onslide<3->{
+        \(\Longrightarrow\)
+        State \(U\ket{\psi}\) is stabilized by \(UgU^{\dagger}\).
+    }
+
+    \vspace*{2mm}
+
+    \onslide<4->{
+        \(\Longrightarrow\)
+        If we can describe a state by its stabilizers, we can easily compute the stabilizers of the state
+        that emerges from the previous state under a unitary operation.
+    }
+
+    \vspace*{25mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+
+\begin{frame}{Unitary Operations}{Advantages for Computation}
+    For certain special unitary operations \(U\) this transformation of the generators
+    takes on a particularly appealing form.
+    \onslide<2->{
+        \[
+            HXH^{\dagger}=Z
+            \qquad
+            HYH^{\dagger}=-Y
+            \qquad
+            HZH^{\dagger}=X
+        \]
+    }
+
+    \vspace*{2mm}
+
+    \onslide<3->{
+        \textbf{Example:} \\
+        (Unkown) State \(\ket{\psi}\) stabilized by \(X\). \\
+    }
+    \onslide<4->{
+        \(\qquad\longrightarrow\)
+        Apply Hadamard gate \(H\) to \(\ket{\psi}\). \\
+    }
+    \onslide<5->{
+        \(\qquad\qquad\Longrightarrow\)
+        Resulting (Unkown) state \(\ket{\psi'}\) stabilized by \(Z\).
+    }
+
+    \vspace*{25mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
+
+\begin{frame}{Unitary Operations}{Transformation Properties}
+    \[
+        \renewcommand{\arraystretch}{1.0}
+        \begin{array}{|c|c|c|}
+            \hline
+            \textbf{Operation}    & \textbf{Input} & \textbf{Output} \\
+            \hline
+            \text{controlled-NOT} & X_1            & X_1 X_2         \\
+            & X_2            & X_2             \\
+            & Z_1            & Z_1             \\
+            & Z_2            & Z_1 Z_2         \\
+            \hline
+            H                     & X              & Z               \\
+            & Z              & X               \\
+            \hline
+            S                     & X              & Y               \\
+            & Z              & Z               \\
+            \hline
+        \end{array}
+        \quad
+        \begin{array}{|c|c|c|}
+            \hline
+            \textbf{Operation} & \textbf{Input} & \textbf{Output} \\
+            \hline
+            X                  & X              & X               \\
+            & Z              & -Z              \\
+            \hline
+            Y                  & X              & -X              \\
+            & Z              & -Z              \\
+            \hline
+            Z                  & X              & -X              \\
+            & Z              & Z               \\
+            \hline
+        \end{array}
+    \]
+
+    \vspace*{10mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}

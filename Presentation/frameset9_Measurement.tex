@@ -1,0 +1,34 @@
+\begin{frame}{Measurement}
+    \textbf{Measurement} is the process of extracting information from a quantum state. \\
+    \onslide<2->{
+        \vspace*{2mm}
+        \textbf{Projective Measurement:}
+        \begin{itemize}
+            \setlength{\itemsep}{1.25\baselineskip}
+            \onslide<3->{
+                \item \textbf{State:}
+                \(\ket{\psi}\in\hilbert\)
+            }
+            \onslide<4->{
+                \item \textbf{Observable:}
+                \(M=\left\{M_i\right\}_{1\leq i\leq n}\)
+            }
+            \onslide<5->{
+                \item \textbf{Outcome:}
+                \(i\in\left\{1,\ldots,n\right\}\)
+            }
+            \onslide<6->{
+                \item \textbf{Probability:}
+                \(p_i=\left\|\braket{\psi}{M_i}{\psi}\right\|^2\)
+            }
+            \onslide<7->{
+                \item \textbf{Post-Measurement State:}
+                \(\ket{\psi_i}=\frac{M_i\ket{\psi}}{\sqrt{p_i}}\)
+            }
+        \end{itemize}
+    }
+
+    \vspace*{10mm}
+
+    \fullfootcite{01_QuantumComputationAndQuantumInformation}
+\end{frame}
