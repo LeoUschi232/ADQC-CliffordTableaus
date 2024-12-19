@@ -26,6 +26,7 @@ namespace CliffordTableaus {
     static const std::regex x_regex = std::regex(R"(^x q\[(\d+)\];$)");
     static const std::regex y_regex = std::regex(R"(^y q\[(\d+)\];$)");
     static const std::regex z_regex = std::regex(R"(^z q\[(\d+)\];$)");
+    static const std::regex swap_regex = std::regex(R"(^swap q\[(\d+)\];$)");
     static const std::regex measure_regex = std::regex(R"(^measure q\[(\d+)\];$)");
 
     class StabilizerCircuit {
@@ -174,6 +175,14 @@ namespace CliffordTableaus {
          * @return Line of QASM3 code corresponding to the application of the Pauli-Z gate to the qubit.
          */
         static std::string getPauliZ(uint qubit);
+
+        /**
+         * Get the string of a line of QASM3 code which applies the SWAP gate to the qubits.
+         * @param qubit1 Qubit to swap with qubit2.
+         * @param qubit2 Qubit to swap with qubit1.
+         * @return Line of QASM3 code corresponding to the application of the SWAP gate to the qubits.
+         */
+        static std::string getSWAP(uint qubit1, uint qubit2);
     };
 
     /**
@@ -200,6 +209,7 @@ namespace CliffordTableaus {
         CNOT,
         HADAMARD,
         PHASE,
-        MEASURE
+        MEASURE,
+        SWAP
     };
 }

@@ -454,8 +454,10 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 Overfull \vbox (29.57372pt too high) detected at line 62
 [57] [58]) (./frameset9_Measurement.tex [59] [60] [61] [62] [63] [64] [65]
 [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
-[81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85] [86]
-(./CliffordTableausPresentation.aux) )
+[81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85]
+(./frameset10_GottesmanKnillTheorem.tex [86])
+(./frameset11_StabilizerCircuit.tex) [87] (./CliffordTableausPresentation.aux) 
+)
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -467,7 +469,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (86 pages, 518895 bytes).
+Output written on CliffordTableausPresentation.pdf (87 pages, 520282 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -939,8 +941,10 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 Overfull \vbox (29.57372pt too high) detected at line 62
 [57] [58]) (./frameset9_Measurement.tex [59] [60] [61] [62] [63] [64] [65]
 [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
-[81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85] [86]
-(./CliffordTableausPresentation.aux) )
+[81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85]
+(./frameset10_GottesmanKnillTheorem.tex [86])
+(./frameset11_StabilizerCircuit.tex) [87] (./CliffordTableausPresentation.aux) 
+)
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -952,5 +956,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (86 pages, 518895 bytes).
+Output written on CliffordTableausPresentation.pdf (87 pages, 520282 bytes).
 Transcript written on CliffordTableausPresentation.log.

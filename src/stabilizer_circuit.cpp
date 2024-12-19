@@ -160,6 +160,15 @@ namespace CliffordTableaus {
             measurement_result.at(q_index) = 'x';
 
             return true;
+        } else if (std::regex_match(line, match, swap_regex)) {
+            uint q_index1 = std::stoul(match[1]);
+            uint q_index2 = std::stoul(match[2]);
+
+            tableau.SWAP(q_index1 + 1, q_index2 + 1);
+            measurement_result.at(q_index1) = 'x';
+            measurement_result.at(q_index2) = 'x';
+
+            return true;
         } else {
             return false;
         }
@@ -181,6 +190,7 @@ namespace CliffordTableaus {
         std::vector<Gate> allowed_gates = {PAULI_X, PAULI_Y, PAULI_Z, HADAMARD, PHASE};
         if (n_qubits >= 2) {
             allowed_gates.push_back(CNOT);
+            allowed_gates.push_back(SWAP);
         }
         if (allow_intermediate_measurement) {
             allowed_gates.push_back(MEASURE);
@@ -191,14 +201,14 @@ namespace CliffordTableaus {
         std::discrete_distribution<int> gate_distribution;
 
         if (n_qubits >= 2 && allow_intermediate_measurement) {
-            // 7 gates: X=0.16, Y=0.16, Z=0.16, CNOT=0.16, HADAMARD=0.16, PHASE=0.16, MEASURE=0.04
-            auto p1 = 0.16;
-            auto p2 = 0.04;
-            gate_distribution = std::discrete_distribution<int>({p1, p1, p1, p1, p1, p1, p2});
+            // 8 gates: X=0.13, Y=0.13, Z=0.13, CNOT=0.13, HADAMARD=0.13, PHASE=0.13, SWAP=0.13 MEASURE=0.09
+            auto p1 = 0.13;
+            auto p2 = 0.09;
+            gate_distribution = std::discrete_distribution<int>({p1, p1, p1, p1, p1, p1, p1, p2});
         } else if (n_qubits >= 2) {
-            // 6 gates: X=1/6, Y=1/6, Z=1/6, CNOT=1/6, HADAMARD=1/6, PHASE=1/6
-            auto p = 1.0 / 6.0;
-            gate_distribution = std::discrete_distribution<int>({p, p, p, p, p, p});
+            // 7 gates: X=1/7, Y=1/7, Z=1/7, CNOT=1/7, HADAMARD=1/7, PHASE=1/7, SWAP=1/7
+            auto p = 0.14285714285;
+            gate_distribution = std::discrete_distribution<int>({p, p, p, p, p, p, p});
         } else if (allow_intermediate_measurement) {
             // 6 gates: X=0.19, Y=0.19, Z=0.19, HADAMARD=0.19, PHASE=0.19, MEASURE=0.05
             auto p1 = 0.19;
@@ -244,6 +254,13 @@ namespace CliffordTableaus {
                     break;
                 case MEASURE:
                     file << getMeasurement(q1);
+                    break;
+                case SWAP:
+                    q2 = qubit_dist(qubit_generator);
+                    while (q2 == q1) {
+                        q2 = qubit_dist(qubit_generator);
+                    }
+                    file << getSWAP(q1, q2);
                     break;
             }
         }
@@ -304,7 +321,8 @@ namespace CliffordTableaus {
                 std::regex_match(line, x_regex) ||
                 std::regex_match(line, y_regex) ||
                 std::regex_match(line, z_regex) ||
-                std::regex_match(line, measure_regex)
+                std::regex_match(line, measure_regex) ||
+                std::regex_match(line, swap_regex)
                     ) {
                 file << line << "\n";
             } else {
@@ -317,7 +335,8 @@ namespace CliffordTableaus {
                     line.rfind("measure", 0) == 0 ||
                     line.rfind('x', 0) == 0 ||
                     line.rfind('y', 0) == 0 ||
-                    line.rfind('z', 0) == 0) {
+                    line.rfind('z', 0) == 0 ||
+                    line.rfind("swap", 0) == 0) {
                     throw std::invalid_argument("Gate not supported.");
                 } else {
                     throw std::invalid_argument("Format wrong");
@@ -414,6 +433,12 @@ namespace CliffordTableaus {
     std::string StabilizerCircuit::getPauliZ(uint qubit) {
         std::ostringstream builder;
         builder << "z q[" << qubit << "];\n";
+        return builder.str();
+    }
+
+    std::string StabilizerCircuit::getSWAP(uint qubit1, uint qubit2) {
+        std::ostringstream builder;
+        builder << "swap q[" << qubit1 << "],q[" << qubit2 << "];\n";
         return builder.str();
     }
 }

@@ -109,5 +109,12 @@ namespace CliffordTableaus {
          * @param qubit Qubit to apply the Pauli-Z gate to.
          */
         void PauliZ(uint qubit);
+
+        /**
+         * Apply the SWAP gate to the qubits qubit1 and qubit2.
+         * @param qubit1 Qubit to swap with qubit2.
+         * @param qubit2 Qubit to swap with qubit1.
+         */
+        void SWAP(uint qubit1, uint qubit2);
     };
 }

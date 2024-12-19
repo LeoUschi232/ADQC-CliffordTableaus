@@ -57,4 +57,25 @@ namespace CliffordTableaus {
         this->Phase(qubit);
         this->Phase(qubit);
     }
+
+    void StabilizerTableau::SWAP(uint qubit1, uint qubit2) {
+        if (qubit1 == 0) {
+            throw std::invalid_argument("Attempted to apply SWAP with qubit1 = 0!");
+        }
+        if (qubit1 > n) {
+            throw std::invalid_argument("Attempted to apply SWAP with qubit1 > n!");
+        }
+        if (qubit2 == 0) {
+            throw std::invalid_argument("Attempted to apply SWAP with qubit2 = 0!");
+        }
+        if (qubit2 > n) {
+            throw std::invalid_argument("Attempted to apply SWAP with qubit2 > n!");
+        }
+        if (qubit1 == qubit2) {
+            return;
+        }
+        this->CNOT(qubit1, qubit2);
+        this->CNOT(qubit2, qubit1);
+        this->CNOT(qubit1, qubit2);
+    }
 }
