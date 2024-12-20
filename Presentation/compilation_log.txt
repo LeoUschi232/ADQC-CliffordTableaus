@@ -458,7 +458,148 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 (./frameset10_GottesmanKnillTheorem.tex [86])
 (./frameset11_StabilizerCircuit.tex [87] [88] [89] [90] [91] [92])
 (./frameset12_CliffordTableau.tex [93] [94] [95 <./images/CliffordTableau.png>]
-[96] [97] [98] [99] [100] [101] [102]) [103]
+[96] [97] [98] [99] [100] [101] [102] [103])
+(./frameset13_HadamardGateAlgorithm.tex
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[104]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[105]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[106]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[107]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[108]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[109]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[110]) (./frameset14_PhaseGateAlgorithm.tex
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[111]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[112]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[113]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[114]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[115]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[116]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[117]) (./frameset15_MeasurementAlgorithm.tex) [118]
 (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
@@ -471,7 +612,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (103 pages, 618655 bytes).
+Output written on CliffordTableausPresentation.pdf (118 pages, 653454 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -481,8 +622,8 @@ INFO - Processing section 0
 INFO - Looking for bibtex file 'bibliography.bib' for section 0
 INFO - LaTeX decoding ...
 INFO - Found BibTeX data source 'bibliography.bib'
-INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
 INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
 INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
 INFO - No sort tailoring available for locale 'en-US'
 INFO - Writing 'CliffordTableausPresentation.bbl' with encoding 'UTF-8'
@@ -947,7 +1088,148 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 (./frameset10_GottesmanKnillTheorem.tex [86])
 (./frameset11_StabilizerCircuit.tex [87] [88] [89] [90] [91] [92])
 (./frameset12_CliffordTableau.tex [93] [94] [95 <./images/CliffordTableau.png>]
-[96] [97] [98] [99] [100] [101] [102]) [103]
+[96] [97] [98] [99] [100] [101] [102] [103])
+(./frameset13_HadamardGateAlgorithm.tex
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[104]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[105]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[106]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[107]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[108]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[109]
+
+! LaTeX Error: \begin{itemize} on input line 87 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{frame}
+                
+[110]) (./frameset14_PhaseGateAlgorithm.tex
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[111]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[112]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[113]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[114]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[115]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[116]
+
+! LaTeX Error: \begin{itemize} on input line 85 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 \end{frame}
+                
+[117]) (./frameset15_MeasurementAlgorithm.tex) [118]
 (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
@@ -960,5 +1242,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (103 pages, 618655 bytes).
+Output written on CliffordTableausPresentation.pdf (118 pages, 653454 bytes).
 Transcript written on CliffordTableausPresentation.log.

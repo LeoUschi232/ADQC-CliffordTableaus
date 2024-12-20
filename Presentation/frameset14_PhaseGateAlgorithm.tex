@@ -1,0 +1,85 @@
+\begin{frame}{Phase Gate Algorithm}
+    Suppose we apply a Phase gate to qubit \(a\) of current state \(\ket{\psi}\). \\
+    \onslide<2->{
+        \vspace*{1mm}
+        \(\Longrightarrow\)
+        For all stabilizers and destabilizers \(R_i\) the entries \(x_{i,a}\) and \(z_{i,a}\)
+        determine the entries \(x_{i,a}'\) and \(z_{i,a}'\) of the new stabilizers and destabilizers \(R_i'\)
+        after the Phase gate application in the following way: \\
+    }
+    \vspace*{2mm}
+
+    \begin{itemize}
+        \onslide<3->{
+            \item
+            \(
+            x_{i,a}z_{i,a}=00
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}=I
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}'=SIS^{\dagger}=I
+            \,\,\,\Longrightarrow\,\,\,
+            x_{i,a}'z_{i,a}'=00
+            \,\land\,
+            r_i'=r_i
+            \)
+        }
+        \onslide<4->{
+            \item
+            \(
+            x_{i,a}z_{i,a}=01
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}=Z
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}'=SZS^{\dagger}=Z
+            \,\,\,\Longrightarrow\,\,\,
+            x_{i,a}'z_{i,a}'=01
+            \,\land\,
+            r_i'=r_i
+            \)
+        }
+        \onslide<5->{
+            \item
+            \(
+            x_{i,a}z_{i,a}=10
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}=X
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}'=SXS^{\dagger}=Y
+            \,\,\,\Longrightarrow\,\,\,
+            x_{i,a}'z_{i,a}'=11
+            \,\land\,
+            r_i'=r_i
+            \)
+        }
+        \onslide<6->{
+            \item
+            \(
+            x_{i,a}z_{i,a}=11
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}=Y
+            \,\,\,\Longrightarrow\,\,\,
+            P_{i,a}'=SYS^{\dagger}=-X
+            \,\,\,\Longrightarrow\,\,\,
+            x_{i,a}'z_{i,a}'=10
+            \,\land\,
+            r_i'=\neg r_i
+            \)
+        }
+    \end{enumerate}
+
+    \onslide<7->{
+        \vspace*{2mm}
+        \[
+            \textbf{Operation summary:}
+            \qquad
+            x_{i,a}'=x_{i,a}
+            \quad\land\quad
+            z_{i,a}'=x_{i,a}\oplus z_{i,a}
+            \quad\land\quad
+            r_i'=r_i\oplus\left(x_{i,a}\cdot z_{i,a}\right)
+        \]
+    }
+
+    \fullfootcite{02_ImprovedSimulationOfStabilizerCircuits}
+\end{frame}
