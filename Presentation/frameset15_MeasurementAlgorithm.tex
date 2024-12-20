@@ -1,0 +1,70 @@
+\begin{frame}{Measurement Algorithm}{Deterministic Case}
+    \vspace*{-3mm}
+    Measuring qubit \(a\)
+    \onslide<2->{
+        \(\Longrightarrow\)
+        Stabilizers have \(I\) or \(Z\) on \(a\) and \(g\) is either \(-Z_a\) or \(Z_a\). \\
+    }
+
+    \onslide<3->{
+        Invariants:
+        \(\forall\,i\in[1,n]\holds\)
+        \(R_i\) anti-commutes with \(R_{n+i}\) and commutes with all \(R_{j\neq n+i}\) \\
+    }
+
+    \onslide<4->{
+        \(Z_a\) anti-commutes with all \(R_i\) for which \(x_{i,a}=1\). \\
+        \(g\) the product of \(R_{n+i}\) for such \(i\)\(\longleftrightarrow\) it anti-commutes exactly with these \(R_i\). \\
+    }
+
+    \onslide<5->{
+        \[
+            g=\prod_{i=1}^{n}\left(R_{n+i}\right)^{x_{i,a}}
+            =\pm Z_a
+        \]
+    }
+
+    \onslide<6->{
+        Compute \(g\) in scratch-space row \(2n+1\) and extract \(r_{2n+1}\):
+        \[
+            \begin{aligned}
+                &r_{2n+1}=0
+                &&\implies g=Z_a
+                &&\implies\text{Measurement: }0 \\
+                &r_{2n+1}=1
+                &&\implies g=-Z_a
+                &&\implies\text{Measurement: }1
+            \end{aligned}
+        \]
+        Measurement result is just \(r_{2n+1}\). \\
+    }
+\end{frame}
+
+\begin{frame}{Measurement Algorithm}{Non-deterministic Case}
+    Measuring qubit \(a\):
+    \(\Longrightarrow\)
+    \(g\) is either \(-Z_a\) or \(Z_a\). \\
+
+    \begin{enumerate}
+        \onslide<2->{
+            \item
+            Find \(p\in[n+1,2n]\) such that \(x_{p,a}=1\). \\
+            This \(R_p\) corresponds to our previous \(g_1\), which anti-commutes with \(g\).
+        }
+        \onslide<3->{
+            \item
+            Multiply \(g_1\) on to all \(g_j\) for which \(x_{j,a}=1\). \\
+            This transforms all \(g_j\) anti-commuting with \(g\) to \(g_j'\) commuting with \(g\).
+        }
+        \onslide<4->{
+            \item
+            Push \(R_p\) onto \(R_{p-n}\). \\
+            After measurement, the stabilizer anti-commuting with \(g\) becomes a destabilizer.
+        }
+        \onslide<5->{
+            \item
+            Assign \(R_p=g\), either \(Z_a\) or \(-Z_a\) with equal probability. \\
+            Retrieve the measurement result from \(r_p\) like before.
+        }
+    \end{enumerate}
+\end{frame}
