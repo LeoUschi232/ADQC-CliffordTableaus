@@ -13,6 +13,9 @@ CMakeFiles/
 CTestTestfile.cmake
 libCliffordTableausLib.a
 
+# Local QC Python simulation for computing expectation values
+qc-simulation
+
 # Object files and intermediate files
 *.o
 *.so
