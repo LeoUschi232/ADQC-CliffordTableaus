@@ -456,8 +456,18 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
 [81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85]
 (./frameset10_GottesmanKnillTheorem.tex [86])
-(./frameset11_StabilizerCircuit.tex) [87] (./CliffordTableausPresentation.aux) 
-)
+(./frameset11_StabilizerCircuit.tex [87] [88] [89] [90] [91] [92])
+(./frameset12_CliffordTableau.tex [93] [94]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[95 <./images/CliffordTableau.png>]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[96]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[97]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[98]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[99]) [100] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -469,7 +479,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (87 pages, 520282 bytes).
+Output written on CliffordTableausPresentation.pdf (100 pages, 613261 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -943,8 +953,18 @@ Overfull \vbox (29.57372pt too high) detected at line 62
 [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
 [81] [82] [83] [84]) (./CliffordTableausPresentation.toc) [85]
 (./frameset10_GottesmanKnillTheorem.tex [86])
-(./frameset11_StabilizerCircuit.tex) [87] (./CliffordTableausPresentation.aux) 
-)
+(./frameset11_StabilizerCircuit.tex [87] [88] [89] [90] [91] [92])
+(./frameset12_CliffordTableau.tex [93] [94]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[95 <./images/CliffordTableau.png>]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[96]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[97]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[98]
+Overfull \vbox (49.68971pt too high) detected at line 65
+[99]) [100] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -956,5 +976,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (87 pages, 520282 bytes).
+Output written on CliffordTableausPresentation.pdf (100 pages, 613261 bytes).
 Transcript written on CliffordTableausPresentation.log.
