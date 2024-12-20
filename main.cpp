@@ -140,7 +140,7 @@ void print_help(const char *program_name) {
 
 void print_progress(unsigned int current, unsigned int total) {
     int progress = static_cast<int>(100.0 * current / total);
-    int bar_width = 50; // Width of the progress bar
+    int bar_width = 50;
     int pos = bar_width * progress / 100;
 
     std::cout << "[";
