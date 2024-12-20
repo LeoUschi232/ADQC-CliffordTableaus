@@ -23,7 +23,6 @@ namespace CliffordTableaus {
 
 
     void ImprovedStabilizerTableau::rowsum(uint h, uint i) {
-        bool both_are_stabilizers = n + 1 <= h && h <= 2 * n && n + 1 <= i && i <= 2 * n;
         int rh = static_cast<int>(get_r(h));
         int ri = static_cast<int>(get_r(i));
 
@@ -42,9 +41,8 @@ namespace CliffordTableaus {
             set_r(h, 0);
         } else if (sum_g == 2) {
             set_r(h, 1);
-        } else if (both_are_stabilizers) {
-            std::cerr << "Warning: sum_g should never be congruent to 1 or 3 on two stabilizers.\n"
-                      << "Sum g value: " << sum_g << std::endl;
+        } else {
+            throw std::logic_error("Sum_g should never be congruent to 1 or 3.");
         }
 
         for (uint j = 1; j <= n; ++j) {
@@ -136,25 +134,31 @@ namespace CliffordTableaus {
             }
         }
         if (p <= 2 * n) {
+            assert(p >= n + 1);
+
             // The paper says the following:
             // Case I: Such a p exists.
             // If more than one exists, then let p be the smallest.
             // In this case the measurement outcome is random, so the state needs to be updated.
             // This is done as follows.
             // First call rowsum(i,p) for all i ∈ {1 to 2*n} such that i=/=p and xia = 1.
-            // However, I have found that stabilizers can in fact anticommute with destabilizers.
-            // This means that the multiplication of the stabilizer gp which anticommutes with the measurement g
-            // must only be performed on top of other stabilizers gi which anticommute with gp
-            // but NOT on top of destabilizers gi which anticommute with gp.
-            // This means, that rowsum(i,p) shall only be called on all i∈{n+1 to 2*n} instead of all i∈{1 to 2*n}.
+            // However, this description of the procedure is incomplete.
+            // The invariants of the algorithm are
+            // 1. R_1 to R_n all commute.
+            // 2. For all h ∈ {1 to n}, R_h anti-commutes with R_{n+h}.
+            // 3. For all i,h ∈ {1 to n}, such that i ≠ h, R_i commutes with R_{n+h}.
+            // This means that sum_g within the rowsum subroutine may be congruent to 1 or 3
+            // if i=p-n due to invariant nr 2.
+            // This case is not mentioned in the paper but must be taken into consideration.
             for (uint i = 1; i <= 2 * n; ++i) {
-                if (i != p && get_x(i, a) == 1) {
+                if (i != p &&
+                    i != p - n &&
+                    get_x(i, a) == 1) {
                     rowsum(i, p);
                 }
             }
 
             // Second, set the entire (p−n)th row equal to the pth row.
-            assert(p >= n + 1);
             for (uint j = 1; j <= n; ++j) {
                 set_x(p - n, j, get_x(p, j));
                 set_z(p - n, j, get_z(p, j));
