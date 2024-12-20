@@ -59,7 +59,38 @@
         }
     \end{minipage}
 
-    \vspace*{24mm}
+    \vspace*{5mm}
+
+    \fullfootcite{02_ImprovedSimulationOfStabilizerCircuits}
+\end{frame}
+
+
+\begin{frame}{Clifford Tableau}{Initial Tableau}
+    Pauli-\(Z\) gates stabilize \(\ket{0}\) states and Pauli-\(X\) gates destabilize \(\ket{0}\) states.
+
+    \onslide<2->{
+        \vspace*{2mm}
+        \(\qquad\Longrightarrow\)
+        Tableau for \(\ket{0}^{\otimes n}\) has an Identity submatrix for its first \((2n)\times(2n)\) submatrix.
+    }
+    \onslide<3->{
+        \[
+            \text{Tableau for }\ket{00}\text{ is }
+            \left(
+            \begin{array}{cc|cc|c}
+                1 & 0 & 0 & 0 & 0 \\
+                0 & 1 & 0 & 0 & 0 \\
+                \hline
+                0 & 0 & 1 & 0 & 0 \\
+                0 & 0 & 0 & 1 & 0 \\
+                \hline
+                0 & 0 & 0 & 0 & 0 \\
+            \end{array}
+            \right)
+        \]
+    }
+
+    \vspace*{15mm}
 
     \fullfootcite{02_ImprovedSimulationOfStabilizerCircuits}
 \end{frame}
