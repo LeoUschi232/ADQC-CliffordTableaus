@@ -8,17 +8,27 @@ namespace CliffordTableaus {
 
         std::string line;
         if (!std::getline(file, line) || line != "OPENQASM 3;") {
-            throw std::runtime_error("Invalid QASM format: missing 'OPENQASM 3;' on the first line.");
+            std::cerr << "Invalid QASM format: missing 'OPENQASM 3;' on the first line." << std::endl;
+            return "";
         }
 
         // Read the second line (qreg q[n];) and parse the number of qubits
         if (!std::getline(file, line)) {
-            throw std::runtime_error("Invalid QASM format: missing 'qreg q[n];' on the second line.");
+            std::cerr << "Invalid QASM format: missing 'qreg q[n];' on the second line." << std::endl;
+            return "";
         }
 
         std::smatch match;
+        if (line == "include \"stdgates.inc\";") {
+            if (!std::getline(file, line)) {
+                std::cerr << "Invalid QASM format: missing 'qreg q[n];' after include statement." << std::endl;
+                return "";
+            }
+        }
+
         if (!std::regex_match(line, match, qreg_regex)) {
-            throw std::runtime_error("Invalid QASM format: 'qreg q[n];' expected on the second line.");
+            std::cerr << "Invalid QASM format: 'qreg q[n];' expected on the second line." << std::endl;
+            return "";
         }
 
         auto n = std::stoul(match[1]);
@@ -29,9 +39,8 @@ namespace CliffordTableaus {
             if (line.empty()) {
                 continue;
             }
-            // std::cout << line << std::endl;
             if (!applyGateLine(line, tableau, measurement_result)) {
-                throw std::invalid_argument("Error! Expected file in QASM3 format.");
+                std::cerr << "Warning: " << line << " is not a valid QASM3 line." << std::endl;
             }
         }
         return measurement_result;
@@ -92,7 +101,7 @@ namespace CliffordTableaus {
             }
 
             if (!applyGateLine(line, tableau, measurement_result)) {
-                std::cout << "Error: Invalid input." << std::endl;
+                std::cerr << "Error: Invalid input." << std::endl;
             }
         }
         return measurement_result;
@@ -229,7 +238,8 @@ namespace CliffordTableaus {
 
             switch (allowed_gates[gate_distribution(gate_generator)]) {
                 case IDENTITY:
-                    throw std::logic_error("Identity gate should not be selected.");
+                    file << getIdentity(q1);
+                    break;
                 case PAULI_X:
                     file << getPauliX(q1);
                     break;
@@ -272,78 +282,6 @@ namespace CliffordTableaus {
         }
     }
 
-
-    void StabilizerCircuit::writeStabilizerCircuitToFile(
-            const std::string &circuit_filename,
-            const std::string &circuit,
-            bool overwrite_file
-    ) {
-        auto file = createCircuitFile(circuit_filename, overwrite_file);
-
-        std::istringstream iss(circuit);
-        std::string line;
-        int line_number = 0;
-        while (std::getline(iss, line)) {
-            line_number++;
-
-            // These two lines only remove leading and trailing whitespace from the entire line,
-            // not the whitespace between words or tokens.
-            // They use std::find_if to find the first and last non-whitespace characters.
-            // All internal spacing, such as the space between "h" and "q[0];", remains intact.
-            line.erase(line.begin(), std::find_if(line.begin(), line.end(), [](unsigned char c) {
-                return !std::isspace(c);
-            }));
-            line.erase(std::find_if(line.rbegin(), line.rend(), [](unsigned char c) {
-                return !std::isspace(c);
-            }).base(), line.end());
-
-            if (line_number == 1) {
-                if (line != "OPENQASM 3;") {
-                    throw std::invalid_argument("The format is wrong");
-                }
-                file << line << "\n";
-                continue;
-            }
-
-            if (line_number == 2) {
-                if (!std::regex_match(line, qreg_regex)) {
-                    throw std::invalid_argument("The format is wrong.");
-                }
-                file << line << "\n";
-                continue;
-            }
-
-            std::smatch match;
-            if (std::regex_match(line, id_regex) ||
-                std::regex_match(line, cnot_regex) ||
-                std::regex_match(line, h_regex) ||
-                std::regex_match(line, s_regex) ||
-                std::regex_match(line, x_regex) ||
-                std::regex_match(line, y_regex) ||
-                std::regex_match(line, z_regex) ||
-                std::regex_match(line, measure_regex) ||
-                std::regex_match(line, swap_regex)
-                    ) {
-                file << line << "\n";
-            } else {
-                // Check if line starts with a known gate token,
-                // if not, it's unsupported or format is wrong.
-                if (line.rfind("id", 0) == 0 ||
-                    line.rfind("cx", 0) == 0 ||
-                    line.rfind('h', 0) == 0 ||
-                    line.rfind('s', 0) == 0 ||
-                    line.rfind("measure", 0) == 0 ||
-                    line.rfind('x', 0) == 0 ||
-                    line.rfind('y', 0) == 0 ||
-                    line.rfind('z', 0) == 0 ||
-                    line.rfind("swap", 0) == 0) {
-                    throw std::invalid_argument("Gate not supported.");
-                } else {
-                    throw std::invalid_argument("Format wrong");
-                }
-            }
-        }
-    }
 
     std::ofstream StabilizerCircuit::createCircuitFile(const std::string &circuit_filename, bool overwrite_file) {
         // Get the directory of the current source file otherwise execution from different location will throw errors.

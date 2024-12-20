@@ -26,14 +26,13 @@ namespace CliffordTableaus {
         int rh = static_cast<int>(get_r(h));
         int ri = static_cast<int>(get_r(i));
 
-        int sum_g = (2 * (rh + ri)) % 4;
-        assert(sum_g == 0 || sum_g == 2);
+        int sum_g = 2 * (rh + ri);
         for (uint j = 1; j <= n; ++j) {
             int xij = static_cast<int>(get_x(i, j));
             int zij = static_cast<int>(get_z(i, j));
             int xhj = static_cast<int>(get_x(h, j));
             int zhj = static_cast<int>(get_z(h, j));
-            sum_g += g_canonical(xij, zij, xhj, zhj);
+            sum_g += g(xij, zij, xhj, zhj);
         }
         sum_g = ((sum_g % 4) + 4) % 4;
 
@@ -53,19 +52,24 @@ namespace CliffordTableaus {
 
     void ImprovedStabilizerTableau::CNOT(uint control, uint target) {
         if (control == 0) {
-            throw_invalid_argument("Attempted to apply CNOT with control qubit = 0!");
+            std::cerr << "Attempted to apply CNOT with control = 0!" << std::endl;
+            return;
         }
         if (control > n) {
-            throw_invalid_argument("Attempted to apply CNOT with control qubit > n!");
+            std::cerr << "Attempted to apply CNOT with control > n!" << std::endl;
+            return;
         }
         if (target == 0) {
-            throw_invalid_argument("Attempted to apply CNOT with target qubit = 0!");
+            std::cerr << "Attempted to apply CNOT with target = 0!" << std::endl;
+            return;
         }
         if (target > n) {
-            throw_invalid_argument("Attempted to apply CNOT with target qubit > n!");
+            std::cerr << "Attempted to apply CNOT with target > n!" << std::endl;
+            return;
         }
         if (control == target) {
-            throw_invalid_argument("Attempted to apply CNOT with target qubit = control qubit!");
+            std::cerr << "Attempted to apply CNOT with target = control!" << std::endl;
+            return;
         }
 
         auto a = control;
@@ -81,10 +85,12 @@ namespace CliffordTableaus {
 
     void ImprovedStabilizerTableau::Hadamard(uint qubit) {
         if (qubit == 0) {
-            throw_invalid_argument("Attempted to apply Hadamard with qubit = 0!");
+            std::cerr << "Attempted to apply Hadamard with qubit = 0!" << std::endl;
+            return;
         }
         if (qubit > n) {
-            throw_invalid_argument("Attempted to apply Hadamard with qubit > n!");
+            std::cerr << "Attempted to apply Hadamard with qubit > n!" << std::endl;
+            return;
         }
 
         auto a = qubit;
@@ -101,10 +107,12 @@ namespace CliffordTableaus {
 
     void ImprovedStabilizerTableau::Phase(uint qubit) {
         if (qubit == 0) {
-            throw_invalid_argument("Attempted to apply Phase with qubit = 0!");
+            std::cout << "Attempted to apply Phase with qubit = 0!" << std::endl;
+            return;
         }
         if (qubit > n) {
-            throw_invalid_argument("Attempted to apply Phase with qubit > n!");
+            std::cout << "Attempted to apply Phase with qubit > n!" << std::endl;
+            return;
         }
 
         auto a = qubit;

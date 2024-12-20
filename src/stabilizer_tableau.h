@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cstdint>
-#include <stdexcept>
 #include <cstdint>
 #include <vector>
+#include <iostream>
 
 
 namespace CliffordTableaus {

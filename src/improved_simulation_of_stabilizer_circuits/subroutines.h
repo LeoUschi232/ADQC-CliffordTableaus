@@ -1,8 +1,6 @@
 #pragma once
 
-#include <cstdint>
 #include <random>
-#include <stdexcept>
 
 namespace CliffordTableaus {
     using uint = std::size_t;
@@ -29,15 +27,7 @@ namespace CliffordTableaus {
      * @param x1z1x2z2 The 4 input bits stored in the least significant bits of an 8-bit unsigned integer.
      * @return The exponent to which i is raised when the Pauli matrices represented by x1z1 and x2z2 are multiplied.
      */
-    int g_canonical(int x1, int z1, int x2, int z2);
-
-    /**
-     * Let g_alternate (x1, z1, x2, z2) be a function that takes 4 bits as input, and that returns the exponent
-     * to which i is raised (either 0, 1, or −1) when the Pauli matrices represented by x1z1 and x2z2 are multiplied.
-     * @param x1z1x2z2 The 4 input bits stored in the least significant bits of an 8-bit unsigned integer.
-     * @return The exponent to which i is raised when the Pauli matrices represented by x1z1 and x2z2 are multiplied.
-     */
-    int g_alternate(int x1, int z1, int x2, int z2);
+    int g(int x1, int z1, int x2, int z2);
 
     /**
      * Generate a random bit, either 0 or 1 with equal probability.

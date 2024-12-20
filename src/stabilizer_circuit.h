@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <cstdint>
-#include <stdexcept>
 #include <cstdint>
 #include <vector>
 #include <array>
@@ -102,18 +101,6 @@ namespace CliffordTableaus {
                 bool allow_intermediate_measurement = false,
                 bool measure_all_at_the_end = true,
                 bool overwrite_file = false
-        );
-
-        /**
-         * Write a stabilizer circuit to a file.
-         * @param circuit_filename Name of the file to write the circuit to.
-         * @param circuit Stabilizer circuit in QASM3 format.
-         * @param overwrite_file Whether the file should be overwritten if it already exists.
-         */
-        static void writeStabilizerCircuitToFile(
-                const std::string &circuit_filename,
-                const std::string &circuit,
-                bool overwrite_file
         );
 
         /**
