@@ -600,8 +600,8 @@ Type  H <return>  for immediate help.
 l.85 \end{frame}
                 
 [117]) (./frameset15_MeasurementAlgorithm.tex [118] [119] [120] [121] [122]
-[123] [124] [125] [126] [127] [128]) [129] (./CliffordTableausPresentation.aux)
- )
+[123] [124] [125] [126] [127] [128]) (./frameset16_Advantages.tex [129])
+[130] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -613,7 +613,7 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (129 pages, 676102 bytes).
+Output written on CliffordTableausPresentation.pdf (130 pages, 677121 bytes).
 Transcript written on CliffordTableausPresentation.log.
 INFO - This is Biber 2.19
 INFO - Logfile is 'CliffordTableausPresentation.blg'
@@ -1231,8 +1231,8 @@ Type  H <return>  for immediate help.
 l.85 \end{frame}
                 
 [117]) (./frameset15_MeasurementAlgorithm.tex [118] [119] [120] [121] [122]
-[123] [124] [125] [126] [127] [128]) [129] (./CliffordTableausPresentation.aux)
- )
+[123] [124] [125] [126] [127] [128]) (./frameset16_Advantages.tex [129])
+[130] (./CliffordTableausPresentation.aux) )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
 s/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi1
 0.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-
@@ -1244,5 +1244,5 @@ msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on CliffordTableausPresentation.pdf (129 pages, 676037 bytes).
+Output written on CliffordTableausPresentation.pdf (130 pages, 677121 bytes).
 Transcript written on CliffordTableausPresentation.log.
