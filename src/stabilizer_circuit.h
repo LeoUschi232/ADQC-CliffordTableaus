@@ -26,7 +26,7 @@ namespace CliffordTableaus {
     static const std::regex x_regex = std::regex(R"(^x q\[(\d+)\];$)");
     static const std::regex y_regex = std::regex(R"(^y q\[(\d+)\];$)");
     static const std::regex z_regex = std::regex(R"(^z q\[(\d+)\];$)");
-    static const std::regex swap_regex = std::regex(R"(^swap q\[(\d+)\];$)");
+    static const std::regex swap_regex = std::regex(R"(^swap q\[(\d+)\],q\[(\d+)\];$)");
     static const std::regex measure_regex = std::regex(R"(^measure q\[(\d+)\];$)");
 
     class StabilizerCircuit {

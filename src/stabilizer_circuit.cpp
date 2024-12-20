@@ -62,7 +62,7 @@ namespace CliffordTableaus {
         std::string measurement_result(n, 'x');
         std::cout << "Initialized circuit with " << n << " qubits.\n"
                   << "Available commands:\n"
-                  << "Gates CNOT, H, S, Measure, X, Y, Z applied to qubits in QASM3 format.\n"
+                  << "Gates CNOT, H, S, Measure, X, Y, Z and SWAP applied to qubits in QASM3 format.\n"
                   << "exit|quit => Terminate interactive mode and print current measurement string.\n"
                   << "finish|measure all => Measure all remaining qubits and print the measurement string.\n";
 
